@@ -34,7 +34,7 @@ const items = [
   },
   {
     title: 'Budget',
-    url: '/budget',
+    url: '/dashboard/budget',
     icon: DollarSign,
   },
   {
