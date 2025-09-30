@@ -19,14 +19,14 @@ const Providers = composeProviders([
   // AuthProvider,
   ThemeProvider,
   AlertProvinder,
-  ReactQueryClientProvider,
+  // ReactQueryClientProvider,
 ]);
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
       {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       <Toaster
         position="top-center"
         toastOptions={{

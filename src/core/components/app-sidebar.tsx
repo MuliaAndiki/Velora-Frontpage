@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
+import { ClipboardMinus, CreditCard, DollarSign, Goal, Home, SquareUserRound } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/utils/classname';
@@ -23,30 +23,35 @@ import { kebabCaseToWords } from '@/utils/string.format';
 // Menu items with proper routes
 const items = [
   {
-    title: 'Home',
+    title: 'Dashboard',
     url: '/',
     icon: Home,
   },
   {
-    title: 'Inbox',
-    url: '/inbox',
-    icon: Inbox,
+    title: 'Transaction',
+    url: '/transaction',
+    icon: CreditCard,
   },
   {
-    title: 'Calendar',
-    url: '/calendar',
-    icon: Calendar,
+    title: 'Budget',
+    url: '/budget',
+    icon: DollarSign,
   },
   {
-    title: 'Search',
-    url: '/search',
-    icon: Search,
+    title: 'Goals',
+    url: '/Goal',
+    icon: Goal,
   },
   {
-    title: 'Settings',
-    url: '/settings',
-    icon: Settings,
+    title: 'Report',
+    url: '/report',
+    icon: ClipboardMinus,
   },
+  {
+    title: 'Profile',
+    url: '/profile',
+    icon: SquareUserRound,
+  }
 ];
 
 export function AppSidebar() {
