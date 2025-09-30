@@ -40,7 +40,7 @@ export function SidebarLayout({ children }: AppLayoutProps) {
               <div className="flex items-center justify-between max-w-7xl mx-auto w-full">
                 <SidebarTrigger />
                 <div className="flex items-center gap-4">
-                  <ThemeToggle />
+                  {/* <ThemeToggle /> */}
                   <LanguageDropdown />
                   <NotificationDropdown />
                   {/* <UserDropdown /> */}
@@ -48,7 +48,6 @@ export function SidebarLayout({ children }: AppLayoutProps) {
               </div>
             </div>
 
-            {/* Content */}
             <div className="flex-1 overflow-auto w-full">
               <div className="container h-full max-w-7xl w-full mx-auto p-[1rem]">{children}</div>
             </div>

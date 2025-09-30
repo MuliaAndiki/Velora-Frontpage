@@ -382,7 +382,6 @@ const GoalHeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Goals Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {goals.map((goal) => (
           <GoalCard

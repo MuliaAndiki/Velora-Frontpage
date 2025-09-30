@@ -39,19 +39,19 @@ const items = [
   },
   {
     title: 'Goals',
-    url: '/Goal',
+    url: '/dashboard/goal',
     icon: Goal,
   },
   {
     title: 'Report',
-    url: '/report',
+    url: '/dashboard/report',
     icon: ClipboardMinus,
   },
   {
     title: 'Profile',
     url: '/dashboard/profile',
     icon: SquareUserRound,
-  }
+  },
 ];
 
 export function AppSidebar() {
@@ -60,21 +60,23 @@ export function AppSidebar() {
   const isCollapsed = state === 'collapsed';
 
   return (
-    <Sidebar collapsible="icon" className="border-r">
-      <SidebarHeader className="border-b p-4 h-20 flex justify-center">
+    <Sidebar
+      collapsible="icon"
+      className="border-r bg-slate-900 bg-opacity-95 backdrop-blur-xl shadow-xl"
+    >
+      <SidebarHeader className="border-b border-slate-800 p-4 h-20 flex justify-center bg-slate-900 bg-opacity-80 backdrop-blur-xl">
         {isCollapsed ? (
-          // <LayoutDashboard className="size-4" />
           <Image src="/images/logo.png" alt="Logo" width={40} height={40} />
         ) : (
           <div className="flex gap-2 items-center">
             <Image src="/images/logo.png" alt="Logo" width={40} height={40} />
-            <span className="text-xl font-semibold">{kebabCaseToWords(pathname)}</span>
+            <span className="text-xl font-semibold text-white">{kebabCaseToWords(pathname)}</span>
           </div>
         )}
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>My Classes</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-slate-400">Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
@@ -85,11 +87,12 @@ export function AppSidebar() {
                       <Link
                         href={item.url}
                         className={cn(
-                          'flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 h-10',
-                          isActive && 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50'
+                          'flex items-center gap-3 rounded-xl px-3 py-2 text-slate-400 transition-all hover:text-white hover:bg-slate-800/80 h-12 font-medium',
+                          isActive &&
+                            'bg-gradient-to-r from-orange-600 to-purple-600 text-white shadow-lg'
                         )}
                       >
-                        <item.icon className="h-6 w-6 lg:h-10 lg:w-10" />
+                        <item.icon className="h-6 w-6 lg:h-8 lg:w-8" />
                         <span className="text-base lg:text-lg">{!isCollapsed && item.title}</span>
                       </Link>
                     </SidebarMenuButton>
