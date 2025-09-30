@@ -42,11 +42,17 @@ export default function AppHeader() {
     >
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center gap-4">
-          {/* Company Logo */}
-          <Link href="/">
-            <Image src="/images/logo.png" alt="Logo" width={40} height={40} />
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/images/logo.png" alt="Velora Logo" width={40} height={40} />
+            <span className="text-2xl font-bold text-orange-500 tracking-tight">Velora</span>
           </Link>
+          <span className="hidden md:inline text-slate-400 font-medium ml-2">
+            Beautifully Manage Your Money
+          </span>
+        </div>
 
+        <div className="flex items-center gap-4">
+          {/* <ThemeToggle /> */}
           <NavigationMenu>
             <NavigationMenuList>
               {navigationMenuConfig?.items?.map((item) => (
@@ -58,13 +64,8 @@ export default function AppHeader() {
               ))}
             </NavigationMenuList>
           </NavigationMenu>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <ThemeToggle />
           <LanguageDropdown />
           <NotificationDropdown />
-          {/* <UserDropdown /> */}
         </div>
       </div>
     </nav>

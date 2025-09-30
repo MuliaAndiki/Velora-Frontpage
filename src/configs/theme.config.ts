@@ -89,31 +89,31 @@ export const themeConfig: ThemeConfig = {
     ring: 'rgba(145, 29, 236, 0.3)',
   },
   dark: {
-    background: '#1A1A1A',
+    background: '#0f172a', // slate-900
     foreground: '#F5EAFF',
     card: {
-      background: '#2A2A2A',
+      background: '#1e293b', // slate-800
       foreground: '#F5EAFF',
     },
     popover: {
-      background: '#2A2A2A',
+      background: '#1e293b',
       foreground: '#F5EAFF',
     },
     primary: {
-      background: '#911DEC',
-      foreground: '#F5EAFF',
+      background: 'linear-gradient(90deg, #f97316 0%, #a21caf 100%)', // orange-500 to purple-800
+      foreground: '#fff',
     },
     secondary: {
-      background: '#2A2A2A',
+      background: '#334155', // slate-700
       foreground: '#F5EAFF',
     },
     muted: {
-      background: '#2A2A2A',
+      background: '#1e293b',
       foreground: 'rgba(245, 234, 255, 0.6)',
     },
     accent: {
-      background: '#2A2A2A',
-      foreground: '#F5EAFF',
+      background: 'linear-gradient(90deg, #f97316 0%, #a21caf 100%)',
+      foreground: '#fff',
     },
     destructive: {
       background: '#FA0C00',
@@ -131,8 +131,8 @@ export const themeConfig: ThemeConfig = {
       background: '#04B4FC',
       foreground: '#04B4FC22',
     },
-    border: 'rgba(245, 234, 255, 0.1)',
-    input: 'rgba(245, 234, 255, 0.15)',
-    ring: 'rgba(245, 234, 255, 0.3)',
+    border: 'rgba(30, 41, 59, 0.7)', // slate-800
+    input: 'rgba(30, 41, 59, 0.7)',
+    ring: 'rgba(249, 115, 22, 0.3)', // orange-500
   },
 };
