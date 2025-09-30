@@ -24,12 +24,12 @@ import { kebabCaseToWords } from '@/utils/string.format';
 const items = [
   {
     title: 'Dashboard',
-    url: '/',
+    url: '/dashboard',
     icon: Home,
   },
   {
     title: 'Transaction',
-    url: '/transaction',
+    url: '/dashboard/transaction',
     icon: CreditCard,
   },
   {
