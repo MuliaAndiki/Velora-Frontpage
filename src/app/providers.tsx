@@ -16,7 +16,7 @@ const Providers = composeProviders([
   ({ children }) => <SidebarProvider defaultOpen={false}>{children}</SidebarProvider>,
   ({ children }) => <Provider store={store}>{children}</Provider>,
   ({ children }) => <PersistGate persistor={persistor}>{children}</PersistGate>,
-  AuthProvider,
+  // AuthProvider,
   ThemeProvider,
   AlertProvinder,
   ReactQueryClientProvider,
