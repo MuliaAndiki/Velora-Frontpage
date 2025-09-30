@@ -1,7 +1,5 @@
-import BudgetContainer from "./_container/budget"
+import BudgetContainer from './_container/budget';
 
-export default function(){
-    return(
-        <BudgetContainer />
-    )
+export default function Budget() {
+  return <BudgetContainer />;
 }
