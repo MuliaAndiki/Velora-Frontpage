@@ -22,6 +22,9 @@ const TransactionHeroSection = () => {
                     <p className="text-white">Isi konten di sini...</p>
                 </div>
             </div>
+            <button className="fixed bottom-4 right-4 z-50 bg-[#d65206] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[#b74705] transition">
+                + Add Transaction
+            </button>
         </view>
     )
 }
