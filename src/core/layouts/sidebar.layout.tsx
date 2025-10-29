@@ -3,33 +3,14 @@
 import { AppSidebar } from '@/core/components/app-sidebar';
 import { SidebarProvider, SidebarTrigger, SidebarInset } from '@/components/ui/sidebar';
 
-import ThemeToggle from '../components/theme-toggle';
 import LanguageDropdown from '../components/language.dropdown';
 import NotificationDropdown from '../components/notification.dropdown';
-// import UserDropdown from '../components/user.dropdown';
-
-// import AppBar from "../components/app-bar";
 
 interface AppLayoutProps {
   children: React.ReactNode;
 }
 
 export function SidebarLayout({ children }: AppLayoutProps) {
-  //   const [isScrolled, setIsScrolled] = useState(false);
-
-  //   useEffect(() => {
-  //     const handleScroll = () => {
-  //       if (window.scrollY > 0) {
-  //         setIsScrolled(true);
-  //       } else {
-  //         setIsScrolled(false);
-  //       }
-  //     };
-
-  //     window.addEventListener('scroll', handleScroll);
-  //     return () => window.removeEventListener('scroll', handleScroll);
-  //   }, []);
-
   return (
     <SidebarProvider defaultOpen>
       <div className="flex min-h-screen w-full">
