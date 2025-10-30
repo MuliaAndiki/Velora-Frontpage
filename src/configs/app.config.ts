@@ -1,3 +1,13 @@
+import { SidebarContentType } from '@/types/app';
+import {
+  ClipboardMinus,
+  CreditCard,
+  DollarSign,
+  Goal,
+  Home,
+  Settings,
+  SquareUserRound,
+} from 'lucide-react';
 import React from 'react';
 
 interface AppConfig {
@@ -94,3 +104,41 @@ export const navigationMenuConfig: NavigationMenuConfig = {
     },
   ],
 };
+
+export const SidebarMenuData: SidebarContentType[] = [
+  {
+    title: 'Dashboard',
+    url: '/dashboard',
+    icon: Home,
+  },
+  {
+    title: 'Transaction',
+    url: '/dashboard/transaction',
+    icon: CreditCard,
+  },
+  {
+    title: 'Budget',
+    url: '/dashboard/budget',
+    icon: DollarSign,
+  },
+  {
+    title: 'Goals',
+    url: '/dashboard/goal',
+    icon: Goal,
+  },
+  {
+    title: 'Report',
+    url: '/dashboard/report',
+    icon: ClipboardMinus,
+  },
+  {
+    title: 'Profile',
+    url: '/dashboard/profile',
+    icon: SquareUserRound,
+  },
+  {
+    title: 'Setting',
+    icon: Settings,
+    url: '/dashboard/setting',
+  },
+];

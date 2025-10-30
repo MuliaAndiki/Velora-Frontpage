@@ -60,7 +60,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
                 <Input
                   id="fullname"
                   type="text"
-                  placeholder="m@example.com"
                   required
                   value={formRegister.fullName}
                   onChange={(e) =>

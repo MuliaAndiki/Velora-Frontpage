@@ -5,6 +5,7 @@ import { SidebarProvider, SidebarTrigger, SidebarInset } from '@/components/ui/s
 
 import LanguageDropdown from '../components/language.dropdown';
 import NotificationDropdown from '../components/notification.dropdown';
+import View from '@/components/ui/view';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -13,28 +14,28 @@ interface AppLayoutProps {
 export function SidebarLayout({ children }: AppLayoutProps) {
   return (
     <SidebarProvider defaultOpen>
-      <div className="flex min-h-screen w-full">
+      <View className="flex min-h-screen w-full ">
         <AppSidebar />
         <SidebarInset>
-          <div className="flex h-full flex-col w-full">
-            <div className="flex p-4 items-center gap-2 border-b w-full h-20">
-              <div className="flex items-center justify-between max-w-7xl mx-auto w-full">
+          <View className="flex h-full flex-col w-full ">
+            <View className="flex p-4 items-center gap-2 border-b w-full h-20">
+              <View className="flex items-center justify-between  mx-auto w-full">
                 <SidebarTrigger />
-                <div className="flex items-center gap-4">
+                <View className="flex items-center gap-4">
                   {/* <ThemeToggle /> */}
                   <LanguageDropdown />
                   <NotificationDropdown />
                   {/* <UserDropdown /> */}
-                </div>
-              </div>
-            </div>
+                </View>
+              </View>
+            </View>
 
-            <div className="flex-1 overflow-auto w-full">
-              <div className="container h-full max-w-7xl w-full mx-auto p-[1rem]">{children}</div>
-            </div>
-          </div>
+            <View className="flex-1 overflow-hidden w-full">
+              <View className="container h-full max-w-7xl w-full mx-auto p-[1rem]">{children}</View>
+            </View>
+          </View>
         </SidebarInset>
-      </div>
+      </View>
     </SidebarProvider>
   );
 }
