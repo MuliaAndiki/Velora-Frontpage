@@ -1,4 +1,3 @@
-import { SidebarContentType } from '@/types/app';
 import {
   ClipboardMinus,
   CreditCard,
@@ -9,6 +8,8 @@ import {
   SquareUserRound,
 } from 'lucide-react';
 import React from 'react';
+
+import { SidebarContentType } from '@/types/app';
 
 interface AppConfig {
   name: string;

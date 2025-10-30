@@ -1,3 +1,6 @@
+import Link from 'next/link';
+
+import Box from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -9,9 +12,7 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import View from '@/components/ui/view';
-import Link from 'next/link';
 import { FormLoginType } from '@/types/form';
-import Box from '@/components/ui/box';
 
 interface LoginFormProps {
   formLogin: FormLoginType;

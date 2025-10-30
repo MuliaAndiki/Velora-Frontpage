@@ -1,8 +1,8 @@
 'use client';
 
+import Container from '@/components/ui/container';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
 import DashboardHeroSection from '@/core/section/private/dashboard/hero-section';
-import Container from '@/components/ui/container';
 export default function DashboardContainer() {
   return (
     <SidebarLayout>

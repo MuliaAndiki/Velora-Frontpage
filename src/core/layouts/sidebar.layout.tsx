@@ -1,11 +1,11 @@
 'use client';
 
+import { SidebarInset,SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import View from '@/components/ui/view';
 import { AppSidebar } from '@/core/components/app-sidebar';
-import { SidebarProvider, SidebarTrigger, SidebarInset } from '@/components/ui/sidebar';
 
 import LanguageDropdown from '../components/language.dropdown';
 import NotificationDropdown from '../components/notification.dropdown';
-import View from '@/components/ui/view';
 
 interface AppLayoutProps {
   children: React.ReactNode;

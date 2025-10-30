@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+
 import Box from '@/components/ui/box';
 import View from '@/components/ui/view';
 const LandingHeroSection = () => {

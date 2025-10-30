@@ -1,10 +1,10 @@
 'use client';
+import Box from '@/components/ui/box';
+import Container from '@/components/ui/container'; 
 import { themeConfig } from '@/configs/theme.config';
 import NavLayout from '@/core/layouts/nav.layout';
 import { useTheme } from '@/core/providers/theme.provider';
 import LandingHeroSection from '@/core/section/public/hero-section';
-import Container from '@/components/ui/container'; 
-import Box from '@/components/ui/box';
 
 export default function ContainerHome() {
   const { theme } = useTheme();
