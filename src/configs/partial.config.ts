@@ -1,4 +1,4 @@
-import { InconeType, InconeChartType, ExpenseChartType } from '@/types/partial';
+import { ExpenseChartType,InconeChartType, InconeType } from '@/types/partial';
 export const ButtonIncome: InconeType[] = [
   { title: 'harian', query: 'harian' },
   { title: 'bulan', query: 'bulan' },

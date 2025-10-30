@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import {
@@ -11,10 +12,10 @@ import {
   SidebarHeader,
   useSidebar,
 } from '@/components/ui/sidebar';
-import Image from 'next/image';
-import { kebabCaseToWords } from '@/utils/string.format';
-import SidebarSection from './sidebar-section';
 import { SidebarMenuData } from '@/configs/app.config';
+import { kebabCaseToWords } from '@/utils/string.format';
+
+import SidebarSection from './sidebar-section';
 
 export function AppSidebar() {
   const pathname = usePathname();

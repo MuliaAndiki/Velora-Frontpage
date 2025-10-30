@@ -1,14 +1,15 @@
 'use client';
-import { useLogin } from '@/hooks/mutation/auth/mutation';
-import { FormLoginType } from '@/types/form/auth.form';
-import { useAlert } from '@/hooks/useAlert';
+import { GalleryVerticalEnd } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import LoginForm from '@/core/section/auth/login/hero-section';
-import { GalleryVerticalEnd } from 'lucide-react';
-import Container from '@/components/ui/container';
+
 import Box from '@/components/ui/box';
-import Link from 'next/link';
+import Container from '@/components/ui/container';
+import LoginForm from '@/core/section/auth/login/hero-section';
+import { useLogin } from '@/hooks/mutation/auth/mutation';
+import { useAlert } from '@/hooks/useAlert';
+import { FormLoginType } from '@/types/form/auth.form';
 
 const LoginContainer = () => {
   const alert = useAlert();

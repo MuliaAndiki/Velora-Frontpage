@@ -1,5 +1,5 @@
 type ToastType = 'success' | 'error' | 'warning' | 'info' | 'question';
-import { JSX } from "react";
+import { JSX } from 'react';
 export interface ModalProps {
   title: string;
   icon: ToastType;

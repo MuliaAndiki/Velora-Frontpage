@@ -1,6 +1,6 @@
-import AxiosClient from '@/utils/axios.client';
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
 import { FormGoalType, FormGoalUpdateType } from '@/types/form/goal.form';
+import AxiosClient from '@/utils/axios.client';
 
 class GoalApi {
   async getAll(): Promise<TResponse<any>> {

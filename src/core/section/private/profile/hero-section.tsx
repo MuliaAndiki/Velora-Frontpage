@@ -1,5 +1,5 @@
+import { Camera, Check, Edit2, Eye, EyeOff, Lock, Mail, Phone, Save,User, X } from 'lucide-react';
 import React, { useState } from 'react';
-import { Camera, Edit2, Eye, EyeOff, Mail, Phone, User, Lock, Check, X, Save } from 'lucide-react';
 
 // Types
 interface UserProfile {

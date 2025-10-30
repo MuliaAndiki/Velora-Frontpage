@@ -1,6 +1,6 @@
-import AxiosClient from '@/utils/axios.client';
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
 import { FormBudgetType, FormBudgetUpdateType } from '@/types/form/budget.form';
+import AxiosClient from '@/utils/axios.client';
 
 class BudgetApi {
   async getAll(): Promise<TResponse<any>> {

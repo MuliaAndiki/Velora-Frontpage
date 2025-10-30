@@ -1,20 +1,23 @@
-import { Label } from '@radix-ui/react-label';
-import Box from './ui/box';
-import View from './ui/view';
 import { CardDashboardCardProps } from '@/types/props';
+import { formatCurrency } from '@/utils/format';
+
+import Box from './ui/box';
+import { Card, CardDescription,CardHeader, CardTitle } from './ui/card';
 
 const DashboardCard: React.FC<CardDashboardCardProps> = ({ data }) => {
   return (
-    <View className="w-full flex h-full flex-col border p-4 rounded-lg ">
-      <Box className="justify-between items-center flex space-y-2 ">
+    <Card className="w-full flex h-full flex-col border p-4 rounded-lg ">
+      <CardHeader className="justify-between items-center flex space-y-2 ">
         <Box className="w-15 h-15 bg-white rounded-lg" />
-        <Label className="text-lg font-semibold">{data.label}</Label>
-      </Box>
+        <CardTitle className="text-lg font-semibold">{data.label}</CardTitle>
+      </CardHeader>
       <Box className="w-full flex justify-center items-start flex-col">
-        <Label className="text-lg font-semibold">Total Balance :</Label>
-        <Label className="text-3xl text-bold">{data.price}</Label>
+        <CardDescription className="text-lg font-semibold">Total Balance :</CardDescription>
+        <CardDescription className="text-3xl text-bold">
+          {formatCurrency(data.price)}
+        </CardDescription>
       </Box>
-    </View>
+    </Card>
   );
 };
 

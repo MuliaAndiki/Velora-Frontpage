@@ -1,15 +1,16 @@
 'use client';
 
-import { useRegister } from '@/hooks/mutation/auth/mutation';
-import { FormRegisterType } from '@/types/form/auth.form';
-import { useAlert } from '@/hooks/useAlert';
+import { GalleryVerticalEnd } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import RegisterForm from '@/core/section/auth/register/hero-section';
+
 import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
-import Link from 'next/link';
-import { GalleryVerticalEnd } from 'lucide-react';
+import RegisterForm from '@/core/section/auth/register/hero-section';
+import { useRegister } from '@/hooks/mutation/auth/mutation';
+import { useAlert } from '@/hooks/useAlert';
+import { FormRegisterType } from '@/types/form/auth.form';
 
 const RegisterContainer = () => {
   const alert = useAlert();

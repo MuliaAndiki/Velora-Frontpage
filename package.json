@@ -36,6 +36,7 @@
     "cookies-next": "^6.1.0",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.5.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "i18next": "^24.2.3",
     "jose": "^6.0.10",
     "lucide-react": "^0.486.0",

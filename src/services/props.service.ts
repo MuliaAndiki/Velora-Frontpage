@@ -1,11 +1,11 @@
 import AuthApi from '@/services/auth/auth.service';
 import BudgetApi from '@/services/budget/budget.service';
 import CategoryApi from '@/services/category/category.service';
-import TransactionApi from '@/services/transaction/transaction.service';
-import GoalApi from '@/services/goal/goal.service';
 import DashboardApi from '@/services/dashboard/dashboard.service';
-import ReportApi from '@/services/report/report.service';
+import GoalApi from '@/services/goal/goal.service';
 import ImportExportApi from '@/services/import-export/import-export.service';
+import ReportApi from '@/services/report/report.service';
+import TransactionApi from '@/services/transaction/transaction.service';
 
 class Api {
   static Auth = AuthApi;

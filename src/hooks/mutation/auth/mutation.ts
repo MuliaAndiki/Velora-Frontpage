@@ -1,16 +1,17 @@
-import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
-import Api from '@/services/props.service';
-import { FormLoginType, FormRegisterType } from '@/types/form';
 import { useMutation } from '@tanstack/react-query';
-import { useAppNameSpase } from '@/hooks/useNameSpace';
-import { MutationOpsiType } from '@/types/app';
-import { logout, setCurrentUser } from '@/stores/authSlice/authSlice';
 import { deleteCookie, setCookie } from 'cookies-next';
+
 import {
   APP_REFRESH_TOKEN_COOKIE_EXPIRES_IN,
   APP_SESSION_COOKIE_KEY,
 } from '@/configs/cookies.config';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
+import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
+import Api from '@/services/props.service';
+import { logout, setCurrentUser } from '@/stores/authSlice/authSlice';
 import { userSchema } from '@/types/api';
+import { MutationOpsiType } from '@/types/app';
+import { FormLoginType, FormRegisterType } from '@/types/form';
 
 export function useLogin(options?: MutationOpsiType) {
   const namespace = useAppNameSpase();

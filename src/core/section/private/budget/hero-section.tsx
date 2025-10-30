@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
 import {
-  Home,
-  ShoppingCart,
   Car,
-  Utensils,
-  Heart,
-  Film,
-  Zap,
-  Plus,
   Edit2,
+  Film,
+  Heart,
+  Home,
+  Plus,
+  ShoppingCart,
   Trash2,
   TrendingUp,
+  Utensils,
+  Zap,
 } from 'lucide-react';
+import React, { useState } from 'react';
 
 // Types
 interface Budget {

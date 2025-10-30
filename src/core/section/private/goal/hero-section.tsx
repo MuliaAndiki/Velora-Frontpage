@@ -1,18 +1,18 @@
 'use client';
-import React, { useState, useMemo } from 'react';
 import {
-  Target,
-  TrendingUp,
   Calendar,
-  DollarSign,
-  Plus,
-  Edit2,
-  Trash2,
   Check,
   Clock,
+  DollarSign,
+  Edit2,
+  Plus,
+  Target,
+  Trash2,
+  TrendingUp,
   Trophy,
   Zap,
 } from 'lucide-react';
+import React, { useMemo,useState } from 'react';
 
 // Types
 interface Goal {
