@@ -36,7 +36,6 @@ export interface RegisterCardProps {
   isPending: boolean;
 }
 
-// Budget Page Props
 export interface BudgetFormProps {
   formBudget: FormBudgetType;
   setFormBudget: React.Dispatch<React.SetStateAction<FormBudgetType>>;
@@ -45,7 +44,6 @@ export interface BudgetFormProps {
   categories: any[];
 }
 
-// Category Page Props
 export interface CategoryFormProps {
   formCategory: FormCategoryType;
   setFormCategory: React.Dispatch<React.SetStateAction<FormCategoryType>>;

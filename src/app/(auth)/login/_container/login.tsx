@@ -1,15 +1,16 @@
 'use client';
-
-import { useLogin } from '@/hooks/mutation/auth/useLogin';
+import { useLogin } from '@/hooks/mutation/auth/mutation';
 import { FormLoginType } from '@/types/form/auth.form';
 import { useAlert } from '@/hooks/useAlert';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { LoginCard } from '@/core/section/auth/login/hero-section';
-import { useIsMobile } from '@/hooks/use-mobile';
+import LoginForm from '@/core/section/auth/login/hero-section';
+import { GalleryVerticalEnd } from 'lucide-react';
+import Container from '@/components/ui/container';
+import Box from '@/components/ui/box';
+import Link from 'next/link';
 
 const LoginContainer = () => {
-  const mobile = useIsMobile();
   const alert = useAlert();
   const router = useRouter();
   const [formLogin, setFormLogin] = useState<FormLoginType>({
@@ -37,21 +38,24 @@ const LoginContainer = () => {
   };
 
   return (
-    <div className="bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
-      <div
-        className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl opacity-10 animate-pulse"
-        style={{ animationDelay: '1s' }}
-      ></div>
-      <div className="w-full max-w-sm">
-        <LoginCard
-          formLogin={formLogin}
-          setFormLogin={setFormLogin}
-          onLogin={handleLogin}
-          isPending={login.isPending}
-        />
-      </div>
-    </div>
+    <Container className="flex min-h-svh items-center justify-center p-6 md:p-10">
+      <Box className="w-full max-w-sm">
+        <Box className="flex w-full max-w-sm flex-col gap-6">
+          <Link href="#" className="flex items-center gap-2 self-center font-medium">
+            <Box className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+              <GalleryVerticalEnd className="size-4" />
+            </Box>
+            Velora Inc.
+          </Link>
+          <LoginForm
+            formLogin={formLogin}
+            setFormLogin={setFormLogin}
+            onLogin={handleLogin}
+            isPending={login.isPending}
+          />
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

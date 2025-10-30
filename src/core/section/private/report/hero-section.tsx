@@ -2,8 +2,6 @@ import React, { useState, useMemo } from 'react';
 import {
   BarChart,
   Bar,
-  LineChart,
-  Line,
   PieChart,
   Pie,
   Cell,
@@ -18,13 +16,11 @@ import {
 } from 'recharts';
 import {
   Download,
-  Calendar,
   TrendingUp,
   TrendingDown,
   DollarSign,
   BarChart3,
   FileText,
-  Filter,
   Circle,
 } from 'lucide-react';
 

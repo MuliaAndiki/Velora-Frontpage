@@ -1,9 +1,6 @@
 'use client';
 
-import { ClipboardMinus, CreditCard, DollarSign, Goal, Home, SquareUserRound } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/utils/classname';
 
 import {
   Sidebar,
@@ -11,48 +8,13 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarHeader,
   useSidebar,
 } from '@/components/ui/sidebar';
 import Image from 'next/image';
 import { kebabCaseToWords } from '@/utils/string.format';
-
-// Menu items with proper routes
-const items = [
-  {
-    title: 'Dashboard',
-    url: '/dashboard',
-    icon: Home,
-  },
-  {
-    title: 'Transaction',
-    url: '/dashboard/transaction',
-    icon: CreditCard,
-  },
-  {
-    title: 'Budget',
-    url: '/dashboard/budget',
-    icon: DollarSign,
-  },
-  {
-    title: 'Goals',
-    url: '/dashboard/goal',
-    icon: Goal,
-  },
-  {
-    title: 'Report',
-    url: '/dashboard/report',
-    icon: ClipboardMinus,
-  },
-  {
-    title: 'Profile',
-    url: '/dashboard/profile',
-    icon: SquareUserRound,
-  },
-];
+import SidebarSection from './sidebar-section';
+import { SidebarMenuData } from '@/configs/app.config';
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -78,28 +40,11 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel className="text-slate-400">Menu</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => {
-                const isActive = pathname === item.url;
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild tooltip={isCollapsed ? item.title : undefined}>
-                      <Link
-                        href={item.url}
-                        className={cn(
-                          'flex items-center gap-3 rounded-xl px-3 py-2 text-slate-400 transition-all hover:text-white hover:bg-slate-800/80 h-12 font-medium',
-                          isActive &&
-                            'bg-gradient-to-r from-orange-600 to-purple-600 text-white shadow-lg'
-                        )}
-                      >
-                        <item.icon className="h-6 w-6 lg:h-8 lg:w-8" />
-                        <span className="text-base lg:text-lg">{!isCollapsed && item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
+            <SidebarSection
+              MenuData={SidebarMenuData}
+              isCollapsed={isCollapsed}
+              pathname={pathname}
+            />
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
