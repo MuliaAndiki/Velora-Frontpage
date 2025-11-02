@@ -2,30 +2,27 @@
 
 import { GalleryVerticalEnd } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
-import RegisterForm from '@/core/section/auth/register/hero-section';
-import { useRegister } from '@/hooks/mutation/auth/mutation';
-import { useAlert } from '@/hooks/useAlert';
-import { FormRegisterType } from '@/types/form/auth.form';
+import RegisterCard from '@/core/section/auth/register/hero-section';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
+import { FormRegister } from '@/types/form/auth.form';
 
 const RegisterContainer = () => {
-  const alert = useAlert();
-  const router = useRouter();
-  const [formRegister, setFormRegister] = useState<FormRegisterType>({
+  const namespase = useAppNameSpase();
+  const [formRegister, setFormRegister] = useState<FormRegister>({
     email: '',
     password: '',
     fullName: '',
   });
 
-  const register = useRegister();
+  const register = namespase.serviceApp.Auth.mutation.useRegister();
 
   const handleRegister = () => {
     if (!formRegister.email || !formRegister.password || !formRegister.fullName) {
-      alert.toast({
+      namespase.alert.toast({
         title: 'Warning',
         message: 'Please fill in all fields',
         icon: 'warning',
@@ -35,12 +32,7 @@ const RegisterContainer = () => {
 
     register.mutate(formRegister, {
       onSuccess: () => {
-        alert.toast({
-          title: 'Success',
-          message: 'Registration successful! Please login to continue.',
-          icon: 'success',
-        });
-        router.push('/login');
+        namespase.router.push('/verify-otp');
       },
     });
   };
@@ -55,7 +47,7 @@ const RegisterContainer = () => {
           Velora Inc.
         </Link>
         <Box className="w-full max-w-sm">
-          <RegisterForm
+          <RegisterCard
             formRegister={formRegister}
             setFormRegister={setFormRegister}
             onRegister={handleRegister}

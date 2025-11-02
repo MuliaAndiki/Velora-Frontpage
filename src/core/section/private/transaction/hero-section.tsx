@@ -13,7 +13,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import Link from 'next/link';
-import React, { useMemo,useState } from 'react';
+import React, { useMemo, useState } from 'react';
 // Types
 interface Transaction {
   id: string;

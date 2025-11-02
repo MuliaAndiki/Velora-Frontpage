@@ -1,5 +1,6 @@
-import { env } from '@/configs/env.config';
 import type { NextConfig } from 'next';
+
+import { env } from '@/configs/env.config';
 
 const nextConfig: NextConfig = {
   i18n: {

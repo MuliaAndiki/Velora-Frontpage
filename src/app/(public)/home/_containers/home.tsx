@@ -1,6 +1,6 @@
 'use client';
 import Box from '@/components/ui/box';
-import Container from '@/components/ui/container'; 
+import Container from '@/components/ui/container';
 import { themeConfig } from '@/configs/theme.config';
 import NavLayout from '@/core/layouts/nav.layout';
 import { useTheme } from '@/core/providers/theme.provider';
