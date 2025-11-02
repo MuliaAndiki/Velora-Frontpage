@@ -1,90 +1,96 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
-import { useAlert } from '@/hooks/useAlert/costum-alert';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
 import Api from '@/services/props.service';
-import { FormCategoryType, FormCategoryUpdateType } from '@/types/form/category.form';
+import { FormCreateCategory, FormEditCategory, PickID } from '@/types/form/category.form';
+const CategoryMutation = {
+  useCreateCategory() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormCreateCategory>({
+      mutationFn: (payload) => Api.Category.create(payload),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Berhasil Bikin Category',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Gagal Bikin Category',
+          icon: 'error',
+        });
+      },
+    });
+  },
 
-export function useCreateCategory(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
+  useUpdateCategory() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormEditCategory>({
+      mutationFn: (payload) => Api.Category.update(payload),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Berhasil Edit Category',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Gagal Update Category',
+          icon: 'error',
+        });
+      },
+    });
+  },
 
-  return useMutation<TResponse<any>, Error, FormCategoryType>({
-    mutationFn: (payload: FormCategoryType) => Api.Category.create(payload),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Category created successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to create category',
-        icon: 'error',
-      });
-    },
-  });
-}
+  useDeleteCategory() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, PickID>({
+      mutationFn: (params) => Api.Category.deleteByID(params),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Berhasil Delete Category',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Gagal Delete Category',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useDeleteAll() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, any>({
+      mutationFn: () => Api.Category.deleteALl(),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Berhail Delete Semua Category',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Gagal Delete Semua Category',
+          icon: 'error',
+        });
+      },
+    });
+  },
+};
 
-export function useUpdateCategory(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
-
-  return useMutation<TResponse<any>, Error, FormCategoryUpdateType>({
-    mutationFn: (payload: FormCategoryUpdateType) => Api.Category.update(payload),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Category updated successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to update category',
-        icon: 'error',
-      });
-    },
-  });
-}
-
-export function useDeleteCategory(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
-
-  return useMutation<TResponse<any>, Error, string>({
-    mutationFn: (id: string) => Api.Category.delete(id),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Category deleted successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to delete category',
-        icon: 'error',
-      });
-    },
-  });
-}
+export default CategoryMutation;

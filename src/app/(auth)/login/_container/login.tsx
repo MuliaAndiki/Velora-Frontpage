@@ -1,29 +1,26 @@
 'use client';
 import { GalleryVerticalEnd } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
 import LoginForm from '@/core/section/auth/login/hero-section';
-import { useLogin } from '@/hooks/mutation/auth/mutation';
-import { useAlert } from '@/hooks/useAlert';
-import { FormLoginType } from '@/types/form/auth.form';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
+import { FormLogin } from '@/types/form/auth.form';
 
 const LoginContainer = () => {
-  const alert = useAlert();
-  const router = useRouter();
-  const [formLogin, setFormLogin] = useState<FormLoginType>({
+  const namespase = useAppNameSpase();
+  const [formLogin, setFormLogin] = useState<FormLogin>({
     email: '',
     password: '',
   });
 
-  const login = useLogin();
+  const login = namespase.serviceApp.Auth.mutation.useLogin();
 
   const handleLogin = () => {
     if (!formLogin.email || !formLogin.password) {
-      alert.toast({
+      namespase.alert.toast({
         title: 'Warning',
         message: 'Please fill in all fields',
         icon: 'warning',
@@ -33,7 +30,7 @@ const LoginContainer = () => {
 
     login.mutate(formLogin, {
       onSuccess: () => {
-        router.push('/dashboard');
+        namespase.router.push('/dashboard');
       },
     });
   };

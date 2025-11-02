@@ -54,7 +54,7 @@ const DashboardHeroSection = () => {
         </Box>
       </Box>
 
-      <Button className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-orange-600 to-purple-600 text-white px-6 py-4 rounded-full shadow-2xl hover:shadow-orange-500/50 hover:scale-110 transition-all duration-300 flex items-center gap-2 group">
+      <Button className="fixed bottom-8 right-8 z-50  from-orange-600 to-purple-600 text-white px-6 py-4 rounded-full shadow-2xl hover:shadow-orange-500/50 hover:scale-110 transition-all duration-300 flex items-center gap-2 group">
         <span className="text-2xl group-hover:rotate-90 transition-transform duration-300">+</span>
         <span className="font-semibold">Add Transaction</span>
       </Button>

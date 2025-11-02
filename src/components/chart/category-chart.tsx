@@ -1,5 +1,5 @@
 import { TrendingUp } from 'lucide-react';
-import { Pie,PieChart } from 'recharts';
+import { Pie, PieChart } from 'recharts';
 
 import {
   Card,

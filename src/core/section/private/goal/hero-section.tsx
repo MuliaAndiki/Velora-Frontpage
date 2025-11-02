@@ -12,7 +12,7 @@ import {
   Trophy,
   Zap,
 } from 'lucide-react';
-import React, { useMemo,useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 // Types
 interface Goal {

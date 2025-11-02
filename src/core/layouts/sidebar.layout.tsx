@@ -1,6 +1,6 @@
 'use client';
 
-import { SidebarInset,SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import View from '@/components/ui/view';
 import { AppSidebar } from '@/core/components/app-sidebar';
 

@@ -2,12 +2,20 @@
 import Container from '@/components/ui/container';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
 import SettingsSection from '@/core/section/private/setting/hero-section';
-import { useLogout } from '@/hooks/mutation/auth/mutation';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
 
 const SettingsContainer = () => {
-  const logout = useLogout({});
+  const namespase = useAppNameSpase();
+  const logout = namespase.serviceApp.Auth.mutation.useLogout();
   const handleLogout = () => {
-    logout.mutate({});
+    logout.mutate(
+      {},
+      {
+        onSuccess: () => {
+          namespase.router.push('/login');
+        },
+      }
+    );
   };
   return (
     <SidebarLayout>

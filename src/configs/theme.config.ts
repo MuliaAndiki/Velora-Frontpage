@@ -42,8 +42,8 @@ interface ThemeConfig {
 
 export const themeConfig: ThemeConfig = {
   light: {
-    background: '#F9FAFB', 
-    foreground: '#1F2937', 
+    background: '#F9FAFB',
+    foreground: '#1F2937',
     card: {
       background: '#FFFFFF',
       foreground: '#1F2937',
@@ -53,23 +53,23 @@ export const themeConfig: ThemeConfig = {
       foreground: '#1F2937',
     },
     primary: {
-      background: '#7C3AED', 
+      background: '#7C3AED',
       foreground: '#FFFFFF',
     },
     secondary: {
-      background: '#E5E7EB', 
-      foreground: '#374151', 
+      background: '#E5E7EB',
+      foreground: '#374151',
     },
     muted: {
-      background: '#F3F4F6', 
-      foreground: '#6B7280', 
+      background: '#F3F4F6',
+      foreground: '#6B7280',
     },
     accent: {
-      background: '#8B5CF6', 
+      background: '#8B5CF6',
       foreground: '#FFFFFF',
     },
     destructive: {
-      background: '#EF4444', 
+      background: '#EF4444',
       foreground: '#FFFFFF',
     },
     warning: {
@@ -77,11 +77,11 @@ export const themeConfig: ThemeConfig = {
       foreground: '#1F2937',
     },
     success: {
-      background: '#10B981', 
+      background: '#10B981',
       foreground: '#FFFFFF',
     },
     info: {
-      background: '#3B82F6', 
+      background: '#3B82F6',
       foreground: '#FFFFFF',
     },
     border: '#E5E7EB',
@@ -89,10 +89,10 @@ export const themeConfig: ThemeConfig = {
     ring: 'rgba(124, 58, 237, 0.3)',
   },
   dark: {
-    background: '#0F172A', 
+    background: '#0F172A',
     foreground: '#E5E7EB',
     card: {
-      background: '#1E293B', 
+      background: '#1E293B',
       foreground: '#E5E7EB',
     },
     popover: {
@@ -100,19 +100,19 @@ export const themeConfig: ThemeConfig = {
       foreground: '#E5E7EB',
     },
     primary: {
-      background: '#8B5CF6', 
+      background: '#8B5CF6',
       foreground: '#FFFFFF',
     },
     secondary: {
-      background: '#334155', 
+      background: '#334155',
       foreground: '#E5E7EB',
     },
     muted: {
       background: '#1E293B',
-      foreground: '#9CA3AF', 
+      foreground: '#9CA3AF',
     },
     accent: {
-      background: '#7C3AED', 
+      background: '#7C3AED',
       foreground: '#FFFFFF',
     },
     destructive: {

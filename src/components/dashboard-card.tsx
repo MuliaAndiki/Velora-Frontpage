@@ -2,7 +2,7 @@ import { CardDashboardCardProps } from '@/types/props';
 import { formatCurrency } from '@/utils/format';
 
 import Box from './ui/box';
-import { Card, CardDescription,CardHeader, CardTitle } from './ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 const DashboardCard: React.FC<CardDashboardCardProps> = ({ data }) => {
   return (

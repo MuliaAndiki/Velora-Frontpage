@@ -1,11 +1,5 @@
-export interface FormCategoryType {
-  name: string;
-  type: 'INCOME' | 'EXPENSE';
-  icon?: string;
-  color?: string;
-  description?: string;
-}
+import { Category } from '../schema';
 
-export interface FormCategoryUpdateType extends FormCategoryType {
-  id: string;
-}
+export type FormCreateCategory = Pick<Category, 'name'>;
+export type FormEditCategory = Pick<Category, 'name' | 'id'>;
+export type PickID = Pick<Category, 'id'>;

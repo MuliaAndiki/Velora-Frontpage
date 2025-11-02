@@ -1,4 +1,4 @@
-import { Camera, Check, Edit2, Eye, EyeOff, Lock, Mail, Phone, Save,User, X } from 'lucide-react';
+import { Camera, Check, Edit2, Eye, EyeOff, Lock, Mail, Phone, Save, User, X } from 'lucide-react';
 import React, { useState } from 'react';
 
 // Types

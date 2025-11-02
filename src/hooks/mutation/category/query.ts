@@ -2,18 +2,28 @@ import { useQuery } from '@tanstack/react-query';
 
 import Api from '@/services/props.service';
 
-export function useGetCategories() {
-  return useQuery({
-    queryKey: ['categories'],
-    queryFn: () => Api.Category.getAll(),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-  });
+class CategoryQuery {
+  categoryData: any;
+  isLoading: boolean;
+  isPending: boolean;
+  isError: boolean;
+  refetchAll: () => void;
+  constructor(categoryQuery: any) {
+    this.categoryData = categoryQuery.data.data ?? [];
+    this.isLoading = categoryQuery.isLoading;
+    this.isPending = categoryQuery.isPending;
+    this.isError = categoryQuery.isError;
+    this.refetchAll = () => {
+      categoryQuery.refetch();
+    };
+  }
 }
 
-export function useGetCategoryById(id: string) {
-  return useQuery({
-    queryKey: ['categories', id],
-    queryFn: () => Api.Category.getById(id),
-    staleTime: 1000 * 60 * 5, // 5 minutes
+export function useCategoryData() {
+  const categoryQuery = useQuery({
+    queryFn: () => Api.Category.getAll(),
+    queryKey: ['category'],
+    staleTime: 1000 * 60 * 5,
   });
+  return new CategoryQuery(categoryQuery);
 }

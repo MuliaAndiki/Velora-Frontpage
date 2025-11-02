@@ -12,11 +12,10 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import View from '@/components/ui/view';
-import { FormLoginType } from '@/types/form';
-
+import { FormLogin } from '@/types/form/auth.form';
 interface LoginFormProps {
-  formLogin: FormLoginType;
-  setFormLogin: React.Dispatch<React.SetStateAction<FormLoginType>>;
+  formLogin: FormLogin;
+  setFormLogin: React.Dispatch<React.SetStateAction<FormLogin>>;
   onLogin: () => void;
   isPending: boolean;
 }
@@ -65,7 +64,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ formLogin, onLogin, setFormLogin,
               <Field>
                 <Box className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <Link href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
+                  <Link
+                    href="/forgot-password"
+                    className="ml-auto text-sm underline-offset-4 hover:underline"
+                  >
                     Forgot your password?
                   </Link>
                 </Box>
