@@ -1,18 +1,23 @@
 import Box from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
 import View from '@/components/ui/view';
+import LanguageDropdown from '@/core/components/language.dropdown';
 
 interface SettingProps {
   logout: () => void;
+  isPending: boolean;
 }
 
-const SettingsSection: React.FC<SettingProps> = ({ logout }) => {
+const SettingsSection: React.FC<SettingProps> = ({ logout, isPending }) => {
   return (
     <View>
-      <Box className="flex justify-center items-center min-h-screen w-full overflow-hidden">
-        <Button className="w-full " onClick={() => logout()}>
-          Keluar
-        </Button>
+      <Box className="flex justify-center items-start min-h-screen w-full overflow-hidden">
+        <Box className="w-full flex flex-col p-2">
+          <Button className="w-full" disabled={isPending} onClick={() => logout()}>
+            {isPending ? 'wait' : 'Quit'}
+          </Button>
+          <LanguageDropdown />
+        </Box>
       </Box>
     </View>
   );

@@ -9,8 +9,8 @@ class CategoryApi {
     return res.data;
   }
 
-  async getById(id: string): Promise<TResponse<any>> {
-    const res = await AxiosClient.get(`/api/category/${id}`);
+  async getById(params: PickID): Promise<TResponse<any>> {
+    const res = await AxiosClient.get(`/api/category/${params.id}`);
     return res.data;
   }
 

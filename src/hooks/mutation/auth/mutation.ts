@@ -146,6 +146,9 @@ const AuthMutation = {
           title: 'Berhasil',
           message: 'Otp Terverify',
           icon: 'success',
+          onVoid: () => {
+            namespace.dispatch(clearOtp());
+          },
         });
       },
       onError: (err) => {
@@ -167,9 +170,6 @@ const AuthMutation = {
           title: 'Berhasil',
           message: 'Otp Berhasil Terkirim',
           icon: 'success',
-          onVoid: () => {
-            namespace.dispatch(clearOtp());
-          },
         });
       },
       onError: (err) => {

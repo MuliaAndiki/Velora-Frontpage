@@ -20,7 +20,7 @@ const SettingsContainer = () => {
   return (
     <SidebarLayout>
       <Container className="w-full min-h-screen flex flex-col">
-        <SettingsSection logout={() => handleLogout()} />
+        <SettingsSection logout={() => handleLogout()} isPending={logout.isPending} />
       </Container>
     </SidebarLayout>
   );

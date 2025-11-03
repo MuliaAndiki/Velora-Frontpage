@@ -10,7 +10,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { getLanguageName, Language } from '@/configs/i18n.config';
-import { useLanguage } from '@/hooks/useLanguage';
+
+import { useLanguage } from '../providers/languageProvider';
 
 export default function LanguageDropdown() {
   const { currentLanguage, changeLanguage, languages } = useLanguage();

@@ -1,93 +1,104 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
-import { useAlert } from '@/hooks/useAlert/costum-alert';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
 import Api from '@/services/props.service';
-import { FormGoalType, FormGoalUpdateType } from '@/types/form/goal.form';
+import { FormCreateGoal, PickID } from '@/types/form/goal.form';
 
-export function useCreateGoal(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
+const GoalMutation = {
+  useCreate() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormCreateGoal>({
+      mutationFn: (payload) => Api.Goal.create(payload),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Tabungan Berhasil Terbuat',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Tabungan Gagal Terbuat',
+          icon: 'error',
+          onVoid: () => {
+            console.error(err);
+          },
+        });
+      },
+    });
+  },
 
-  return useMutation<TResponse<any>, Error, FormGoalType>({
-    mutationFn: (payload: FormGoalType) => Api.Goal.create(payload),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['goals'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Goal created successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to create goal',
-        icon: 'error',
-      });
-    },
-  });
-}
+  useUpdate(params: PickID) {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormCreateGoal>({
+      mutationFn: (payload) => Api.Goal.update(payload, params),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Goal Berhasil TerUpdate',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Goal Gagal TerUpdate',
+          icon: 'error',
+          onVoid: () => {
+            console.error(err);
+          },
+        });
+      },
+    });
+  },
+  useDeleteALl() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, any>({
+      mutationFn: () => Api.Goal.deleteAll(),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Goal Berhasil DiDelete',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Goal Gagal DiDelete',
+          icon: 'error',
+          onVoid: () => {
+            console.error(err);
+          },
+        });
+      },
+    });
+  },
+  useDeleteByID() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, any>({
+      mutationFn: (params) => Api.Goal.deleteByID(params),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'Berhasil',
+          message: 'Goal Berhasil DiDelete',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Goal Gagal DiDelete',
+          icon: 'error',
+          onVoid: () => {
+            console.error(err);
+          },
+        });
+      },
+    });
+  },
+};
 
-export function useUpdateGoal(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
-
-  return useMutation<TResponse<any>, Error, FormGoalUpdateType>({
-    mutationFn: (payload: FormGoalUpdateType) => Api.Goal.update(payload),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['goals'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Goal updated successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to update goal',
-        icon: 'error',
-      });
-    },
-  });
-}
-
-export function useDeleteGoal(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
-
-  return useMutation<TResponse<any>, Error, string>({
-    mutationFn: (id: string) => Api.Goal.delete(id),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['goals'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Goal deleted successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to delete goal',
-        icon: 'error',
-      });
-    },
-  });
-}
+export default GoalMutation;

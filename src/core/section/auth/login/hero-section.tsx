@@ -18,15 +18,22 @@ interface LoginFormProps {
   setFormLogin: React.Dispatch<React.SetStateAction<FormLogin>>;
   onLogin: () => void;
   isPending: boolean;
+  translate: any;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ formLogin, onLogin, setFormLogin, isPending }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  formLogin,
+  onLogin,
+  setFormLogin,
+  isPending,
+  translate,
+}) => {
   return (
     <View className="flex flex-col gap-6">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>Login with your Apple or Google account</CardDescription>
+          <CardTitle className="text-xl">{translate('auth.login.title')}</CardTitle>
+          <CardDescription>{translate('auth.login.deskripsi')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -44,11 +51,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ formLogin, onLogin, setFormLogin,
                       fill="currentColor"
                     />
                   </svg>
-                  Login with Google
+                  {translate('auth.login.google')}
                 </Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                Or continue with
+                {translate('auth.login.spread')}
               </FieldSeparator>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -68,7 +75,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ formLogin, onLogin, setFormLogin,
                     href="/forgot-password"
                     className="ml-auto text-sm underline-offset-4 hover:underline"
                   >
-                    Forgot your password?
+                    {translate('auth.login.forgot')}
                   </Link>
                 </Box>
                 <Input
@@ -86,10 +93,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ formLogin, onLogin, setFormLogin,
               </Field>
               <Field>
                 <Button type="submit" disabled={isPending}>
-                  {isPending ? 'Bentar' : 'Login'}
+                  {translate('auth.login.login')}
                 </Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <Link href="/register">Sign up</Link>
+                  {translate('auth.login.notAccount')}
+                  <Link href="/register">{translate('auth.login.account')}</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
@@ -97,8 +105,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ formLogin, onLogin, setFormLogin,
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <Link href="#">Terms of Service</Link>
-        and <Link href="#">Privacy Policy</Link>.
+        {translate('auth.login.fotterDeskripsi')}
+        <Link href="#">{translate('auth.login.terms')}</Link>
+        {translate('auth.login.and')} <Link href="#">{translate('auth.login.privacy')}</Link>.
       </FieldDescription>
     </View>
   );
