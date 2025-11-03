@@ -1,12 +1,4 @@
-export interface FormGoalType {
-  name: string;
-  targetAmount: number;
-  currentAmount: number;
-  deadline: Date;
-  description?: string;
-  icon?: string;
-}
+import { Goal } from '../schema';
 
-export interface FormGoalUpdateType extends FormGoalType {
-  id: string;
-}
+export type FormCreateGoal = Pick<Goal, 'name' | 'savedAmount' | 'deadline' | 'targetAmount'>;
+export type PickID = Pick<Goal, 'id'>;

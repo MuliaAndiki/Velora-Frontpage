@@ -11,6 +11,7 @@ import { FormLogin } from '@/types/form/auth.form';
 
 const LoginContainer = () => {
   const namespase = useAppNameSpase();
+  const t = namespase.t;
   const [formLogin, setFormLogin] = useState<FormLogin>({
     email: '',
     password: '',
@@ -50,6 +51,7 @@ const LoginContainer = () => {
             setFormLogin={setFormLogin}
             onLogin={handleLogin}
             isPending={login.isPending}
+            translate={t}
           />
         </Box>
       </Box>

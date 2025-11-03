@@ -4,7 +4,6 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import View from '@/components/ui/view';
 import { AppSidebar } from '@/core/components/app-sidebar';
 
-import LanguageDropdown from '../components/language.dropdown';
 import NotificationDropdown from '../components/notification.dropdown';
 
 interface AppLayoutProps {
@@ -23,7 +22,7 @@ export function SidebarLayout({ children }: AppLayoutProps) {
                 <SidebarTrigger />
                 <View className="flex items-center gap-4">
                   {/* <ThemeToggle /> */}
-                  <LanguageDropdown />
+
                   <NotificationDropdown />
                   {/* <UserDropdown /> */}
                 </View>
@@ -31,7 +30,7 @@ export function SidebarLayout({ children }: AppLayoutProps) {
             </View>
 
             <View className="flex-1 overflow-hidden w-full">
-              <View className="container h-full max-w-7xl w-full mx-auto p-[1rem]">{children}</View>
+              <View className="container h-full max-w-7xl w-full mx-auto ">{children}</View>
             </View>
           </View>
         </SidebarInset>

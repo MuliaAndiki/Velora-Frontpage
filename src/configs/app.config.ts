@@ -99,7 +99,7 @@ export const navigationMenuConfig: NavigationMenuConfig = {
       description: 'Home',
     },
     {
-      title: 'Login',
+      title: 'navbar-header.login',
       href: '/login',
       description: 'Login',
     },

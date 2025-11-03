@@ -6,6 +6,7 @@ import { useAppSelector } from '@/hooks/dispatch/dispatch';
 import { useAlert } from '@/hooks/useAlert/costum-alert';
 
 import ServiceClass from './mutation/props.service';
+import { useTranslate } from './useTranslate';
 
 export function useAppNameSpase() {
   const currentState = useAppSelector((state) => state);
@@ -14,5 +15,6 @@ export function useAppNameSpase() {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const serviceApp = ServiceClass;
-  return { alert, router, dispatch, queryClient, currentState, serviceApp };
+  const { t } = useTranslate();
+  return { alert, router, dispatch, queryClient, currentState, serviceApp, t };
 }

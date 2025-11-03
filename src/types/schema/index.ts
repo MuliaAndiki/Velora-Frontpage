@@ -20,3 +20,14 @@ export interface Category {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface Goal {
+  id: string;
+  name: string;
+  targetAmount: number;
+  savedAmount: number;
+  deadline: Date;
+  UserID: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
