@@ -13,6 +13,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { SidebarMenuData } from '@/configs/app.config';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { kebabCaseToWords } from '@/utils/string.format';
 
 import SidebarSection from './sidebar-section';
@@ -21,6 +22,7 @@ export function AppSidebar() {
   const pathname = usePathname();
   const { state } = useSidebar();
   const isCollapsed = state === 'collapsed';
+  const namespase = useAppNameSpase();
 
   return (
     <Sidebar
@@ -45,6 +47,7 @@ export function AppSidebar() {
               MenuData={SidebarMenuData}
               isCollapsed={isCollapsed}
               pathname={pathname}
+              t={namespase.t}
             />
           </SidebarGroupContent>
         </SidebarGroup>

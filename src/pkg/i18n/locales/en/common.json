@@ -31,12 +31,38 @@
       "spread": "Or continue with",
       "forgot": "Forgot your password?",
       "login": "SignIn",
+      "password": "Password",
       "notAccount": "Don't have an account?",
       "account": "Sign up",
       "fotterDeskripsi": "By clicking continue, you agree to our",
       "terms": "Terms of Service",
       "and": "and",
       "privacy": "Privacy Policy"
+    },
+    "register": {
+      "title": "Register",
+      "deskripsi": "Register with your Apple or Google account",
+      "google": "login with Google",
+      "spread": "Or continue with",
+      "name": "Name",
+      "password": "Password",
+      "register": "Register",
+      "notAccount": "Already have an account?",
+      "sign": "Sign In",
+      "fotterDeskripsi": "By clicking continue, you agree to our",
+      "terms": "Terms of Service",
+      "and": "and",
+      "privacy": "Privacy Policy"
     }
+  },
+  "sidebar-konten": {
+    "dashboard": "Dashboard",
+    "transaction": "Transaction",
+    "budget": "Budget",
+    "goal": "Goal",
+    "report": "Report",
+    "profile": "Profile",
+    "setting": "Setting",
+    "category": "Category"
   }
 }

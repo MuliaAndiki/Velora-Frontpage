@@ -19,6 +19,7 @@ interface RegisterFormProps {
   setFormRegister: React.Dispatch<React.SetStateAction<FormRegister>>;
   onRegister: () => void;
   isPending: boolean;
+  t: any;
 }
 
 const RegisterCard: React.FC<RegisterFormProps> = ({
@@ -26,13 +27,14 @@ const RegisterCard: React.FC<RegisterFormProps> = ({
   onRegister,
   setFormRegister,
   isPending,
+  t,
 }) => {
   return (
     <View className="flex flex-col gap-6">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Register </CardTitle>
-          <CardDescription>Login with your Apple or Google account</CardDescription>
+          <CardTitle className="text-xl">{t('auth.register.title')} </CardTitle>
+          <CardDescription>{t('auth.register.deskripsi')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -50,14 +52,14 @@ const RegisterCard: React.FC<RegisterFormProps> = ({
                       fill="currentColor"
                     />
                   </svg>
-                  Login with Google
+                  {t('auth.register.google')}
                 </Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                Or continue with
+                {t('auth.register.spread')}
               </FieldSeparator>
               <Field>
-                <FieldLabel htmlFor="fullname">Name :</FieldLabel>
+                <FieldLabel htmlFor="fullname">{t('auth.register.name')} :</FieldLabel>
                 <Input
                   id="fullname"
                   type="text"
@@ -88,7 +90,7 @@ const RegisterCard: React.FC<RegisterFormProps> = ({
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <FieldLabel htmlFor="password">{t('auth.register.password')}</FieldLabel>
                 <Input
                   id="password"
                   type="password"
@@ -107,7 +109,8 @@ const RegisterCard: React.FC<RegisterFormProps> = ({
                   {isPending ? 'Bentar' : 'Register'}
                 </Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <Link href="/login">Sign In</Link>
+                  {t('auth.register.notAccount')}{' '}
+                  <Link href="/login">{t('auth.register.sign')}</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
@@ -115,8 +118,8 @@ const RegisterCard: React.FC<RegisterFormProps> = ({
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <Link href="#">Terms of Service</Link>
-        and <Link href="#">Privacy Policy</Link>.
+        {t('auth.register.fotterDeskripsi')} <Link href="#">{t('auth.register.terms')}</Link>
+        {t('auth.register.and')} <Link href="#">{t('auth.register.privacy')}</Link>.
       </FieldDescription>
     </View>
   );

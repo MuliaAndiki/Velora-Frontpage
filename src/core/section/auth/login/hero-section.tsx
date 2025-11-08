@@ -18,7 +18,7 @@ interface LoginFormProps {
   setFormLogin: React.Dispatch<React.SetStateAction<FormLogin>>;
   onLogin: () => void;
   isPending: boolean;
-  translate: any;
+  t: any;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
@@ -26,14 +26,14 @@ const LoginForm: React.FC<LoginFormProps> = ({
   onLogin,
   setFormLogin,
   isPending,
-  translate,
+  t,
 }) => {
   return (
     <View className="flex flex-col gap-6">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">{translate('auth.login.title')}</CardTitle>
-          <CardDescription>{translate('auth.login.deskripsi')}</CardDescription>
+          <CardTitle className="text-xl">{t('auth.login.title')}</CardTitle>
+          <CardDescription>{t('auth.login.deskripsi')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -51,11 +51,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       fill="currentColor"
                     />
                   </svg>
-                  {translate('auth.login.google')}
+                  {t('auth.login.google')}
                 </Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                {translate('auth.login.spread')}
+                {t('auth.login.spread')}
               </FieldSeparator>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -70,12 +70,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
               </Field>
               <Field>
                 <Box className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <FieldLabel htmlFor="password">{t('auth.login.password')}</FieldLabel>
                   <Link
                     href="/forgot-password"
                     className="ml-auto text-sm underline-offset-4 hover:underline"
                   >
-                    {translate('auth.login.forgot')}
+                    {t('auth.login.forgot')}
                   </Link>
                 </Box>
                 <Input
@@ -93,11 +93,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
               </Field>
               <Field>
                 <Button type="submit" disabled={isPending}>
-                  {translate('auth.login.login')}
+                  {t('auth.login.login')}
                 </Button>
                 <FieldDescription className="text-center">
-                  {translate('auth.login.notAccount')}
-                  <Link href="/register">{translate('auth.login.account')}</Link>
+                  {t('auth.login.notAccount')}
+                  <Link href="/register">{t('auth.login.account')}</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
@@ -105,9 +105,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        {translate('auth.login.fotterDeskripsi')}
-        <Link href="#">{translate('auth.login.terms')}</Link>
-        {translate('auth.login.and')} <Link href="#">{translate('auth.login.privacy')}</Link>.
+        {t('auth.login.fotterDeskripsi')}
+        <Link href="#">{t('auth.login.terms')}</Link>
+        {t('auth.login.and')} <Link href="#">{t('auth.login.privacy')}</Link>.
       </FieldDescription>
     </View>
   );

@@ -1,8 +1,8 @@
 import AuthMutation from '@/hooks/mutation/auth/mutation';
-import { useAuthQueryData } from '@/hooks/mutation/auth/query';
 
+import { useAuthQueryData } from './auth/query';
 import CategoryMutation from './category/mutation';
-import { useCategoryData } from './category/query';
+import { useCategoryQueryData } from './category/query';
 import GoalMutation from './goal/mutation';
 import { useGoalData } from './goal/query';
 
@@ -13,7 +13,7 @@ class ServiceClass {
   };
   static Category = {
     mutation: CategoryMutation,
-    query: useCategoryData,
+    query: useCategoryQueryData,
   };
   static Goal = {
     mutation: GoalMutation,

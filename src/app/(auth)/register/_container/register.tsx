@@ -52,6 +52,7 @@ const RegisterContainer = () => {
             setFormRegister={setFormRegister}
             onRegister={handleRegister}
             isPending={register.isPending}
+            t={namespase.t}
           />
         </Box>
       </Box>
