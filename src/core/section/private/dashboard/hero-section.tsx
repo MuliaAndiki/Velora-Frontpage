@@ -7,13 +7,41 @@ import DashboardCard from '@/components/dashboard-card';
 import RecentCard from '@/components/recent-card';
 import Box from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
+import { Field, FieldTitle } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import PopUp from '@/components/ui/pop-up';
 import View from '@/components/ui/view';
 import { BarchartIncomeConfig, PiechartConfig } from '@/configs/chart.config';
 import { DashboardCardData, RecentCardData } from '@/configs/components.config';
 import { BudgetCardData } from '@/configs/components.config';
-import { ButtonIncome, ExpenseChartData, IncomeChartData } from '@/configs/partial.config';
+import { FormCreateCategory } from '@/types/form/category.form';
+import { ExpenseChartType, InconeChartType, InconeType } from '@/types/partial';
+import { PopupInterface } from '@/types/ui';
 
-const DashboardHeroSection = () => {
+interface DashboardProps {
+  popUpModal: PopupInterface;
+  setPopUpModal: React.Dispatch<React.SetStateAction<PopupInterface>>;
+  // dumy
+  ButtonIncome: InconeType[];
+  ExpenseChartData: ExpenseChartType[];
+  IncomeChartData: InconeChartType[];
+  formCreateCategory: FormCreateCategory;
+  setFromCreateCategory: React.Dispatch<React.SetStateAction<FormCreateCategory>>;
+  isPending: boolean;
+  onAddCategory: () => void;
+}
+
+const DashboardHeroSection: React.FC<DashboardProps> = ({
+  ButtonIncome,
+  ExpenseChartData,
+  IncomeChartData,
+  popUpModal,
+  setPopUpModal,
+  formCreateCategory,
+  setFromCreateCategory,
+  isPending,
+  onAddCategory,
+}) => {
   return (
     <View className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden  ">
       <Box className="flex-1 w-full  mx-auto relative z-10 p-6 lg:p-8">
@@ -54,10 +82,42 @@ const DashboardHeroSection = () => {
         </Box>
       </Box>
 
-      <Button className="fixed bottom-8 right-8 z-50  from-orange-600 to-purple-600 text-white px-6 py-4 rounded-full shadow-2xl hover:shadow-orange-500/50 hover:scale-110 transition-all duration-300 flex items-center gap-2 group">
+      <Button
+        onClick={() => setPopUpModal('categoory')}
+        className="fixed bottom-8 right-8 z-50   px-6 py-4 rounded-full shadow-2xl "
+      >
         <span className="text-2xl group-hover:rotate-90 transition-transform duration-300">+</span>
-        <span className="font-semibold">Add Transaction</span>
+        <span className="font-semibold">Add Category</span>
       </Button>
+      <PopUp isOpen={popUpModal === 'categoory'} onClose={() => setPopUpModal(null)}>
+        <View className="w-full h-full">
+          <Box className="w-full flex justify-center items-center flex-col">
+            <form
+              className="w-full"
+              onSubmit={(e) => {
+                e.preventDefault();
+                onAddCategory();
+              }}
+            >
+              <Field>
+                <FieldTitle>Name Category :</FieldTitle>
+                <Input
+                  value={formCreateCategory.name}
+                  onChange={(e) =>
+                    setFromCreateCategory((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
+                />
+                <Button variant={'outline'} type="submit" disabled={isPending}>
+                  {isPending ? 'Wait' : 'Add'}
+                </Button>
+              </Field>
+            </form>
+          </Box>
+        </View>
+      </PopUp>
     </View>
   );
 };

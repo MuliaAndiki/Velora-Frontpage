@@ -10,9 +10,10 @@ interface SidebarSectionProps {
   MenuData: any;
   pathname: any;
   isCollapsed: any;
+  t: any;
 }
 
-const SidebarSection: React.FC<SidebarSectionProps> = ({ MenuData, isCollapsed, pathname }) => {
+const SidebarSection: React.FC<SidebarSectionProps> = ({ MenuData, isCollapsed, pathname, t }) => {
   return (
     <SidebarGroupContent className="flex h-full flex-col justify-between">
       <SidebarMenu className="w-full ">
@@ -29,7 +30,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({ MenuData, isCollapsed, 
                   )}
                 >
                   <item.icon className="h-6 w-6 lg:h-10 lg:w-10" />
-                  <span className="text-base lg:text-lg">{!isCollapsed && item.title}</span>
+                  <span className="text-base lg:text-lg">{!isCollapsed && t(item.title)}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

@@ -1,4 +1,5 @@
 import {
+  CircleDot,
   ClipboardMinus,
   CreditCard,
   DollarSign,
@@ -108,38 +109,43 @@ export const navigationMenuConfig: NavigationMenuConfig = {
 
 export const SidebarMenuData: SidebarContentType[] = [
   {
-    title: 'Dashboard',
+    title: 'sidebar-konten.dashboard',
     url: '/dashboard',
     icon: Home,
   },
   {
-    title: 'Transaction',
+    title: 'sidebar-konten.transaction',
     url: '/dashboard/transaction',
     icon: CreditCard,
   },
   {
-    title: 'Budget',
+    title: 'sidebar-konten.budget',
     url: '/dashboard/budget',
     icon: DollarSign,
   },
   {
-    title: 'Goals',
+    title: 'sidebar-konten.goal',
     url: '/dashboard/goal',
     icon: Goal,
   },
   {
-    title: 'Report',
+    title: 'sidebar-konten.report',
     url: '/dashboard/report',
     icon: ClipboardMinus,
   },
   {
-    title: 'Profile',
+    title: 'sidebar-konten.profile',
     url: '/dashboard/profile',
     icon: SquareUserRound,
   },
   {
-    title: 'Setting',
+    title: 'sidebar-konten.setting',
     icon: Settings,
     url: '/dashboard/setting',
+  },
+  {
+    title: 'sidebar-konten.category',
+    icon: CircleDot,
+    url: '/dashboard/category',
   },
 ];

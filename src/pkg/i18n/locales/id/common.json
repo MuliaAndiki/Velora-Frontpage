@@ -31,12 +31,38 @@
       "spread": "Atau lanjutkan dengan",
       "forgot": "Lupa kata sandi Anda?",
       "login": "Masuk",
+      "password": "Kata sandi",
       "notAccount": "Belum punya akun?",
       "account": "Daftar",
       "fotterDeskripsi": "Dengan mengklik “Lanjutkan”, Anda setuju dengan ketentuan kami.",
       "terms": "Syarat dan Ketentuan",
       "and": "dan",
       "privacy": "Kebijakan Privasi"
+    },
+    "register": {
+      "title": "Daftar",
+      "deskripsi": "Daftar menggunakan akun Apple atau Google Anda",
+      "google": "Masuk dengan Google",
+      "spread": "Atau lanjutkan dengan",
+      "name": "Nama",
+      "password": "Kata sandi",
+      "register": "Daftar",
+      "notAccount": "sudah memiliki akun",
+      "sign": "Masuk",
+      "fotterDeskripsi": "Dengan mengklik “Lanjutkan”, Anda setuju dengan ketentuan kami.",
+      "terms": "Syarat dan Ketentuan",
+      "and": "dan",
+      "privacy": "Kebijakan Privasi"
     }
+  },
+  "sidebar-konten": {
+    "dashboard": "Dasbor",
+    "transaction": "Transaksi",
+    "budget": "Anggaran",
+    "goal": "Tujuan",
+    "report": "Laporan",
+    "profile": "Profile",
+    "setting": "Pengaturan",
+    "category": "Kategori"
   }
 }

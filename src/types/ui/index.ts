@@ -29,3 +29,12 @@ export interface DivProps {
   as?: keyof JSX.IntrinsicElements;
   onSubmit?: (e: any) => void;
 }
+
+export interface PopUpProps {
+  isOpen: boolean;
+  children: React.ReactNode;
+  onClose: () => void;
+  className?: string;
+}
+
+export type PopupInterface = 'categoory' | null;

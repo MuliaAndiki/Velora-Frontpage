@@ -51,7 +51,7 @@ const LoginContainer = () => {
             setFormLogin={setFormLogin}
             onLogin={handleLogin}
             isPending={login.isPending}
-            translate={t}
+            t={t}
           />
         </Box>
       </Box>
