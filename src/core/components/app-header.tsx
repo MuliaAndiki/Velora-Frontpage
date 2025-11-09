@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import Box from '@/components/ui/box';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -44,8 +43,8 @@ export default function AppHeader({ t }: AppHeaderProps) {
         isScrolled ? 'border-b-border shadow-md' : 'border-b-transparent'
       )}
     >
-      <Box className="flex items-center justify-between max-w-7xl mx-auto">
-        <Box className="flex items-center gap-4">
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
+        <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/images/logo.png" alt="Velora Logo" width={40} height={40} />
             <span className="text-2xl font-bold text-orange-500 tracking-tight">Velora</span>
@@ -53,9 +52,9 @@ export default function AppHeader({ t }: AppHeaderProps) {
           <span className="hidden md:inline text-slate-400 font-medium ml-2">
             {t('navbar-header.title')}
           </span>
-        </Box>
+        </div>
 
-        <Box className="flex items-center gap-4">
+        <div className="flex items-center gap-4">
           <ThemeToggle />
           <NavigationMenu>
             <NavigationMenuList>
@@ -70,8 +69,8 @@ export default function AppHeader({ t }: AppHeaderProps) {
           </NavigationMenu>
           <LanguageDropdown />
           <NotificationDropdown />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </nav>
   );
 }

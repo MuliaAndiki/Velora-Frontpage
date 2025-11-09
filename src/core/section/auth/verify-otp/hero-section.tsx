@@ -1,4 +1,3 @@
-import Box from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field';
@@ -40,7 +39,7 @@ const OTPForm: React.FC<OTPFormProps> = ({
               <FieldLabel htmlFor="otp" className="sr-only">
                 Verification code
               </FieldLabel>
-              <Box className="w-full flex justify-center items-center">
+              <div className="w-full flex justify-center items-center">
                 <InputOTP
                   maxLength={6}
                   id="otp"
@@ -62,7 +61,7 @@ const OTPForm: React.FC<OTPFormProps> = ({
                     <InputOTPSlot index={5} />
                   </InputOTPGroup>
                 </InputOTP>
-              </Box>
+              </div>
 
               <FieldDescription className="text-center">
                 Enter the 6-digit code sent to your email.

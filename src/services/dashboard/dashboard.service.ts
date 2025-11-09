@@ -26,4 +26,4 @@ class DashboardApi {
   }
 }
 
-export default new DashboardApi();
+export default DashboardApi;

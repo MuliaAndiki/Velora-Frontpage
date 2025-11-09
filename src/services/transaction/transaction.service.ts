@@ -55,4 +55,4 @@ class TransactionApi {
   }
 }
 
-export default new TransactionApi();
+export default TransactionApi;

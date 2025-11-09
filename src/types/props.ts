@@ -1,4 +1,4 @@
-import { BudgetCardType, CardDashboardCardType, RecentCardType } from './components';
+import { BudgetCardType, CardDashboardCardType, CategoryType, RecentCardType } from './components';
 
 export interface CardDashboardCardProps {
   data: CardDashboardCardType;
@@ -10,4 +10,7 @@ export interface RecentCardProps {
 
 export interface BudgetCardDataProps {
   data: BudgetCardType;
+}
+export interface CategoryProps {
+  data: CategoryType;
 }

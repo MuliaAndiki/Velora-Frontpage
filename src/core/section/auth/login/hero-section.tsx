@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import Box from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -69,7 +68,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 />
               </Field>
               <Field>
-                <Box className="flex items-center">
+                <div className="flex items-center">
                   <FieldLabel htmlFor="password">{t('auth.login.password')}</FieldLabel>
                   <Link
                     href="/forgot-password"
@@ -77,7 +76,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   >
                     {t('auth.login.forgot')}
                   </Link>
-                </Box>
+                </div>
                 <Input
                   id="password"
                   type="password"

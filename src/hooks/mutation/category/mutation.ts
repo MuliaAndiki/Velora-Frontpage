@@ -54,6 +54,9 @@ const CategoryMutation = {
     return useMutation<TResponse<any>, Error, PickID>({
       mutationFn: (params) => Api.Category.deleteByID(params),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'category',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Berhasil Delete Category',

@@ -29,4 +29,4 @@ class BudgetApi {
   }
 }
 
-export default new BudgetApi();
+export default BudgetApi;

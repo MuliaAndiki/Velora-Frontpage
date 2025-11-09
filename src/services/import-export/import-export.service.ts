@@ -32,4 +32,4 @@ class ImportExportApi {
   }
 }
 
-export default new ImportExportApi();
+export default ImportExportApi;

@@ -20,4 +20,4 @@ class ReportApi {
   }
 }
 
-export default new ReportApi();
+export default ReportApi;

@@ -1,24 +1,24 @@
 import AuthMutation from '@/hooks/mutation/auth/mutation';
 
-import { useAuthQueryData } from './auth/query';
+import { useAuthData } from './auth/query';
 import CategoryMutation from './category/mutation';
-import { useCategoryQueryData } from './category/query';
+import { useCategoryQueries } from './category/query';
 import GoalMutation from './goal/mutation';
 import { useGoalData } from './goal/query';
 
-class ServiceClass {
-  static Auth = {
+export const useServices = () => ({
+  Auth: {
     mutation: AuthMutation,
-    query: useAuthQueryData,
-  };
-  static Category = {
+    query: useAuthData,
+  },
+  Category: {
     mutation: CategoryMutation,
-    query: useCategoryQueryData,
-  };
-  static Goal = {
+    query: useCategoryQueries,
+  },
+  Goal: {
     mutation: GoalMutation,
     query: useGoalData,
-  };
-}
+  },
+});
 
-export default ServiceClass;
+export default useServices;

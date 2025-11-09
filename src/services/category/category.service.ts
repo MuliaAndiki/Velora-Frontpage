@@ -7,7 +7,6 @@ class CategoryApi {
     const res = await AxiosClient.post('/api/category', payload);
     return res.data;
   }
-  //  Setup
   async getAll(): Promise<TResponse<any>> {
     const res = await AxiosClient.get('/api/category/');
     return res.data;
@@ -33,4 +32,4 @@ class CategoryApi {
   }
 }
 
-export default new CategoryApi();
+export default CategoryApi;

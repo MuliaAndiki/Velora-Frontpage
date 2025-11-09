@@ -1,5 +1,4 @@
 'use client';
-import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
 import { themeConfig } from '@/configs/theme.config';
 import NavLayout from '@/core/layouts/nav.layout';
@@ -12,9 +11,9 @@ export default function ContainerHome() {
   return (
     <NavLayout>
       <Container className={`container  mx-auto bg-[${themeConfig[theme].primary.background}]`}>
-        <Box className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-screen">
           <LandingHeroSection />
-        </Box>
+        </div>
       </Container>
     </NavLayout>
   );

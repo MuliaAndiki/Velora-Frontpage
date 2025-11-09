@@ -1,4 +1,4 @@
-import { Goal } from '../schema';
+import { IGoal } from '../schema';
 
-export type FormCreateGoal = Pick<Goal, 'name' | 'savedAmount' | 'deadline' | 'targetAmount'>;
-export type PickID = Pick<Goal, 'id'>;
+export type FormCreateGoal = Pick<IGoal, 'name' | 'savedAmount' | 'deadline' | 'targetAmount'>;
+export type PickID = Pick<IGoal, 'id'>;
