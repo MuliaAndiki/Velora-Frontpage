@@ -3,23 +3,25 @@ import { GalleryVerticalEnd } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
 import OTPForm from '@/core/section/auth/verify-otp/hero-section';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormVerifyOtp } from '@/types/form/auth.form';
+import useServices from '@/hooks/mutation/props.service';
+import { useAppSelector } from '@/hooks/dispatch/dispatch';
 
 const VerifyOtpContainer = () => {
   const namespase = useAppNameSpase();
+  const otp = useAppSelector((state) => state.otp);
   const [formVerifyOtp, setFormVerifyOtp] = useState<FormVerifyOtp>({
-    email: namespase.currentState.otp.email ?? '',
+    email: otp.email ?? '',
     otp: '',
   });
   const [colldown, setColldown] = useState<number>(0);
-  const verify = namespase.serviceApp.Auth.mutation.useVerifyOtp();
-  const resend = namespase.serviceApp.Auth.mutation.useSendOtp();
+  const verify = useServices().Auth.mutation.useVerifyOtp();
+  const resend = useServices().Auth.mutation.useSendOtp();
   const handleVerfiy = () => {
-    if (namespase.currentState.otp.source === 'forgot-password') {
+    if (otp.source === 'forgot-password') {
       if (!formVerifyOtp.email || !formVerifyOtp.otp) {
         namespase.alert.toast({
           title: 'Peringatan',
@@ -39,7 +41,7 @@ const VerifyOtpContainer = () => {
           }
         );
       }
-    } else if (namespase.currentState.otp.source === 'register') {
+    } else if (otp.source === 'register') {
       if (!formVerifyOtp.email || !formVerifyOtp.otp) {
         namespase.alert.toast({
           title: 'Peringatan',
@@ -66,7 +68,7 @@ const VerifyOtpContainer = () => {
   const handleResend = () => {
     resend.mutate(
       {
-        email: namespase.currentState.otp.email ?? '',
+        email: otp.email ?? '',
       },
       {
         onSuccess: () => {
@@ -92,11 +94,11 @@ const VerifyOtpContainer = () => {
 
   return (
     <Container className=" flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-      <Box className="flex w-full max-w-sm flex-col gap-6">
+      <div className="flex w-full max-w-sm flex-col gap-6">
         <Link href="#" className="flex items-center gap-2 self-center font-medium">
-          <Box className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+          <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
             <GalleryVerticalEnd className="size-4" />
-          </Box>
+          </div>
           Velora Inc.
         </Link>
         <OTPForm
@@ -107,7 +109,7 @@ const VerifyOtpContainer = () => {
           colldown={colldown}
           onResend={() => handleResend()}
         />
-      </Box>
+      </div>
     </Container>
   );
 };

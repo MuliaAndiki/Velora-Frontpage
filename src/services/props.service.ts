@@ -8,14 +8,14 @@ import ReportApi from '@/services/report/report.service';
 import TransactionApi from '@/services/transaction/transaction.service';
 
 class Api {
-  static Auth = AuthApi;
-  static Budget = BudgetApi;
-  static Category = CategoryApi;
-  static Transaction = TransactionApi;
-  static Goal = GoalApi;
-  static Dashboard = DashboardApi;
-  static Report = ReportApi;
-  static ImportExport = ImportExportApi;
+  static Auth = new AuthApi();
+  static Budget = new BudgetApi();
+  static Category = new CategoryApi();
+  static Transaction = new TransactionApi();
+  static Goal = new GoalApi();
+  static Dashboard = new DashboardApi();
+  static Report = new ReportApi();
+  static ImportExport = new ImportExportApi();
 }
 
 export default Api;

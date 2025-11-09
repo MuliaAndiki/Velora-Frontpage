@@ -3,11 +3,11 @@ import { GalleryVerticalEnd } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
 import LoginForm from '@/core/section/auth/login/hero-section';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormLogin } from '@/types/form/auth.form';
+import useServices from '@/hooks/mutation/props.service';
 
 const LoginContainer = () => {
   const namespase = useAppNameSpase();
@@ -17,7 +17,7 @@ const LoginContainer = () => {
     password: '',
   });
 
-  const login = namespase.serviceApp.Auth.mutation.useLogin();
+  const login = useServices().Auth.mutation.useLogin();
 
   const handleLogin = () => {
     if (!formLogin.email || !formLogin.password) {
@@ -38,12 +38,12 @@ const LoginContainer = () => {
 
   return (
     <Container className="flex min-h-svh items-center justify-center p-6 md:p-10">
-      <Box className="w-full max-w-sm">
-        <Box className="flex w-full max-w-sm flex-col gap-6">
+      <div className="w-full max-w-sm">
+        <div className="flex w-full max-w-sm flex-col gap-6">
           <Link href="#" className="flex items-center gap-2 self-center font-medium">
-            <Box className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-4" />
-            </Box>
+            </div>
             Velora Inc.
           </Link>
           <LoginForm
@@ -53,8 +53,8 @@ const LoginContainer = () => {
             isPending={login.isPending}
             t={t}
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </Container>
   );
 };

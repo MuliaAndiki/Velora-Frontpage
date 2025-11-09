@@ -1,5 +1,4 @@
 'use client';
-import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 
@@ -12,7 +11,7 @@ export default function NavLayout({ children }: { children: React.ReactNode }) {
   return (
     <Container className="flex flex-col min-h-screen w-full">
       <AppHeader t={t} />
-      <Box className="flex-1">{children}</Box>
+      <div className="flex-1">{children}</div>
       <AppFooter t={t} />
     </Container>
   );

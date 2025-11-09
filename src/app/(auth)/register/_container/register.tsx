@@ -4,11 +4,11 @@ import { GalleryVerticalEnd } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import Box from '@/components/ui/box';
 import Container from '@/components/ui/container';
 import RegisterCard from '@/core/section/auth/register/hero-section';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormRegister } from '@/types/form/auth.form';
+import useServices from '@/hooks/mutation/props.service';
 
 const RegisterContainer = () => {
   const namespase = useAppNameSpase();
@@ -18,7 +18,7 @@ const RegisterContainer = () => {
     fullName: '',
   });
 
-  const register = namespase.serviceApp.Auth.mutation.useRegister();
+  const register = useServices().Auth.mutation.useRegister();
 
   const handleRegister = () => {
     if (!formRegister.email || !formRegister.password || !formRegister.fullName) {
@@ -39,14 +39,14 @@ const RegisterContainer = () => {
 
   return (
     <Container className="flex min-h-svh items-center justify-center p-6 md:p-10">
-      <Box className="flex w-full max-w-sm flex-col gap-6">
+      <div className="flex w-full max-w-sm flex-col gap-6">
         <Link href="#" className="flex items-center gap-2 self-center font-medium">
-          <Box className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+          <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
             <GalleryVerticalEnd className="size-4" />
-          </Box>
+          </div>
           Velora Inc.
         </Link>
-        <Box className="w-full max-w-sm">
+        <div className="w-full max-w-sm">
           <RegisterCard
             formRegister={formRegister}
             setFormRegister={setFormRegister}
@@ -54,8 +54,8 @@ const RegisterContainer = () => {
             isPending={register.isPending}
             t={namespase.t}
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </Container>
   );
 };

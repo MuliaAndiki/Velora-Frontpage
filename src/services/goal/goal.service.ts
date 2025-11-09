@@ -34,4 +34,4 @@ class GoalApi {
   }
 }
 
-export default new GoalApi();
+export default GoalApi;

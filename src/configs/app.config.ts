@@ -6,7 +6,6 @@ import {
   Goal,
   Home,
   Settings,
-  SquareUserRound,
 } from 'lucide-react';
 import React from 'react';
 
@@ -114,6 +113,11 @@ export const SidebarMenuData: SidebarContentType[] = [
     icon: Home,
   },
   {
+    title: 'sidebar-konten.category',
+    icon: CircleDot,
+    url: '/dashboard/category',
+  },
+  {
     title: 'sidebar-konten.transaction',
     url: '/dashboard/transaction',
     icon: CreditCard,
@@ -133,19 +137,10 @@ export const SidebarMenuData: SidebarContentType[] = [
     url: '/dashboard/report',
     icon: ClipboardMinus,
   },
-  {
-    title: 'sidebar-konten.profile',
-    url: '/dashboard/profile',
-    icon: SquareUserRound,
-  },
+
   {
     title: 'sidebar-konten.setting',
     icon: Settings,
     url: '/dashboard/setting',
-  },
-  {
-    title: 'sidebar-konten.category',
-    icon: CircleDot,
-    url: '/dashboard/category',
   },
 ];

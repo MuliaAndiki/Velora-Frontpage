@@ -19,7 +19,6 @@ import {
 import { InconeChartType, InconeType } from '@/types/partial';
 import { camelCaseToWords } from '@/utils/string.format';
 
-import Box from '../ui/box';
 import { Button } from '../ui/button';
 
 interface IncomeChartProps {
@@ -34,14 +33,14 @@ const IncomeChart: React.FC<IncomeChartProps> = ({
   BarchartIncomeConfig,
 }) => {
   return (
-    <Box className=" flex justify-center items-center ">
-      <Box className="w-full flex justify-center items-center flex-col  rounded-lg  ">
+    <div className=" flex justify-center items-center ">
+      <div className="w-full flex justify-center items-center flex-col  rounded-lg  ">
         <Card className="w-full">
           <CardHeader className="flex justify-between items-center">
-            <Box className="w-full">
+            <div className="w-full">
               <CardTitle className="text-2xl">Income Vs Expense</CardTitle>
               <CardDescription>Showing total visitors for the last 6 months</CardDescription>
-            </Box>
+            </div>
             {ButtonIncome.map((items, key) => (
               <Button key={key} onClick={() => items.query} className="">
                 {camelCaseToWords(items.title)}
@@ -98,20 +97,20 @@ const IncomeChart: React.FC<IncomeChartProps> = ({
             </ChartContainer>
           </CardContent>
           <CardFooter>
-            <Box className="flex w-full items-start gap-2 text-sm">
-              <Box className="grid gap-2">
-                <Box className="flex items-center gap-2 leading-none font-medium">
+            <div className="flex w-full items-start gap-2 text-sm">
+              <div className="grid gap-2">
+                <div className="flex items-center gap-2 leading-none font-medium">
                   Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </Box>
-                <Box className="text-muted-foreground flex items-center gap-2 leading-none">
+                </div>
+                <div className="text-muted-foreground flex items-center gap-2 leading-none">
                   January - June 2024
-                </Box>
-              </Box>
-            </Box>
+                </div>
+              </div>
+            </div>
           </CardFooter>
         </Card>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

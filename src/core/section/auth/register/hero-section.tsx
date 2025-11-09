@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import Box from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {

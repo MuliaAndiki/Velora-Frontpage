@@ -37,9 +37,9 @@ class AuthApi {
   }
   // Setup Endpoint
   async GetProfile(): Promise<TResponse<any>> {
-    const res = await AxiosClient.get('/api/auth/profile');
+    const res = await AxiosClient.get('/api/auth/');
     return res.data;
   }
 }
 
-export default new AuthApi();
+export default AuthApi;

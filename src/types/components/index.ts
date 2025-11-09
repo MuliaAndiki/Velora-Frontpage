@@ -17,3 +17,11 @@ export interface BudgetCardType {
   persentase?: number;
   used: number;
 }
+
+export interface CategoryType {
+  id: string;
+  name: string;
+  avaUrl: string;
+  createdAt: string;
+  updatedAt: string;
+}
