@@ -4,6 +4,8 @@ import { SidebarGroupContent } from '@/components/ui/sidebar';
 import { SidebarMenu } from '@/components/ui/sidebar';
 import { SidebarMenuItem } from '@/components/ui/sidebar';
 import { SidebarMenuButton } from '@/components/ui/sidebar';
+import { SidebarIcons } from '@/configs/icons.config';
+import { SidebarContentType } from '@/types/app';
 import { cn } from '@/utils/classname';
 
 interface SidebarSectionProps {
@@ -17,7 +19,8 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({ MenuData, isCollapsed, 
   return (
     <SidebarGroupContent className="flex h-full flex-col justify-between">
       <SidebarMenu className="w-full ">
-        {MenuData?.map((item: any) => {
+        {MenuData?.map((item: SidebarContentType) => {
+          const Icon = SidebarIcons[item.icon];
           const isActive = pathname === item.url;
           return (
             <SidebarMenuItem key={item.title}>
@@ -29,7 +32,8 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({ MenuData, isCollapsed, 
                     isActive && 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50'
                   )}
                 >
-                  <item.icon className="h-6 w-6 lg:h-10 lg:w-10" />
+                  {Icon && <Icon className="h-6 w-6 lg:h-10 lg:w-10" />}
+
                   <span className="text-base lg:text-lg">{!isCollapsed && t(item.title)}</span>
                 </Link>
               </SidebarMenuButton>

@@ -1,6 +1,7 @@
 import { Label } from '@radix-ui/react-label';
 import { Ellipsis } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import {
   DropdownMenu,
@@ -8,12 +9,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { CategoryProps } from '@/types/props';
@@ -65,7 +61,9 @@ const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
                 >
                   Delete
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-md ">Edit</DropdownMenuItem>
+                <Link href={`/dashboard/category/edit-category/${data.id}`}>
+                  <DropdownMenuItem className="text-md ">Edit</DropdownMenuItem>
+                </Link>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>

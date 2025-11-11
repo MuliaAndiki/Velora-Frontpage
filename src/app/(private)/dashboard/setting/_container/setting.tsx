@@ -1,10 +1,11 @@
 'use client';
+import { useEffect } from 'react';
+
 import Container from '@/components/ui/container';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
 import SettingsSection from '@/core/section/private/setting/hero-section';
 import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
-import { useEffect } from 'react';
 
 const SettingsContainer = () => {
   const namespase = useAppNameSpase();
