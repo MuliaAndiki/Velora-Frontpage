@@ -1,11 +1,12 @@
 'use client';
+import { useState } from 'react';
+
 import Container from '@/components/ui/container';
 import { GoalCardData } from '@/configs/components.config';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
 import GoalHeroSection from '@/core/section/private/goal/hero-section';
 import useServices from '@/hooks/mutation/props.service';
 import { PopupInterface } from '@/types/ui';
-import { useState } from 'react';
 
 const GoalContainer = () => {
   const [popUp, setPopUp] = useState<PopupInterface>(null);

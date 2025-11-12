@@ -10,15 +10,15 @@ const nextConfig: NextConfig = {
   },
 
   experimental: {
-    // optimizePackageImports: [ // NONAKTIFKAN DULU
-    //   'lucide-react',
-    //   '@tabler/icons-react',
-    //   '@radix-ui/react-dialog',
-    //   '@radix-ui/react-dropdown-menu',
-    //   '@radix-ui/react-popover',
-    //   '@radix-ui/react-select',
-    //   '@tanstack/react-query',
-    // ],
+    optimizePackageImports: [
+      'lucide-react',
+      '@tabler/icons-react',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-popover',
+      '@radix-ui/react-select',
+      '@tanstack/react-query',
+    ],
     optimisticClientCache: true,
   },
 

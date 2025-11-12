@@ -1,8 +1,8 @@
 import { goalProps } from '@/types/props';
+import { formatCurrency } from '@/utils/number.format';
 
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { formatCurrency } from '@/utils/number.format';
 const GoalPartial: React.FC<goalProps> = ({ data }) => {
   return (
     <Card>
@@ -29,7 +29,7 @@ const GoalPartial: React.FC<goalProps> = ({ data }) => {
         </div>
         <div
           className="w-full h-3 bg-red-500 rounded-lg my-2"
-          style={{ width: `${Math.min(data.percent, 100)}%` }}
+          style={{ width: `${Math.min(data.percent!, 100)}%` }}
         />
         <div className="flex justify-between w-full">
           <p className="text-slate-400">achieve</p>
