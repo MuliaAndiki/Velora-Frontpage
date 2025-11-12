@@ -1,6 +1,6 @@
 import { CardDescription, CardTitle } from '@/components/ui/card';
 import { RecentCardProps } from '@/types/props';
-import { formatCurrency } from '@/utils/format';
+import { formatCurrency } from '@/utils/number.format';
 
 const RecentCardPartial: React.FC<RecentCardProps> = ({ data }) => {
   return (

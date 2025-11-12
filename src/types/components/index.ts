@@ -25,3 +25,15 @@ export interface CategoryType {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface GoalType {
+  title: string;
+  desc: string;
+  label: string;
+  startValue: number;
+  endValue: number;
+  remainingValue: number;
+  percent: number;
+  dateNow: string;
+  dateLine: string;
+}

@@ -1,5 +1,5 @@
 import { BudgetCardDataProps } from '@/types/props';
-import { formatCurrency } from '@/utils/format';
+import { formatCurrency } from '@/utils/number.format';
 
 import { CardDescription, CardTitle } from '../ui/card';
 

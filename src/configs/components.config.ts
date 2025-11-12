@@ -1,4 +1,9 @@
-import { BudgetCardType, CardDashboardCardType, RecentCardType } from '@/types/components';
+import {
+  BudgetCardType,
+  CardDashboardCardType,
+  GoalType,
+  RecentCardType,
+} from '@/types/components';
 
 export const DashboardCardData: CardDashboardCardType[] = [
   {
@@ -48,5 +53,18 @@ export const BudgetCardData: BudgetCardType[] = [
     category: 'Food',
     price: 20000,
     used: 20,
+  },
+];
+
+export const GoalCardData: GoalType[] = [
+  {
+    label: 'label',
+    desc: 'desc',
+    dateLine: '10 april 2025',
+    dateNow: '10 november 2025',
+    endValue: 20000000,
+    startValue: 10000000,
+    remainingValue: 1000,
+    title: 'title',
   },
 ];
