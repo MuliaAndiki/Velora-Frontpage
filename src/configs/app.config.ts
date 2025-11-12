@@ -1,12 +1,3 @@
-import {
-  CircleDot,
-  ClipboardMinus,
-  CreditCard,
-  DollarSign,
-  Goal,
-  Home,
-  Settings,
-} from 'lucide-react';
 import React from 'react';
 
 import { SidebarContentType } from '@/types/app';
@@ -107,40 +98,11 @@ export const navigationMenuConfig: NavigationMenuConfig = {
 };
 
 export const SidebarMenuData: SidebarContentType[] = [
-  {
-    title: 'sidebar-konten.dashboard',
-    url: '/dashboard',
-    icon: Home,
-  },
-  {
-    title: 'sidebar-konten.category',
-    icon: CircleDot,
-    url: '/dashboard/category',
-  },
-  {
-    title: 'sidebar-konten.transaction',
-    url: '/dashboard/transaction',
-    icon: CreditCard,
-  },
-  {
-    title: 'sidebar-konten.budget',
-    url: '/dashboard/budget',
-    icon: DollarSign,
-  },
-  {
-    title: 'sidebar-konten.goal',
-    url: '/dashboard/goal',
-    icon: Goal,
-  },
-  {
-    title: 'sidebar-konten.report',
-    url: '/dashboard/report',
-    icon: ClipboardMinus,
-  },
-
-  {
-    title: 'sidebar-konten.setting',
-    icon: Settings,
-    url: '/dashboard/setting',
-  },
+  { title: 'sidebar-konten.dashboard', url: '/dashboard', icon: 'Home' },
+  { title: 'sidebar-konten.category', url: '/dashboard/category', icon: 'CircleDot' },
+  { title: 'sidebar-konten.transaction', url: '/dashboard/transaction', icon: 'CreditCard' },
+  { title: 'sidebar-konten.budget', url: '/dashboard/budget', icon: 'DollarSign' },
+  { title: 'sidebar-konten.goal', url: '/dashboard/goal', icon: 'Goal' },
+  { title: 'sidebar-konten.report', url: '/dashboard/report', icon: 'ClipboardMinus' },
+  { title: 'sidebar-konten.setting', url: '/dashboard/setting', icon: 'Settings' },
 ];

@@ -8,7 +8,6 @@ import CategoryChart from '@/components/chart/category-chart';
 import IncomeChart from '@/components/chart/incone-chart';
 import DashboardCard from '@/components/dashboard-card';
 import RecentCard from '@/components/recent-card';
-
 import { Button } from '@/components/ui/button';
 import { Field, FieldTitle } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';

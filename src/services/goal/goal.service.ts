@@ -14,6 +14,10 @@ class GoalApi {
     return res.data;
   }
 
+  async getProgres(): Promise<TResponse<any>> {
+    const res = await AxiosClient.get('/api/goals');
+    return res.data;
+  }
   async create(payload: FormCreateGoal): Promise<TResponse<any>> {
     const res = await AxiosClient.post('/api/goals/', payload);
     return res.data;

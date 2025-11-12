@@ -1,7 +1,9 @@
+import { SidebarIconKey } from '@/configs/icons.config';
+
 export interface SidebarContentType {
   title: string;
   url: string;
-  icon: any;
+  icon: SidebarIconKey;
 }
 
 export interface MutationOpsiType {

@@ -8,3 +8,11 @@ export function formatNumber(num: number, isCurrency = false) {
 
   return num.toLocaleString('en-US');
 }
+
+export const formatCurrency = (value: number): string => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(value);
+};

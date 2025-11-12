@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 import Container from '@/components/ui/container';
 import ForgotPasswordForm from '@/core/section/auth/forgot-password/hero-section';
+import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormForgotPassword } from '@/types/form/auth.form';
-import useServices from '@/hooks/mutation/props.service';
 
 const ForgotPasswordContainer = () => {
   const namespase = useAppNameSpase();

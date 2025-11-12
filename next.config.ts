@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  // ✅ COMMENT/SIMPAN experimental features untuk sementara
   experimental: {
     // optimizePackageImports: [ // NONAKTIFKAN DULU
     //   'lucide-react',
@@ -23,7 +22,6 @@ const nextConfig: NextConfig = {
     optimisticClientCache: true,
   },
 
-  // ✅ TAMBAHKAN turbopack config kosong
   turbopack: {},
 
   headers: async () => {

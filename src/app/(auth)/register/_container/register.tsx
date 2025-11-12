@@ -6,9 +6,9 @@ import { useState } from 'react';
 
 import Container from '@/components/ui/container';
 import RegisterCard from '@/core/section/auth/register/hero-section';
+import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormRegister } from '@/types/form/auth.form';
-import useServices from '@/hooks/mutation/props.service';
 
 const RegisterContainer = () => {
   const namespase = useAppNameSpase();

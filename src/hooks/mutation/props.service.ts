@@ -4,7 +4,7 @@ import { useAuthData } from './auth/query';
 import CategoryMutation from './category/mutation';
 import { useCategoryQueries } from './category/query';
 import GoalMutation from './goal/mutation';
-import { useGoalData } from './goal/query';
+import { useGoalQueries } from './goal/query';
 
 export const useServices = () => ({
   Auth: {
@@ -17,7 +17,7 @@ export const useServices = () => ({
   },
   Goal: {
     mutation: GoalMutation,
-    query: useGoalData,
+    query: useGoalQueries,
   },
 });
 

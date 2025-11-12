@@ -1,5 +1,6 @@
-import Api from '@/services/props.service';
 import { useQuery } from '@tanstack/react-query';
+
+import Api from '@/services/props.service';
 
 export function useAuthData() {
   const profileQuery = useQuery({

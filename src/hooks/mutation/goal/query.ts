@@ -3,38 +3,33 @@ import { useQuery } from '@tanstack/react-query';
 import Api from '@/services/props.service';
 import { PickID } from '@/types/form/goal.form';
 
-class GoalQuery {
-  GoalData: any;
-  GoalDataByID: any;
-  isLoading: boolean;
-  isPending: boolean;
-  isError: boolean;
-  refetchAll: () => void;
-  constructor(goalQuery: any, goalQueryID: any) {
-    this.GoalData = goalQuery.data.data ?? [];
-    this.GoalDataByID = goalQueryID.data.data ?? [];
-    this.isLoading = goalQuery.isLoading || goalQueryID.isLoading;
-    this.isPending = goalQuery.isPending || goalQueryID.isPending;
-    this.isError = goalQuery.isError || goalQueryID.isError;
-    this.refetchAll = () => {
-      goalQuery.refetch();
-      goalQueryID.refetch();
-    };
-  }
-}
-
-export function useGoalData(params: PickID) {
+export function useGoalQueries(params: PickID) {
   const goalQuery = useQuery({
-    queryFn: () => Api.Goal.getAll(),
     queryKey: ['goal'],
+    queryFn: () => Api.Goal.getAll(),
     staleTime: 1000 * 60 * 5,
   });
-
-  const goalQueryID = useQuery({
-    queryFn: () => Api.Goal.getById(params),
+  const goalQueryByID = useQuery({
     queryKey: ['goal', 'id'],
+    queryFn: () => Api.Goal.getById(params),
     staleTime: 1000 * 60 * 5,
     enabled: !!params,
   });
-  return new GoalQuery(goalQuery, goalQueryID);
+  const goalProgress = useQuery({
+    queryKey: ['goal', 'progres'],
+    queryFn: () => Api.Goal.getProgres(),
+    staleTime: 1000 * 60 * 5,
+  });
+  return {
+    goalQuery: goalQuery.data?.data ?? [],
+    goalQueryByID: goalQueryByID.data?.data ?? [],
+    goalProgress: goalProgress.data?.data ?? [],
+    isLoading: goalQuery.isLoading || goalQueryByID.isLoading || goalProgress.isLoading,
+    isError: goalQuery.isError || goalQueryByID.isError || goalProgress.isError,
+    refetcAll: () => {
+      goalProgress.refetch();
+      goalQuery.refetch();
+      goalQueryByID.refetch();
+    },
+  };
 }

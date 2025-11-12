@@ -10,6 +10,9 @@ const CategoryMutation = {
     return useMutation<TResponse<any>, Error, FormCreateCategory>({
       mutationFn: (payload) => Api.Category.create(payload),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'category',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Berhasil Bikin Category',
@@ -31,7 +34,11 @@ const CategoryMutation = {
     const namespace = useAppNameSpase();
     return useMutation<TResponse<any>, Error, FormEditCategory>({
       mutationFn: (payload) => Api.Category.update(payload),
+
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'category',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Berhasil Edit Category',
@@ -78,6 +85,9 @@ const CategoryMutation = {
     return useMutation<TResponse<any>, Error, any>({
       mutationFn: () => Api.Category.deleteALl(),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'category',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Berhail Delete Semua Category',

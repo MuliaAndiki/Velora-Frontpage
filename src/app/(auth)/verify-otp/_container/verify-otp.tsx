@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 
 import Container from '@/components/ui/container';
 import OTPForm from '@/core/section/auth/verify-otp/hero-section';
+import { useAppSelector } from '@/hooks/dispatch/dispatch';
+import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormVerifyOtp } from '@/types/form/auth.form';
-import useServices from '@/hooks/mutation/props.service';
-import { useAppSelector } from '@/hooks/dispatch/dispatch';
 
 const VerifyOtpContainer = () => {
   const namespase = useAppNameSpase();
