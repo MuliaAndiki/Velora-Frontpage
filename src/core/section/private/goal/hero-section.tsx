@@ -19,10 +19,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import PopUp from '@/components/ui/pop-up';
 import View from '@/components/ui/view';
 import { GoalType } from '@/types/components';
 import { PopupInterface } from '@/types/ui';
-import PopUp from '@/components/ui/pop-up';
 
 interface GoalProps {
   goalData: GoalType[];

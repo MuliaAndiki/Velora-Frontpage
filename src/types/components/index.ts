@@ -33,7 +33,7 @@ export interface GoalType {
   startValue: number;
   endValue: number;
   remainingValue: number;
-  percent: number;
+  percent?: number;
   dateNow: string;
   dateLine: string;
 }
