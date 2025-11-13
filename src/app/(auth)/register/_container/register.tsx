@@ -8,6 +8,7 @@ import Container from '@/components/ui/container';
 import RegisterCard from '@/core/section/auth/register/hero-section';
 import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
+import { setEmail, setSource } from '@/stores/otpSlice/otpSlice';
 import { FormRegister } from '@/types/form/auth.form';
 
 const RegisterContainer = () => {
@@ -31,7 +32,9 @@ const RegisterContainer = () => {
     }
 
     register.mutate(formRegister, {
-      onSuccess: () => {
+      onSuccess: (res, variable) => {
+        namespase.dispatch(setEmail(variable.email));
+        namespase.dispatch(setSource('register'));
         namespase.router.push('/verify-otp');
       },
     });

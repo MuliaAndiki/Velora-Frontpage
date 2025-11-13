@@ -11,6 +11,9 @@ const GoalMutation = {
     return useMutation<TResponse<any>, Error, FormCreateGoal>({
       mutationFn: (payload) => Api.Goal.create(payload),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'goal',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Tabungan Berhasil Terbuat',
@@ -30,11 +33,15 @@ const GoalMutation = {
     });
   },
 
-  useUpdate(params: PickID) {
+  useUpdate() {
     const namespace = useAppNameSpase();
-    return useMutation<TResponse<any>, Error, FormCreateGoal>({
-      mutationFn: (payload) => Api.Goal.update(payload, params),
+    return useMutation<TResponse<any>, Error, { params: PickID; payload: FormCreateGoal }>({
+      mutationFn: ({ params, payload }) => Api.Goal.update(payload, params),
+
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'goal',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Goal Berhasil TerUpdate',
@@ -58,6 +65,9 @@ const GoalMutation = {
     return useMutation<TResponse<any>, Error, any>({
       mutationFn: () => Api.Goal.deleteAll(),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'goal',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Goal Berhasil DiDelete',
@@ -81,6 +91,9 @@ const GoalMutation = {
     return useMutation<TResponse<any>, Error, any>({
       mutationFn: (params) => Api.Goal.deleteByID(params),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'goal',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Goal Berhasil DiDelete',

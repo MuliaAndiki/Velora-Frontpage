@@ -37,4 +37,4 @@ export interface PopUpProps {
   className?: string;
 }
 
-export type PopupInterface = 'categoory' | 'goal' | null;
+export type PopupInterface = 'categoory' | 'goal' | 'edit-goal' | null;

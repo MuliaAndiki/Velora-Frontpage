@@ -27,13 +27,15 @@ export interface CategoryType {
 }
 
 export interface GoalType {
-  title: string;
-  desc: string;
-  label: string;
-  startValue: number;
-  endValue: number;
+  id: string;
+  name: string;
+  // desc: string;
+  // label: string;
+  savedAmount: number;
+  status: string;
+  targetAmount: number;
   remainingValue: number;
   percent?: number;
-  dateNow: string;
-  dateLine: string;
+  startAt: string;
+  endAt: string;
 }

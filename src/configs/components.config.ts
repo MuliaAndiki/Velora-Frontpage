@@ -55,16 +55,3 @@ export const BudgetCardData: BudgetCardType[] = [
     used: 20,
   },
 ];
-
-export const GoalCardData: GoalType[] = [
-  {
-    label: 'label',
-    desc: 'desc',
-    dateLine: '10 april 2025',
-    dateNow: '10 november 2025',
-    endValue: 20000000,
-    startValue: 10000000,
-    remainingValue: 1000,
-    title: 'title',
-  },
-];

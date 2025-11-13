@@ -56,15 +56,11 @@ const AuthMutation = {
     const namespace = useAppNameSpase();
     return useMutation<TResponse<any>, Error, FormRegister>({
       mutationFn: (payload) => Api.Auth.Register(payload),
-      onSuccess: (res, variable) => {
+      onSuccess: () => {
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Selamat Akun Ada Terdaftar',
           icon: 'success',
-          onVoid: () => {
-            namespace.dispatch(setEmail(variable.email));
-            namespace.dispatch(setSource('register'));
-          },
         });
       },
       onError: (err) => {

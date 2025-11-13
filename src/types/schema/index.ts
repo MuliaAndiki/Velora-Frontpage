@@ -25,9 +25,10 @@ export interface ICategory {
 export interface IGoal {
   id: string;
   name: string;
-  targetAmount: number;
-  savedAmount: number;
-  deadline: Date;
+  targetAmount: number | undefined;
+  savedAmount: number | undefined;
+  startAt: string | null;
+  endAt: string | null;
   UserID: string;
   createdAt: Date;
   updatedAt: Date;
