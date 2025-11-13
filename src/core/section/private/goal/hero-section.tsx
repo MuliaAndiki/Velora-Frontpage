@@ -1,5 +1,6 @@
-import { Goal } from 'lucide-react';
+import { Goal, X } from 'lucide-react';
 
+import GoalHeader from '@/components/goal-header';
 import GoalPartial from '@/components/partial/goal-partial';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,19 +20,50 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Field, FieldContent, FieldSeparator, FieldTitle } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
 import PopUp from '@/components/ui/pop-up';
 import View from '@/components/ui/view';
 import { GoalType } from '@/types/components';
-import { PopupInterface } from '@/types/ui';
+import { FormCreateGoal } from '@/types/form/goal.form';
+import { AlertContexType, PopupInterface } from '@/types/ui';
+import { formatCurrency } from '@/utils/number.format';
 
 interface GoalProps {
   goalData: GoalType[];
   isPending: boolean;
   popUp: PopupInterface;
   setPopUp: React.Dispatch<React.SetStateAction<PopupInterface>>;
+  formCreateGoal: FormCreateGoal;
+  setFormCreateGoal: React.Dispatch<React.SetStateAction<FormCreateGoal>>;
+  formEditGoal: FormCreateGoal;
+  setFormEditGoal: React.Dispatch<React.SetStateAction<FormCreateGoal>>;
+  onCreate: () => void;
+  onDeleteAll: () => void;
+  alert: AlertContexType;
+  onDeleteByID: (id: string) => void;
+  handleOpenPopUp: (data: any) => void;
+  onEdit: () => void;
+  setId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const GoalHeroSection: React.FC<GoalProps> = ({ goalData, isPending, popUp, setPopUp }) => {
+const GoalHeroSection: React.FC<GoalProps> = ({
+  goalData,
+  isPending,
+  popUp,
+  setPopUp,
+  formCreateGoal,
+  setFormCreateGoal,
+  onCreate,
+  onDeleteAll,
+  alert,
+  onDeleteByID,
+  formEditGoal,
+  setFormEditGoal,
+  handleOpenPopUp,
+  onEdit,
+  setId,
+}) => {
   return (
     <View>
       <div className="w-full min-h-screen flex justify-start items-start overflow-hidden flex-col relative p-4">
@@ -39,45 +71,13 @@ const GoalHeroSection: React.FC<GoalProps> = ({ goalData, isPending, popUp, setP
           <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-600 mb-3">
             Financial Goals
           </h1>
-          <p className="text-slate-400 text-lg">set,track, and achieve your financial dreams</p>
+          <p className="text-slate-400 text-lg">Set,track, and achieve your financial dreams</p>
         </div>
         <div className="grid grid-cols-4 grid-rows-1 gap-4  w-full">
-          <Card className="flex  items-start border rounded-lg">
-            <CardContent className="flex  justify-items-start flex-col">
-              <div className="flex items-center gap-3 ">
-                <p>icon</p>
-                <CardTitle className="font-semibold text-lg">Total Goals</CardTitle>
-              </div>
-              <p>content</p>
-            </CardContent>
-          </Card>
-          <Card className="flex  justify-items-start border rounded-lg">
-            <CardContent className="flex justify-items-start gap-3 flex-col">
-              <div className="w-full flex items-center gap-4">
-                <p>icon</p>
-                <CardTitle className="font-semibold text-lg">Completed</CardTitle>
-              </div>
-              <p>content</p>
-            </CardContent>
-          </Card>
-          <Card className="flex  justify-items-start border rounded-lg">
-            <CardContent className="flex justify-items-start flex-col">
-              <div className="w-full flex items-center gap-3">
-                <h1>icon</h1>
-                <CardTitle className="font-semibold text-lg">In Progress</CardTitle>
-              </div>
-              <h1>Content</h1>
-            </CardContent>
-          </Card>
-          <Card className="flex  justify-items-start border rounded-lg">
-            <CardContent className="flex justify-items-start flex-col">
-              <div className="w-full flex items-center gap-3">
-                <h1>icon</h1>
-                <CardTitle className="font-semibold text-lg">Total Save</CardTitle>
-              </div>
-              <h1>Content</h1>
-            </CardContent>
-          </Card>
+          <GoalHeader data={goalData ?? []} title="Total Goals" filter="" />
+          <GoalHeader data={goalData ?? []} title="Complate" filter="COMPLATE" />
+          <GoalHeader data={goalData ?? []} title="In Progress" filter="INPROGRESS" />
+          <GoalHeader data={goalData ?? []} title="Total Saved" filter="" />
         </div>
         <div className="w-full my-2">
           <Card>
@@ -89,8 +89,8 @@ const GoalHeroSection: React.FC<GoalProps> = ({ goalData, isPending, popUp, setP
             </CardContent>
             <CardFooter>
               <div className="flex justify-between items-center w-full ">
-                <CardDescription>Rp.100.000.00</CardDescription>
-                <CardDescription>Rp.100.000.00</CardDescription>
+                <CardDescription>{formatCurrency(10000000)}</CardDescription>
+                <CardDescription>{formatCurrency(1000000)}</CardDescription>
               </div>
             </CardFooter>
           </Card>
@@ -98,7 +98,14 @@ const GoalHeroSection: React.FC<GoalProps> = ({ goalData, isPending, popUp, setP
         <div className="w-full my-2 ">
           <div className="grid grid-cols-3 grid-row-1 gap-4">
             {goalData.map((items, key) => (
-              <GoalPartial key={key} data={items} />
+              <GoalPartial
+                key={key}
+                data={items}
+                alert={alert}
+                onDeleteByID={onDeleteByID}
+                handleOpenPopUp={handleOpenPopUp}
+                setId={setId}
+              />
             ))}
           </div>
         </div>
@@ -119,7 +126,10 @@ const GoalHeroSection: React.FC<GoalProps> = ({ goalData, isPending, popUp, setP
                 >
                   Create
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-md text-destructive font-semibold">
+                <DropdownMenuItem
+                  className="text-md text-destructive font-semibold"
+                  onClick={() => onDeleteAll()}
+                >
                   Delete All
                 </DropdownMenuItem>
               </DropdownMenuGroup>
@@ -129,9 +139,215 @@ const GoalHeroSection: React.FC<GoalProps> = ({ goalData, isPending, popUp, setP
       </div>
       <PopUp isOpen={popUp === 'goal'} onClose={() => setPopUp(null)}>
         <View className="w-full h-full">
-          <div className="flex justify-center items-center w-full">
-            <p>setup</p>
-          </div>
+          <Field className="flex justify-center items-center w-full flex-col">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                onCreate();
+              }}
+            >
+              <div className="w-full flex justify-between items-center">
+                <FieldTitle className="text-2xl font-semibold">Create Goal</FieldTitle>
+                <X size={16} onClick={() => setPopUp(null)} className="cursor-pointer" />
+              </div>
+              <div>
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">Name :</FieldTitle>
+                    <Input
+                      value={formCreateGoal.name}
+                      onChange={(e) =>
+                        setFormCreateGoal((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">TargetAmount :</FieldTitle>
+                    <Input
+                      value={formCreateGoal.targetAmount}
+                      type="number"
+                      inputMode="numeric"
+                      onChange={(e) =>
+                        setFormCreateGoal((prev) => ({
+                          ...prev,
+                          targetAmount: Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">savedAmount :</FieldTitle>
+                    <Input
+                      value={formCreateGoal.savedAmount}
+                      type="number"
+                      inputMode="numeric"
+                      onChange={(e) =>
+                        setFormCreateGoal((prev) => ({
+                          ...prev,
+                          savedAmount: Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">Start :</FieldTitle>
+                    <Input
+                      value={formCreateGoal.startAt!}
+                      type="date"
+                      onChange={(e) =>
+                        setFormCreateGoal((prev) => ({
+                          ...prev,
+                          startAt: e.target.value,
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <div>
+                    <h1 className="text-lg font-semibold">Deadline :</h1>
+                    <Input
+                      value={formCreateGoal.endAt!}
+                      type="date"
+                      onChange={(e) =>
+                        setFormCreateGoal((prev) => ({
+                          ...prev,
+                          endAt: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="w-full  mt-2">
+                  <Button
+                    variant={'destructive'}
+                    disabled={isPending}
+                    type="submit"
+                    className="w-full"
+                  >
+                    {isPending ? 'load' : 'Create'}
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </Field>
+        </View>
+      </PopUp>
+
+      <PopUp isOpen={popUp === 'edit-goal'} onClose={() => setPopUp(null)}>
+        <View className="w-full h-full">
+          <Field>
+            <div className="flex w-full justify-between">
+              <FieldTitle className="text-lg font-semibold">Edit Goal</FieldTitle>
+              <X onClick={() => setPopUp(null)} className="cursor-pointer" />
+            </div>
+            <FieldSeparator />
+            <div>
+              <form
+                className="w-full"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  onEdit();
+                }}
+              >
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">Name :</FieldTitle>
+                    <Input
+                      defaultValue={formEditGoal.name}
+                      onChange={(e) =>
+                        setFormEditGoal((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">TargetAmount :</FieldTitle>
+                    <Input
+                      defaultValue={formEditGoal.targetAmount}
+                      type="number"
+                      inputMode="numeric"
+                      onChange={(e) =>
+                        setFormEditGoal((prev) => ({
+                          ...prev,
+                          targetAmount: Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">savedAmount :</FieldTitle>
+                    <Input
+                      defaultValue={formEditGoal.savedAmount}
+                      type="number"
+                      inputMode="numeric"
+                      onChange={(e) =>
+                        setFormEditGoal((prev) => ({
+                          ...prev,
+                          savedAmount: Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <FieldContent>
+                    <FieldTitle className="text-lg font-semibold">Start :</FieldTitle>
+                    <Input
+                      defaultValue={formEditGoal.startAt!}
+                      type="date"
+                      onChange={(e) =>
+                        setFormEditGoal((prev) => ({
+                          ...prev,
+                          startAt: e.target.value,
+                        }))
+                      }
+                    />
+                  </FieldContent>
+                </div>
+                <div>
+                  <div>
+                    <h1 className="text-lg font-semibold">Deadline :</h1>
+                    <Input
+                      defaultValue={formEditGoal.endAt!}
+                      type="date"
+                      onChange={(e) =>
+                        setFormEditGoal((prev) => ({
+                          ...prev,
+                          endAt: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="w-full  mt-2">
+                  <Button
+                    variant={'destructive'}
+                    disabled={isPending}
+                    type="submit"
+                    className="w-full"
+                  >
+                    {isPending ? 'load' : 'update'}
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </Field>
         </View>
       </PopUp>
     </View>

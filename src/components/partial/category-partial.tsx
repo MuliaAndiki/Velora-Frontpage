@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { CategoryProps } from '@/types/props';
+import { PopupInterface } from '@/types/ui';
 import { getDate } from '@/utils/string.format';
 
 import { Button } from '../ui/button';
@@ -21,6 +22,7 @@ interface CategoryPartialProps {
   loadId: string | null;
   setLoadId: React.Dispatch<React.SetStateAction<string | null>>;
   onDelete: (id: any) => void;
+  setPopUpModal: React.Dispatch<React.SetStateAction<PopupInterface>>;
 }
 
 const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
@@ -28,6 +30,7 @@ const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
   loadId,
   setLoadId,
   onDelete,
+  setPopUpModal,
 }) => {
   return (
     <div
@@ -61,9 +64,9 @@ const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
                 >
                   Delete
                 </DropdownMenuItem>
-                <Link href={`/dashboard/category/edit-category/${data.id}`}>
-                  <DropdownMenuItem className="text-md ">Edit</DropdownMenuItem>
-                </Link>
+                <DropdownMenuItem className="text-md " onClick={() => setPopUpModal('edit-goal')}>
+                  Edit
+                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>

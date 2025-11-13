@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import Api from '@/services/props.service';
 import { PickID } from '@/types/form/goal.form';
 
-export function useGoalQueries(params: PickID) {
+export function useGoalQueries(params?: PickID) {
   const goalQuery = useQuery({
     queryKey: ['goal'],
     queryFn: () => Api.Goal.getAll(),
@@ -11,7 +11,7 @@ export function useGoalQueries(params: PickID) {
   });
   const goalQueryByID = useQuery({
     queryKey: ['goal', 'id'],
-    queryFn: () => Api.Goal.getById(params),
+    queryFn: () => Api.Goal.getById(params!),
     staleTime: 1000 * 60 * 5,
     enabled: !!params,
   });

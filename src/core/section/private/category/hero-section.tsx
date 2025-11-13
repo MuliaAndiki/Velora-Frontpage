@@ -91,6 +91,7 @@ const CategoryHeroSection: React.FC<CategoryProps> = ({
                 key={key}
                 setLoadId={setLoadId}
                 onDelete={onDelete}
+                setPopUpModal={setPopUpModal}
               />
             ))}
           </div>
