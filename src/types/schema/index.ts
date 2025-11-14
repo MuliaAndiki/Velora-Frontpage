@@ -1,3 +1,5 @@
+import { TransactionType } from '../partial';
+
 export interface IAuth {
   id: string;
   email: string;
@@ -32,4 +34,15 @@ export interface IGoal {
   UserID: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ITransaction {
+  id: string;
+  amount: number;
+  description: string;
+  date: string;
+  receiptUrl: string;
+  type: TransactionType;
+  categoryID: string;
+  userID: string;
 }

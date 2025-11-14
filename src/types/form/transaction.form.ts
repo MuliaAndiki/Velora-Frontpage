@@ -1,13 +1,6 @@
-export interface FormTransactionType {
-  amount: number;
-  date: Date;
-  categoryId: string;
-  description?: string;
-  type: 'INCOME' | 'EXPENSE';
-  attachment?: File;
-}
+import { ITransaction } from '../schema';
 
-export interface FormTransactionUpdateType extends Omit<FormTransactionType, 'attachment'> {
-  id: string;
-  attachment?: File;
-}
+export type FormCreateTransaction = Pick<
+  ITransaction,
+  'amount' | 'date' | 'description' | 'receiptUrl' | 'type'
+>;

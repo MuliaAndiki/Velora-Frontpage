@@ -1,34 +1,80 @@
 'use client';
-import { useEffect } from 'react';
+import { useState } from 'react';
 
 import Container from '@/components/ui/container';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
 import SettingsSection from '@/core/section/private/setting/hero-section';
 import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
+import { FormUpdateProfile } from '@/types/form/auth.form';
+import { PopupInterface } from '@/types/ui';
+import { fileToBase64 } from '@/utils/base64';
 
 const SettingsContainer = () => {
+  const [popUpModal, setPopUpModal] = useState<PopupInterface>(null);
   const namespase = useAppNameSpase();
+  const update = useServices().Auth.mutation.useUpdateProfile();
   const logout = useServices().Auth.mutation.useLogout();
   const userData = useServices().Auth.query();
-
-  useEffect(() => {
-    console.log(userData.profileQuery);
-  }, [userData.profileQuery]);
+  const [formUpdateProfile, setFormUpdateProfile] = useState<FormUpdateProfile>({
+    email: '',
+    fullName: '',
+    photoUrl: '',
+  });
+  const [preview, setPreview] = useState<string | null>(null);
   const handleLogout = () => {
     logout.mutate(
       {},
       {
         onSuccess: () => {
-          namespase.router.push('/login');
+          namespase.router.push('/home');
         },
       }
     );
   };
+
+  const handlePopUp = (data: any) => {
+    setFormUpdateProfile(data);
+    setPopUpModal('profile');
+    setPreview(data.photoUrl);
+  };
+  const handleChangePict = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const base64 = await fileToBase64(file);
+      setFormUpdateProfile((prev) => ({
+        ...prev,
+        photoUrl: base64,
+      }));
+      const url = URL.createObjectURL(file);
+      setPreview(url);
+      return () => URL.revokeObjectURL(url);
+    }
+  };
+
+  const handleUpdate = () => {
+    update.mutate(formUpdateProfile, {
+      onSuccess: () => {
+        setPopUpModal(null);
+      },
+    });
+  };
   return (
     <SidebarLayout>
       <Container className="w-full min-h-screen flex flex-col">
-        <SettingsSection logout={() => handleLogout()} isPending={logout.isPending} />
+        <SettingsSection
+          logout={() => handleLogout()}
+          isPending={logout.isPending}
+          userData={userData.profileQuery ?? ''}
+          setPopUpModal={setPopUpModal}
+          popUpModal={popUpModal}
+          handleOpenPopUp={handlePopUp}
+          formUpdateProfile={formUpdateProfile}
+          setFormUpdateProfile={setFormUpdateProfile}
+          onUpdate={() => handleUpdate()}
+          onChangeAva={handleChangePict}
+          preview={preview}
+        />
       </Container>
     </SidebarLayout>
   );

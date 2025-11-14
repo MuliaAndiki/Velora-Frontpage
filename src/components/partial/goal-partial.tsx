@@ -1,3 +1,15 @@
+import { Ellipsis } from 'lucide-react';
+import Link from 'next/link';
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { goalProps } from '@/types/props';
 import { AlertContexType } from '@/types/ui';
 import { formatCurrency } from '@/utils/number.format';
@@ -24,7 +36,7 @@ const GoalPartial: React.FC<goalProps & GoalPartialProps> = ({
     <Card>
       <CardHeader className="w-full flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="h-7 w-7 aspect-square border bg-red-500" />
+          <div className="h-8 w-8 rounded-full border bg-red-500" />
           <div className="flex flex-col justify-items-start">
             <CardTitle className="font-semibold text-2xl">{data.name}</CardTitle>
             {/* <CardDescription className="text-slate-400">{data.desc}</CardDescription> */}
@@ -90,6 +102,24 @@ const GoalPartial: React.FC<goalProps & GoalPartialProps> = ({
           >
             {camelCaseToWords('delete')}
           </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="w-auto h-auto">
+                <Ellipsis />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-40" align="end">
+              <DropdownMenuLabel className="text-lg font-bold">settings</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <Link href={`/dashboard/goal/detail/${data.id}`}>
+                  <DropdownMenuItem className="text-md font-semibold">
+                    lihat detail
+                  </DropdownMenuItem>
+                </Link>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </CardContent>
     </Card>

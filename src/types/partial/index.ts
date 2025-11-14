@@ -14,3 +14,8 @@ export interface ExpenseChartType {
   visitors: number;
   fill: string;
 }
+
+export enum TransactionType {
+  'INCOME',
+  'EXPENSE',
+}

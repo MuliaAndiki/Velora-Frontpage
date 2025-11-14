@@ -85,7 +85,7 @@ const GoalHeroSection: React.FC<GoalProps> = ({
               <CardTitle>Overlay Progress</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className=" w-full rounded-lg border bg-red-500 h-7"></div>
+              <div className=" w-full rounded-lg border bg-red-500 h-7" />
             </CardContent>
             <CardFooter>
               <div className="flex justify-between items-center w-full ">

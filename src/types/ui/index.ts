@@ -37,4 +37,9 @@ export interface PopUpProps {
   className?: string;
 }
 
-export type PopupInterface = 'categoory' | 'goal' | 'edit-goal' | null;
+export interface SpreedType {
+  orientation?: 'horizontal' | 'vertical';
+  className?: string;
+}
+
+export type PopupInterface = 'categoory' | 'goal' | 'edit-goal' | 'profile' | null;

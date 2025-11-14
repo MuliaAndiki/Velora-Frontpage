@@ -2,22 +2,26 @@ import { useQuery } from '@tanstack/react-query';
 
 import Api from '@/services/props.service';
 
-export function useGetTransactions(params?: {
-  startDate?: string;
-  endDate?: string;
-  categoryId?: string;
-}) {
-  return useQuery({
-    queryKey: ['transactions', params],
-    queryFn: () => Api.Transaction.getAll(params),
-    staleTime: 1000 * 60 * 5, // 5 minutes
+export function useTransactionQueries(id?: string) {
+  const transactionQuery = useQuery({
+    queryKey: ['transaction'],
+    queryFn: () => Api.Transaction.get(),
+    staleTime: 1000 * 60 * 5,
   });
-}
-
-export function useGetTransactionById(id: string) {
-  return useQuery({
-    queryKey: ['transactions', id],
-    queryFn: () => Api.Transaction.getById(id),
-    staleTime: 1000 * 60 * 5, // 5 minutes
+  const transactionQueryById = useQuery({
+    queryKey: ['transaction', id],
+    queryFn: () => Api.Transaction.getById(id!),
+    staleTime: 1000 * 60 * 5,
+    enabled: !!id,
   });
+  return {
+    transactionQuery: transactionQuery.data?.data ?? [],
+    transactionQueryById: transactionQueryById.data?.data ?? '',
+    isLoading: transactionQuery.isLoading || transactionQueryById.isLoading,
+    isError: transactionQuery.isError || transactionQuery.isError,
+    refetcAll: () => {
+      transactionQuery.refetch();
+      transactionQueryById.refetch();
+    },
+  };
 }

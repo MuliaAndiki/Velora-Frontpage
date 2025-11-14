@@ -16,6 +16,7 @@ import {
   FormLogin,
   FormRegister,
   FormSendOtp,
+  FormUpdateProfile,
   FormVerifyOtp,
 } from '@/types/form/auth.form';
 
@@ -171,6 +172,30 @@ const AuthMutation = {
         namespace.alert.toast({
           title: 'Gagal',
           message: 'Gagal Mengirim Otp',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useUpdateProfile() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormUpdateProfile>({
+      mutationFn: (payload) => Api.Auth.UpdateProfile(payload),
+      onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'profile',
+        });
+        namespace.alert.toast({
+          title: 'succes',
+          message: 'succesfully update profile',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'error',
+          message: 'failed update profile',
           icon: 'error',
         });
       },

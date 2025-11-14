@@ -4,6 +4,7 @@ import {
   FormLogin,
   FormRegister,
   FormSendOtp,
+  FormUpdateProfile,
   FormVerifyOtp,
 } from '@/types/form/auth.form';
 import AxiosClient from '@/utils/axios.client';
@@ -35,9 +36,12 @@ class AuthApi {
     const res = await AxiosClient.post('/api/auth/verify', payload);
     return res.data;
   }
-  // Setup Endpoint
   async GetProfile(): Promise<TResponse<any>> {
     const res = await AxiosClient.get('/api/auth/');
+    return res.data;
+  }
+  async UpdateProfile(payload: FormUpdateProfile): Promise<TResponse<any>> {
+    const res = await AxiosClient.put('/api/auth', payload);
     return res.data;
   }
 }
