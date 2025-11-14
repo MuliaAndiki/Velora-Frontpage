@@ -9,8 +9,8 @@ class GoalApi {
     return res.data;
   }
 
-  async getById(params: PickID): Promise<TResponse<any>> {
-    const res = await AxiosClient.get(`/api/goals/${params}`);
+  async getById(id: string): Promise<TResponse<any>> {
+    const res = await AxiosClient.get(`/api/goals/${id}`);
     return res.data;
   }
 

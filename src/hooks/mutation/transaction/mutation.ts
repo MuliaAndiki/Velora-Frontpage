@@ -1,93 +1,74 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
-import { useAlert } from '@/hooks/useAlert/costum-alert';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
 import Api from '@/services/props.service';
-import { FormTransactionType, FormTransactionUpdateType } from '@/types/form/transaction.form';
+import { FormCreateTransaction } from '@/types/form/transaction.form';
 
-export function useCreateTransaction(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
+const TransactionMutation = {
+  useCreate() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, { payload: FormCreateTransaction; id: string }>({
+      mutationFn: ({ payload, id }) => Api.Transaction.create(payload, id),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'succes',
+          message: 'succes melakukan transaction',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'failed',
+          message: 'failed melakukan transaction',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useDelete() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, any>({
+      mutationFn: () => Api.Transaction.delete(),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'succes',
+          message: 'succes delete all transacntion',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'failed',
+          message: 'failed delete all transaction',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useDeleteById() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, string>({
+      mutationFn: (id) => Api.Transaction.deleteById(id),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'succes',
+          message: 'succes delete transaction',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'failed',
+          message: 'failed delete transacntion',
+          icon: 'success',
+        });
+      },
+    });
+  },
+};
 
-  return useMutation<TResponse<any>, Error, FormTransactionType>({
-    mutationFn: (payload: FormTransactionType) => Api.Transaction.create(payload),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] }); // Invalidate dashboard data as well
-      alert.toast({
-        title: 'Success',
-        message: 'Transaction created successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to create transaction',
-        icon: 'error',
-      });
-    },
-  });
-}
-
-export function useUpdateTransaction(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
-
-  return useMutation<TResponse<any>, Error, FormTransactionUpdateType>({
-    mutationFn: (payload: FormTransactionUpdateType) => Api.Transaction.update(payload),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Transaction updated successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to update transaction',
-        icon: 'error',
-      });
-    },
-  });
-}
-
-export function useDeleteTransaction(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
-  const queryClient = useQueryClient();
-
-  return useMutation<TResponse<any>, Error, string>({
-    mutationFn: (id: string) => Api.Transaction.delete(id),
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-      alert.toast({
-        title: 'Success',
-        message: 'Transaction deleted successfully',
-        icon: 'success',
-        onVoid: () => {
-          options?.onAfterSuccess?.();
-        },
-      });
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to delete transaction',
-        icon: 'error',
-      });
-    },
-  });
-}
+export default TransactionMutation;
