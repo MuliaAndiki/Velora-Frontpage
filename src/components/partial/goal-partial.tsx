@@ -23,6 +23,7 @@ interface GoalPartialProps {
   alert: AlertContexType;
   handleOpenPopUp: (data: any) => void;
   setId: React.Dispatch<React.SetStateAction<string | null>>;
+  trashole: any;
 }
 
 const GoalPartial: React.FC<goalProps & GoalPartialProps> = ({
@@ -31,6 +32,7 @@ const GoalPartial: React.FC<goalProps & GoalPartialProps> = ({
   alert,
   handleOpenPopUp,
   setId,
+  trashole,
 }) => {
   return (
     <Card>
@@ -39,11 +41,10 @@ const GoalPartial: React.FC<goalProps & GoalPartialProps> = ({
           <div className="h-8 w-8 rounded-full border bg-red-500" />
           <div className="flex flex-col justify-items-start">
             <CardTitle className="font-semibold text-2xl">{data.name}</CardTitle>
-            {/* <CardDescription className="text-slate-400">{data.desc}</CardDescription> */}
           </div>
         </div>
-        <div className=" border rounded-lg p-1 bg-destructive">
-          {/* <h1 className="text-sm ">{data.label}</h1> */}
+        <div className=" border rounded-lg p-2 bg-destructive">
+          {trashole(Number(data.percent))}
         </div>
       </CardHeader>
       <CardContent className="flex items-center flex-col ">

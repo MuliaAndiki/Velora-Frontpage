@@ -111,7 +111,7 @@ const CategoryHeroSection: React.FC<CategoryProps> = ({
             <DropdownMenuGroup>
               <DropdownMenuItem
                 className="text-md text-accent-foreground font-semibold"
-                onClick={() => setPopUpModal('categoory')}
+                onClick={() => setPopUpModal('category')}
               >
                 Create
               </DropdownMenuItem>
@@ -126,7 +126,7 @@ const CategoryHeroSection: React.FC<CategoryProps> = ({
         </DropdownMenu>
       </div>
 
-      <PopUp isOpen={popUpModal === 'categoory'} onClose={() => setPopUpModal(null)}>
+      <PopUp isOpen={popUpModal === 'category'} onClose={() => setPopUpModal(null)}>
         <View className="w-full h-full">
           <div className="w-full flex justify-center items-center flex-col">
             <form

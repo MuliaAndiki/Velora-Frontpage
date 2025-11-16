@@ -42,4 +42,4 @@ export interface SpreedType {
   className?: string;
 }
 
-export type PopupInterface = 'categoory' | 'goal' | 'edit-goal' | 'profile' | null;
+export type PopupInterface = 'category' | 'goal' | 'edit-goal' | 'profile' | 'transaction' | null;

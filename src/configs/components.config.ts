@@ -1,8 +1,8 @@
 import {
   BudgetCardType,
   CardDashboardCardType,
-  GoalType,
   RecentCardType,
+  TransactionPartialType,
 } from '@/types/components';
 
 export const DashboardCardData: CardDashboardCardType[] = [

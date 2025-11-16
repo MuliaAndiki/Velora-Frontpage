@@ -3,7 +3,6 @@ import { FormCreateGoal, PickID } from '@/types/form/goal.form';
 import AxiosClient from '@/utils/axios.client';
 
 class GoalApi {
-  // Setup
   async getAll(): Promise<TResponse<any>> {
     const res = await AxiosClient.get('/api/goals/');
     return res.data;
@@ -14,8 +13,8 @@ class GoalApi {
     return res.data;
   }
 
-  async getProgres(): Promise<TResponse<any>> {
-    const res = await AxiosClient.get('/api/goals');
+  async getAllProgres(): Promise<TResponse<any>> {
+    const res = await AxiosClient.get('/api/goals/progres');
     return res.data;
   }
   async create(payload: FormCreateGoal): Promise<TResponse<any>> {

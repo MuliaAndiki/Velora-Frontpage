@@ -103,11 +103,25 @@ const GoalContainer = () => {
     }
   };
 
+  const trashole = (percent: number) => {
+    if (percent > 85) {
+      return <h1 className="font-semibold">high</h1>;
+    } else if (percent > 50) {
+      return <h1 className="font-semibold">medium</h1>;
+    } else if (percent > 35) {
+      return <h1 className="font-semibold">low</h1>;
+    } else {
+      return <span className="font-semibold">very low</span>;
+    }
+  };
+
   return (
     <SidebarLayout>
       <Container className="w-full min-h-screen flex flex-col">
         <GoalHeroSection
           goalData={goalAll.goalQuery ?? []}
+          trashhole={trashole}
+          goalOverlayData={goalAll.goalProgress ?? ''}
           isPending={goalCreate.isPending || goalEdit.isPending}
           popUp={popUp}
           setPopUp={setPopUp}
