@@ -24,12 +24,13 @@ import { Field, FieldContent, FieldSeparator, FieldTitle } from '@/components/ui
 import { Input } from '@/components/ui/input';
 import PopUp from '@/components/ui/pop-up';
 import View from '@/components/ui/view';
-import { GoalType } from '@/types/components';
+import { GoalOverlayType, GoalType } from '@/types/components';
 import { FormCreateGoal } from '@/types/form/goal.form';
 import { AlertContexType, PopupInterface } from '@/types/ui';
 import { formatCurrency } from '@/utils/number.format';
 
 interface GoalProps {
+  goalOverlayData: GoalOverlayType;
   goalData: GoalType[];
   isPending: boolean;
   popUp: PopupInterface;
@@ -45,6 +46,7 @@ interface GoalProps {
   handleOpenPopUp: (data: any) => void;
   onEdit: () => void;
   setId: React.Dispatch<React.SetStateAction<string | null>>;
+  trashhole: any;
 }
 
 const GoalHeroSection: React.FC<GoalProps> = ({
@@ -63,6 +65,8 @@ const GoalHeroSection: React.FC<GoalProps> = ({
   handleOpenPopUp,
   onEdit,
   setId,
+  goalOverlayData,
+  trashhole,
 }) => {
   return (
     <View>
@@ -85,12 +89,21 @@ const GoalHeroSection: React.FC<GoalProps> = ({
               <CardTitle>Overlay Progress</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className=" w-full rounded-lg border bg-red-500 h-7" />
+              <div
+                className=" w-full rounded-lg border bg-red-500 h-7"
+                style={{
+                  width: `${Math.min(goalOverlayData.percent!, 100)}%`,
+                }}
+              />
             </CardContent>
             <CardFooter>
               <div className="flex justify-between items-center w-full ">
-                <CardDescription>{formatCurrency(10000000)}</CardDescription>
-                <CardDescription>{formatCurrency(1000000)}</CardDescription>
+                <CardDescription>
+                  {formatCurrency(goalOverlayData.saveAmount)} saved
+                </CardDescription>
+                <CardDescription>
+                  {formatCurrency(goalOverlayData.targetAmount)} target
+                </CardDescription>
               </div>
             </CardFooter>
           </Card>
@@ -105,6 +118,7 @@ const GoalHeroSection: React.FC<GoalProps> = ({
                 onDeleteByID={onDeleteByID}
                 handleOpenPopUp={handleOpenPopUp}
                 setId={setId}
+                trashole={trashhole}
               />
             ))}
           </div>

@@ -16,7 +16,7 @@ export function useGoalQueries(id?: string) {
   });
   const goalProgress = useQuery({
     queryKey: ['goal', 'progres'],
-    queryFn: () => Api.Goal.getProgres(),
+    queryFn: () => Api.Goal.getAllProgres(),
     staleTime: 1000 * 60 * 5,
   });
   return {

@@ -39,3 +39,20 @@ export interface GoalType {
   startAt: string;
   endAt: string;
 }
+
+export interface GoalOverlayType {
+  targetAmount: number;
+  saveAmount: number;
+  percent: number;
+}
+
+export interface TransactionPartialType {
+  id: string;
+  amount: number;
+  category: CategoryType;
+  createdAt: string;
+  updatedAt: string;
+  type: string;
+  updateAt: string;
+  description: string;
+}

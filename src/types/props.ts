@@ -4,6 +4,7 @@ import {
   CategoryType,
   GoalType,
   RecentCardType,
+  TransactionPartialType,
 } from './components';
 
 export interface CardDashboardCardProps {
@@ -23,4 +24,8 @@ export interface CategoryProps {
 
 export interface goalProps {
   data: GoalType;
+}
+
+export interface TransactionProps {
+  data: TransactionPartialType;
 }
