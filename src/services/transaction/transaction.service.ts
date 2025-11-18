@@ -3,8 +3,12 @@ import { FormCreateTransaction } from '@/types/form/transaction.form';
 import AxiosClient from '@/utils/axios.client';
 
 class TransactionApi {
-  async create(payload: FormCreateTransaction, categoryId: string): Promise<TResponse<any>> {
+  async createExpense(payload: FormCreateTransaction, categoryId: string): Promise<TResponse<any>> {
     const res = await AxiosClient.post(`/api/transaction/${categoryId}`, payload);
+    return res.data;
+  }
+  async createIncome(payload: FormCreateTransaction): Promise<TResponse<any>> {
+    const res = await AxiosClient.post('/api/transaction', payload);
     return res.data;
   }
   async get(): Promise<TResponse<any>> {

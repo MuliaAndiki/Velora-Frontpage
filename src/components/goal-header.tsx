@@ -5,7 +5,7 @@ interface GoalHeaderProps {
   title: string;
   filter: string;
 }
-const GoalHeader: React.FC<GoalHeaderProps> = ({ data, title, filter }) => {
+const HeaderPartial: React.FC<GoalHeaderProps> = ({ data, title, filter }) => {
   const inProgressCount = data.filter((g) => g.status === filter).length;
   return (
     <Card className="flex  items-start border rounded-lg">
@@ -20,4 +20,4 @@ const GoalHeader: React.FC<GoalHeaderProps> = ({ data, title, filter }) => {
   );
 };
 
-export default GoalHeader;
+export default HeaderPartial;
