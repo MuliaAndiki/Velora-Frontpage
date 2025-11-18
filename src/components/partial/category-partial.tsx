@@ -21,8 +21,8 @@ import { Button } from '../ui/button';
 interface CategoryPartialProps {
   loadId: string | null;
   setLoadId: React.Dispatch<React.SetStateAction<string | null>>;
-  onDelete: (id: any) => void;
-  setPopUpModal: React.Dispatch<React.SetStateAction<PopupInterface>>;
+  onDelete?: (id: any) => void;
+  setPopUpModal?: React.Dispatch<React.SetStateAction<PopupInterface>>;
 }
 
 const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
@@ -60,11 +60,11 @@ const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
               <DropdownMenuGroup>
                 <DropdownMenuItem
                   className="text-destructive text-md"
-                  onClick={() => onDelete(data.id)}
+                  onClick={() => onDelete!(data.id)}
                 >
                   Delete
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-md " onClick={() => setPopUpModal('edit-goal')}>
+                <DropdownMenuItem className="text-md " onClick={() => setPopUpModal!('edit-goal')}>
                   Edit
                 </DropdownMenuItem>
               </DropdownMenuGroup>

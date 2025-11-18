@@ -15,7 +15,4 @@ export interface ExpenseChartType {
   fill: string;
 }
 
-export enum TransactionType {
-  'INCOME',
-  'EXPENSE',
-}
+export type TransactionType = 'INCOME' | 'EXPENSE';

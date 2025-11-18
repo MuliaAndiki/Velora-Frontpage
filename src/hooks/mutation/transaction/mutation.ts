@@ -6,10 +6,10 @@ import Api from '@/services/props.service';
 import { FormCreateTransaction } from '@/types/form/transaction.form';
 
 const TransactionMutation = {
-  useCreate() {
+  useCreateExpense() {
     const namespace = useAppNameSpase();
     return useMutation<TResponse<any>, Error, { payload: FormCreateTransaction; id: string }>({
-      mutationFn: ({ payload, id }) => Api.Transaction.create(payload, id),
+      mutationFn: ({ payload, id }) => Api.Transaction.createExpense(payload, id),
       onSuccess: () => {
         namespace.alert.toast({
           title: 'succes',
@@ -22,6 +22,27 @@ const TransactionMutation = {
         namespace.alert.toast({
           title: 'failed',
           message: 'failed melakukan transaction',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useCreateIncome() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormCreateTransaction>({
+      mutationFn: (payload) => Api.Transaction.createIncome(payload),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'succes',
+          message: 'succes melakukan transaction',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'error',
+          message: 'failed melakukan transcation',
           icon: 'error',
         });
       },

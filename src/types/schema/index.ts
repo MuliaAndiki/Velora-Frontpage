@@ -38,11 +38,10 @@ export interface IGoal {
 
 export interface ITransaction {
   id: string;
-  amount: number;
+  amount: number | undefined;
   description: string;
-  date: string;
   receiptUrl: string;
-  type: TransactionType;
+  type: string | TransactionType;
   categoryID: string;
   userID: string;
 }
