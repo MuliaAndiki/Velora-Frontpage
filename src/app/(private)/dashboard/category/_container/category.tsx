@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useRef } from 'react';
 
 import Container from '@/components/ui/container';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
@@ -9,20 +10,24 @@ import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormCreateCategory } from '@/types/form/category.form';
 import { PopupInterface } from '@/types/ui';
 import { fileToBase64 } from '@/utils/base64';
+import { UploadTriggerRef } from '@/utils/uploadtrigger';
 
 const CategoryContainer = () => {
   const [popUpModal, setPopUpModal] = useState<PopupInterface>(null);
   const [loadId, setLoadId] = useState<string | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const uploadRef = useRef<UploadTriggerRef>(null);
+  const [preview, setPreview] = useState<string | undefined>(undefined);
   const [formCreateCategory, setFromCreateCategory] = useState<FormCreateCategory>({
     name: '',
     cate_avaUrl: '',
+    type: '',
   });
   const namespace = useAppNameSpase();
-  const cateQuer = useServices().Category.query();
-  const deleteById = useServices().Category.mutation.useDeleteCategory();
-  const cateCreate = useServices().Category.mutation.useCreateCategory();
-  const cateDeleteAll = useServices().Category.mutation.useDeleteAll();
+  const service = useServices();
+  const cateQuer = service.Category.query();
+  const deleteById = service.Category.mutation.useDeleteCategory();
+  const cateCreate = service.Category.mutation.useCreateCategory();
+  const cateDeleteAll = service.Category.mutation.useDeleteAll();
 
   const handleChangePict = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -39,7 +44,7 @@ const CategoryContainer = () => {
   };
 
   const handleCreateCategory = () => {
-    if (!formCreateCategory.name) {
+    if (!formCreateCategory.name || !formCreateCategory.type) {
       namespace.alert.toast({
         title: 'Warning',
         message: 'name tidak boleh kosong',
@@ -69,10 +74,14 @@ const CategoryContainer = () => {
   const handleDelete = () => {
     return cateDeleteAll.mutate({});
   };
+  const handleRemovePreview = () => {
+    setPreview(undefined);
+    uploadRef.current?.resetInput();
+  };
 
   return (
     <SidebarLayout>
-      <Container className="w-full min-h-screen flex flex-col ">
+      <Container className="w-full min-h-screen flex flex-col overflow-x-hidden">
         <CategoryHeroSection
           data={cateQuer.categoryQuery ?? []}
           loadId={loadId}
@@ -85,9 +94,9 @@ const CategoryContainer = () => {
           setFromCreateCategory={setFromCreateCategory}
           onAddCategory={() => handleCreateCategory()}
           preview={preview}
-          setPreview={setPreview}
           onChangePict={handleChangePict}
           onDeleteALl={() => handleDelete()}
+          onRemovePreview={() => handleRemovePreview()}
         />
       </Container>
     </SidebarLayout>

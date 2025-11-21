@@ -11,11 +11,12 @@ import { PopupInterface } from '@/types/ui';
 import { fileToBase64 } from '@/utils/base64';
 
 const SettingsContainer = () => {
-  const [popUpModal, setPopUpModal] = useState<PopupInterface>(null);
   const namespase = useAppNameSpase();
-  const update = useServices().Auth.mutation.useUpdateProfile();
-  const logout = useServices().Auth.mutation.useLogout();
-  const userData = useServices().Auth.query();
+  const service = useServices();
+  const [popUpModal, setPopUpModal] = useState<PopupInterface>(null);
+  const update = service.Auth.mutation.useUpdateProfile();
+  const logout = service.Auth.mutation.useLogout();
+  const AuthQuery = service.Auth.query();
   const [formUpdateProfile, setFormUpdateProfile] = useState<FormUpdateProfile>({
     email: '',
     fullName: '',
@@ -65,7 +66,7 @@ const SettingsContainer = () => {
         <SettingsSection
           logout={() => handleLogout()}
           isPending={logout.isPending}
-          userData={userData.profileQuery ?? ''}
+          userData={AuthQuery.profileQuery ?? ''}
           setPopUpModal={setPopUpModal}
           popUpModal={popUpModal}
           handleOpenPopUp={handlePopUp}

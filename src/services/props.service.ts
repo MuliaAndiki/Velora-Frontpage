@@ -7,6 +7,8 @@ import ImportExportApi from '@/services/import-export/import-export.service';
 import ReportApi from '@/services/report/report.service';
 import TransactionApi from '@/services/transaction/transaction.service';
 
+import WalletApi from './wallet/wallet.service';
+
 class Api {
   static Auth = new AuthApi();
   static Budget = new BudgetApi();
@@ -16,6 +18,7 @@ class Api {
   static Dashboard = new DashboardApi();
   static Report = new ReportApi();
   static ImportExport = new ImportExportApi();
+  static Wallet = new WalletApi();
 }
 
 export default Api;

@@ -13,6 +13,7 @@ export const userType = z.object({
     password: z.string(),
     fotoProfile: z.string().nullable().optional(),
     isVerified: z.boolean(),
+    otp: z.string(),
   }),
 });
 

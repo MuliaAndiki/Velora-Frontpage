@@ -21,6 +21,7 @@ export interface BudgetCardType {
 export interface CategoryType {
   id: string;
   name: string;
+  type: string;
   avaUrl: string;
   createdAt: string;
   updatedAt: string;

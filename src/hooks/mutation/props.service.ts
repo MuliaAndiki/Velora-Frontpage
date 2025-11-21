@@ -1,3 +1,4 @@
+'use client';
 import AuthMutation from '@/hooks/mutation/auth/mutation';
 
 import { useAuthData } from './auth/query';
@@ -7,6 +8,8 @@ import GoalMutation from './goal/mutation';
 import { useGoalQueries } from './goal/query';
 import TransactionMutation from './transaction/mutation';
 import { useTransactionQueries } from './transaction/query';
+import WalletMutation from './wallet/mutation';
+import { useWalletTransaction } from './wallet/query';
 
 export const useServices = () => ({
   Auth: {
@@ -24,6 +27,10 @@ export const useServices = () => ({
   Transaction: {
     mutation: TransactionMutation,
     query: useTransactionQueries,
+  },
+  Wallet: {
+    mutation: WalletMutation,
+    query: useWalletTransaction,
   },
 });
 

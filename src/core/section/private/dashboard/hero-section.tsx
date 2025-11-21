@@ -16,25 +16,21 @@ import View from '@/components/ui/view';
 import { BarchartIncomeConfig, PiechartConfig } from '@/configs/chart.config';
 import { DashboardCardData, RecentCardData } from '@/configs/components.config';
 import { BudgetCardData } from '@/configs/components.config';
-import { FormCreateCategory } from '@/types/form/category.form';
+import { FormCreateWallet } from '@/types/form/wallet.form';
 import { ExpenseChartType, InconeChartType, InconeType } from '@/types/partial';
 import { PopupInterface } from '@/types/ui';
-import UploadsTrigger from '@/utils/uploadtrigger';
 
 interface DashboardProps {
   popUpModal: PopupInterface;
   setPopUpModal: React.Dispatch<React.SetStateAction<PopupInterface>>;
-  preview: string | null;
-  setPreview: React.Dispatch<React.SetStateAction<string | null>>;
   // dumy
   ButtonIncome: InconeType[];
   ExpenseChartData: ExpenseChartType[];
   IncomeChartData: InconeChartType[];
-  formCreateCategory: FormCreateCategory;
-  setFromCreateCategory: React.Dispatch<React.SetStateAction<FormCreateCategory>>;
+  formCreateWallet: FormCreateWallet;
+  setFormCreateWallet: React.Dispatch<React.SetStateAction<FormCreateWallet>>;
   isPending: boolean;
-  onAddCategory: () => void;
-  onChangePict: (e: any) => void;
+  onWallet: () => void;
 }
 
 const DashboardHeroSection: React.FC<DashboardProps> = ({
@@ -43,13 +39,10 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
   IncomeChartData,
   popUpModal,
   setPopUpModal,
-  formCreateCategory,
-  setFromCreateCategory,
+  formCreateWallet,
+  setFormCreateWallet,
   isPending,
-  onAddCategory,
-  onChangePict,
-  preview,
-  setPreview,
+  onWallet,
 }) => {
   return (
     <View className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden  ">
@@ -96,7 +89,7 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
         className="fixed bottom-8 right-8 z-50   px-6 py-4 rounded-full shadow-2xl "
       >
         <span className="text-2xl group-hover:rotate-90 transition-transform duration-300">+</span>
-        <span className="font-semibold">Add Category</span>
+        <span className="font-semibold">Create Wallet</span>
       </Button>
       <PopUp isOpen={popUpModal === 'category'} onClose={() => setPopUpModal(null)}>
         <View className="w-full h-full">
@@ -105,48 +98,22 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
               className="w-full"
               onSubmit={(e) => {
                 e.preventDefault();
-                onAddCategory();
+                onWallet();
               }}
             >
               <Field>
-                <FieldTitle>Name Category :</FieldTitle>
+                <FieldTitle>Name Wallet :</FieldTitle>
                 <Input
-                  value={formCreateCategory.name}
+                  value={formCreateWallet.name}
                   onChange={(e) =>
-                    setFromCreateCategory((prev) => ({
+                    setFormCreateWallet((prev) => ({
                       ...prev,
                       name: e.target.value,
                     }))
                   }
                 />
-                <div className="border w-full border-dashed rounded-lg h-full">
-                  <UploadsTrigger
-                    accept="image/*"
-                    multiple={false}
-                    onChange={(e) => onChangePict(e)}
-                  >
-                    <Button type="button" variant={'ghost'} className="w-full h-full flex flex-col">
-                      <ImagePlus />
-                      <Label className="text-lg font-semibold">Upload Foto Category</Label>
-                    </Button>
-                  </UploadsTrigger>
-                </div>
-                {preview && (
-                  <div className="w-full h-full mt-3  rounded-lg p-2 flex justify-center flex-col items-center space-y-2 ">
-                    <Image
-                      alt="preview"
-                      src={preview}
-                      width={150}
-                      height={150}
-                      className="aspect-square rounded-lg object-cover"
-                    />
-                    <Button variant={'destructive'} onClick={() => setPreview(null)}>
-                      Hapus Photo
-                    </Button>
-                  </div>
-                )}
                 <Button variant={'outline'} type="submit" disabled={isPending}>
-                  {isPending ? 'Wait' : 'Add'}
+                  {isPending ? 'Wait' : 'Create'}
                 </Button>
               </Field>
             </form>

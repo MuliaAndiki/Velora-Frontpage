@@ -74,6 +74,7 @@ const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
       ) : null}
 
       <Label className="text-lg font-semibold">{data?.name}</Label>
+      <h1 className="text-md font-semibold text-slate-400">{data?.type}</h1>
       <div className="flex  items-center gap-4">
         <Label>{getDate(data.createdAt)}</Label>
       </div>
