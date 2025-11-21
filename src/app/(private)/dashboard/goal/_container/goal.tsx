@@ -11,6 +11,7 @@ import { PopupInterface } from '@/types/ui';
 
 const GoalContainer = () => {
   const namespace = useAppNameSpase();
+  const service = useServices();
   const [popUp, setPopUp] = useState<PopupInterface>(null);
   const [id, setId] = useState<any>(null);
   const [formEditGoal, setFormEditGoal] = useState<FormCreateGoal>({
@@ -28,11 +29,11 @@ const GoalContainer = () => {
     targetAmount: undefined,
   });
 
-  const goalAll = useServices().Goal.query();
-  const goalCreate = useServices().Goal.mutation.useCreate();
-  const goalDelete = useServices().Goal.mutation.useDeleteALl();
-  const goalDeleteByID = useServices().Goal.mutation.useDeleteByID();
-  const goalEdit = useServices().Goal.mutation.useUpdate();
+  const goalAll = service.Goal.query();
+  const goalCreate = service.Goal.mutation.useCreate();
+  const goalDelete = service.Goal.mutation.useDeleteALl();
+  const goalDeleteByID = service.Goal.mutation.useDeleteByID();
+  const goalEdit = service.Goal.mutation.useUpdate();
 
   const handleOpenPopUp = (data: any) => {
     setFormEditGoal(data);

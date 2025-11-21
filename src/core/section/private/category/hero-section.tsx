@@ -17,6 +17,14 @@ import {
 import { Field, FieldTitle } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import PopUp from '@/components/ui/pop-up';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import View from '@/components/ui/view';
 import { CategoryType } from '@/types/components';
 import { FormCreateCategory } from '@/types/form/category.form';
@@ -35,9 +43,9 @@ interface CategoryProps {
   formCreateCategory: FormCreateCategory;
   setFromCreateCategory: React.Dispatch<React.SetStateAction<FormCreateCategory>>;
   onChangePict: (e: any) => void;
-  preview: string | null;
-  setPreview: React.Dispatch<React.SetStateAction<string | null>>;
+  preview: string | undefined;
   onDeleteALl: () => void;
+  onRemovePreview: () => void;
 }
 
 const CategoryHeroSection: React.FC<CategoryProps> = ({
@@ -53,12 +61,12 @@ const CategoryHeroSection: React.FC<CategoryProps> = ({
   setFromCreateCategory,
   onChangePict,
   preview,
-  setPreview,
   onDeleteALl,
+  onRemovePreview,
 }) => {
   return (
     <View>
-      <div className="w-full min-h-screen flex items-start flex-col">
+      <div className="w-full min-h-screen flex items-start flex-col overflow-x-hidden">
         <div className="w-full flex justify-center items-start p-4 flex-col">
           <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-600 mb-3">
             Category
@@ -147,6 +155,26 @@ const CategoryHeroSection: React.FC<CategoryProps> = ({
                     }))
                   }
                 />
+                <FieldTitle>Type :</FieldTitle>
+                <Select
+                  value={formCreateCategory.type}
+                  onValueChange={(e) =>
+                    setFromCreateCategory((prev) => ({
+                      ...prev,
+                      type: e,
+                    }))
+                  }
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="INCOME">income</SelectItem>
+                      <SelectItem value="EXPENSE">exprense</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
                 <div className="border w-full border-dashed rounded-lg h-full">
                   <UploadsTrigger
                     accept="image/*"
@@ -168,7 +196,7 @@ const CategoryHeroSection: React.FC<CategoryProps> = ({
                       height={150}
                       className="aspect-square rounded-lg object-cover"
                     />
-                    <Button variant={'destructive'} onClick={() => setPreview(null)}>
+                    <Button variant={'destructive'} onClick={() => onRemovePreview()}>
                       Hapus Photo
                     </Button>
                   </div>

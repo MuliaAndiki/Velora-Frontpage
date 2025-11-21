@@ -18,6 +18,7 @@ export interface IAuth {
 export interface ICategory {
   id: string;
   name: string;
+  type: string;
   cate_avaUrl: string;
   userID: string;
   createdAt: Date;
@@ -43,5 +44,12 @@ export interface ITransaction {
   receiptUrl: string;
   type: string | TransactionType;
   categoryID: string;
+  userID: string;
+}
+
+export interface IWallet {
+  id: string;
+  name: string;
+  balance: number;
   userID: string;
 }

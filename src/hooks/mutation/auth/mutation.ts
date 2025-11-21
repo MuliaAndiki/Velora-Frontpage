@@ -35,7 +35,6 @@ const AuthMutation = {
           user: res.data,
         };
         namespace.dispatch(setCurrentUser(payloadUser));
-
         namespace.alert.toast({
           title: 'Berhasil ',
           message: 'Selamat Datang Di Velora',

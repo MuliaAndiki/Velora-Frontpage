@@ -1,5 +1,6 @@
 import { CircleDot, X } from 'lucide-react';
 
+import CategoryPartial from '@/components/partial/category-partial';
 import TransactionPartial from '@/components/partial/transaction-partial';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -25,10 +26,9 @@ import {
 } from '@/components/ui/select';
 import View from '@/components/ui/view';
 import { CategoryType, TransactionPartialType } from '@/types/components';
-import { PopupInterface } from '@/types/ui';
 import { FormCreateTransaction } from '@/types/form/transaction.form';
 import { TransactionType } from '@/types/partial';
-import CategoryPartial from '@/components/partial/category-partial';
+import { PopupInterface } from '@/types/ui';
 
 interface TrasanctionProps {
   transactionData: TransactionPartialType[];
@@ -37,12 +37,12 @@ interface TrasanctionProps {
   setPopUpModal: React.Dispatch<React.SetStateAction<PopupInterface>>;
   formCreateTransaction: FormCreateTransaction;
   setFormCreateTransaction: React.Dispatch<React.SetStateAction<FormCreateTransaction>>;
-  onCreateTransacntion: () => void;
   isPending: boolean;
   selectType: TransactionType;
   setSelectType: React.Dispatch<React.SetStateAction<TransactionType>>;
   loadId: string | null;
   setLoadId: React.Dispatch<React.SetStateAction<string | null>>;
+  onCreate: () => void;
 }
 
 const TransactionHeroSection: React.FC<TrasanctionProps> = ({
@@ -50,7 +50,6 @@ const TransactionHeroSection: React.FC<TrasanctionProps> = ({
   popUpModal,
   setPopUpModal,
   isPending,
-  onCreateTransacntion,
   formCreateTransaction,
   setFormCreateTransaction,
   selectType,
@@ -58,10 +57,11 @@ const TransactionHeroSection: React.FC<TrasanctionProps> = ({
   categoryData,
   loadId,
   setLoadId,
+  onCreate,
 }) => {
   return (
     <View>
-      <div className="w-full flex flex-col min-h-screen overflow-hidden justify-start items-start p-4">
+      <div className="w-full flex flex-col min-h-screen overflow-hidden justify-start items-start p-4 ">
         <div className="flex items-start flex-col mb-3 ">
           <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-600 mb-3">
             All Transactions
@@ -177,9 +177,21 @@ const TransactionHeroSection: React.FC<TrasanctionProps> = ({
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    onCreateTransacntion();
+                    onCreate();
                   }}
                 >
+                  <div className="w-full border p-4 my-4 rounded-lg space-y-2 ">
+                    {categoryData
+                      .filter((item) => item.type === 'INCOME')
+                      .map((item, key) => (
+                        <CategoryPartial
+                          data={item}
+                          loadId={loadId}
+                          setLoadId={setLoadId}
+                          key={key}
+                        />
+                      ))}
+                  </div>
                   <div>
                     <h1 className="text-lg text-slate-400">Amount :</h1>
                     <Input
@@ -235,18 +247,20 @@ const TransactionHeroSection: React.FC<TrasanctionProps> = ({
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    onCreateTransacntion();
+                    onCreate();
                   }}
                 >
                   <div className="w-full border p-4 my-4 rounded-lg space-y-2 ">
-                    {categoryData.map((item, key) => (
-                      <CategoryPartial
-                        data={item}
-                        loadId={loadId}
-                        setLoadId={setLoadId}
-                        key={key}
-                      />
-                    ))}
+                    {categoryData
+                      .filter((item) => item.type === 'EXPENSE')
+                      .map((item, key) => (
+                        <CategoryPartial
+                          data={item}
+                          loadId={loadId}
+                          setLoadId={setLoadId}
+                          key={key}
+                        />
+                      ))}
                   </div>
                   <div>
                     <h1 className="text-lg text-slate-400">Amount :</h1>
