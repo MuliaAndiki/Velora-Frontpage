@@ -110,9 +110,9 @@ const GoalHeroSection: React.FC<GoalProps> = ({
         </div>
         <div className="w-full my-2 ">
           <div className="grid grid-cols-3 grid-row-1 gap-4">
-            {goalData.map((items, key) => (
+            {goalData.map((items) => (
               <GoalPartial
-                key={key}
+                key={items.id}
                 data={items}
                 alert={alert}
                 onDeleteByID={onDeleteByID}

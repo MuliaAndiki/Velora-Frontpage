@@ -1,5 +1,5 @@
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
-import { FormBudgetType, FormBudgetUpdateType } from '@/types/form/budget.form';
+import { FormCreateBudget } from '@/types/form/budget.form';
 import AxiosClient from '@/utils/axios.client';
 
 class BudgetApi {
@@ -13,18 +13,22 @@ class BudgetApi {
     return res.data;
   }
 
-  async create(payload: FormBudgetType): Promise<TResponse<any>> {
+  async create(payload: FormCreateBudget): Promise<TResponse<any>> {
     const res = await AxiosClient.post('/api/budgets', payload);
     return res.data;
   }
 
-  async update(payload: FormBudgetUpdateType): Promise<TResponse<any>> {
-    const res = await AxiosClient.put(`/api/budgets/${payload.id}`, payload);
+  async update(payload: FormCreateBudget, id: string): Promise<TResponse<any>> {
+    const res = await AxiosClient.put(`/api/budgets/${id}`, payload);
     return res.data;
   }
 
   async delete(id: string): Promise<TResponse<any>> {
     const res = await AxiosClient.delete(`/api/budgets/${id}`);
+    return res.data;
+  }
+  async budgetProses(id: string): Promise<TResponse<any>> {
+    const res = await AxiosClient.get(`/api/budgets/progress/${id}`);
     return res.data;
   }
 }

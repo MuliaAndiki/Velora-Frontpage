@@ -1,57 +1,89 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useAlert } from '@/hooks/useAlert/costum-alert';
+import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
 import Api from '@/services/props.service';
+import { FormCreateReport } from '@/types/form/report.form';
 
-interface GenerateReportParams {
-  startDate: string;
-  endDate: string;
-  type: 'transactions' | 'budgets' | 'goals';
-  format: 'pdf' | 'excel' | 'csv';
-}
+const ReportMutation = {
+  useCreateReport() {
+    const namespace = useAppNameSpase();
 
-export function useGenerateReport(options?: { onAfterSuccess?: () => void }) {
-  const alert = useAlert();
+    return useMutation<TResponse<any>, Error, FormCreateReport>({
+      mutationFn: (payload: FormCreateReport) => Api.Report.create(payload),
+      onSuccess: (res) => {
+        namespace.queryClient.invalidateQueries({ queryKey: ['reports'] });
+        namespace.alert.toast({
+          title: 'Success',
+          message: 'Report created successfully',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'Failed',
+          message: 'Failed to create report',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useDeleteReport() {
+    const namespace = useAppNameSpase();
 
-  return useMutation<TResponse<any>, Error, GenerateReportParams>({
-    mutationFn: (params: GenerateReportParams) => Api.Report.generateReport(params),
-    onSuccess: async (res, variables) => {
-      try {
-        const blob = await Api.Report.downloadReport(res.data.fileUrl);
+    return useMutation<TResponse<any>, Error, string>({
+      mutationFn: (id: string) => Api.Report.delete(id),
+      onSuccess: (res) => {
+        namespace.queryClient.invalidateQueries({ queryKey: ['reports'] });
+        namespace.alert.toast({
+          title: 'Success',
+          message: 'Report deleted successfully',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'Failed',
+          message: 'Failed to delete report',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useDownloadReport() {
+    const namespace = useAppNameSpase();
+
+    return useMutation<Blob, Error, string>({
+      mutationFn: (fileUrl: string) => Api.Report.downloadReport(fileUrl),
+      onSuccess: (blob, fileUrl) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `report-${variables.type}-${variables.format}`;
+        a.download = `report-${new Date().getTime()}.pdf`;
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
 
-        alert.toast({
+        namespace.alert.toast({
           title: 'Success',
-          message: 'Report generated successfully',
+          message: 'Report downloaded successfully',
           icon: 'success',
-          onVoid: () => {
-            options?.onAfterSuccess?.();
-          },
         });
-      } catch (err) {
+      },
+      onError: (err) => {
         console.error(err);
-        alert.toast({
+        namespace.alert.toast({
           title: 'Failed',
           message: 'Failed to download report',
           icon: 'error',
         });
-      }
-    },
-    onError: (err) => {
-      console.error(err);
-      alert.toast({
-        title: 'Failed',
-        message: 'Failed to generate report',
-        icon: 'error',
-      });
-    },
-  });
-}
+      },
+    });
+  },
+};
+
+export default ReportMutation;

@@ -17,8 +17,8 @@ class CategoryApi {
     return res.data;
   }
 
-  async update(payload: FormEditCategory): Promise<TResponse<any>> {
-    const res = await AxiosClient.put(`/api/category/${payload.id}`, payload);
+  async update(payload: FormCreateCategory, id: string): Promise<TResponse<any>> {
+    const res = await AxiosClient.put(`/api/category/${id}`, payload);
     return res.data;
   }
 

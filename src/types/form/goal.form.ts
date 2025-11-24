@@ -5,3 +5,5 @@ export type FormCreateGoal = Pick<
   'name' | 'savedAmount' | 'endAt' | 'startAt' | 'targetAmount'
 >;
 export type PickID = Pick<IGoal, 'id'>;
+
+export type FormInsertGoal = Pick<IGoal, 'savedAmount' | 'walletID' | 'id'>;

@@ -56,4 +56,6 @@ export interface TransactionPartialType {
   type: string;
   updateAt: string;
   description: string;
+  receiptUrl: string;
+  walletID: string;
 }

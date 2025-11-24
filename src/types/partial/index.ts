@@ -15,4 +15,8 @@ export interface ExpenseChartType {
   fill: string;
 }
 
-export type TransactionType = 'INCOME' | 'EXPENSE';
+export type TransactionType = 'INCOME' | 'EXPENSE' | null;
+
+export type ReportType = 'TRANSACTIONS' | 'BUDGETS' | 'GOALS' | 'SUMMARY';
+export type BudgetPeriodType = 'WEEKLY' | 'MONTHLY' | 'YEARLY';
+export type BudgetStatusType = 'ACTIVE' | 'COMPLETED' | 'EXCEEDED';

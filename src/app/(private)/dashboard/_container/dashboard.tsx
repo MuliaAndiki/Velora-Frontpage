@@ -10,7 +10,6 @@ import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { FormCreateWallet } from '@/types/form/wallet.form';
 import { PopupInterface } from '@/types/ui';
-import { fileToBase64 } from '@/utils/base64';
 
 export default function DashboardContainer() {
   const namespace = useAppNameSpase();

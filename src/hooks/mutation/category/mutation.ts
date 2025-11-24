@@ -32,8 +32,8 @@ const CategoryMutation = {
 
   useUpdateCategory() {
     const namespace = useAppNameSpase();
-    return useMutation<TResponse<any>, Error, FormEditCategory>({
-      mutationFn: (payload) => Api.Category.update(payload),
+    return useMutation<TResponse<any>, Error, { payload: FormCreateCategory; id: string }>({
+      mutationFn: ({ id, payload }) => Api.Category.update(payload, id),
 
       onSuccess: () => {
         namespace.queryClient.invalidateQueries({

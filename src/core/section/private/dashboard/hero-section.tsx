@@ -85,13 +85,13 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
       </div>
 
       <Button
-        onClick={() => setPopUpModal('category')}
+        onClick={() => setPopUpModal('wallet')}
         className="fixed bottom-8 right-8 z-50   px-6 py-4 rounded-full shadow-2xl "
       >
         <span className="text-2xl group-hover:rotate-90 transition-transform duration-300">+</span>
         <span className="font-semibold">Create Wallet</span>
       </Button>
-      <PopUp isOpen={popUpModal === 'category'} onClose={() => setPopUpModal(null)}>
+      <PopUp isOpen={popUpModal === 'wallet'} onClose={() => setPopUpModal(null)}>
         <View className="w-full h-full">
           <div className="w-full flex justify-center items-center flex-col">
             <form

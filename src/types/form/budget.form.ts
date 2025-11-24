@@ -1,12 +1,7 @@
-export interface FormBudgetType {
-  name: string;
-  amount: number;
-  startDate: Date;
-  endDate: Date;
-  categoryId: string;
-  description?: string;
-}
+import { IBudget } from '../schema';
 
-export interface FormBudgetUpdateType extends FormBudgetType {
-  id: string;
-}
+export type FormCreateBudget = Pick<
+  IBudget,
+  'name' | 'categoryID' | 'limit' | 'period' | 'startDate' | 'endDate'
+>;
+export type PickGetID = Pick<IBudget, 'id'>;

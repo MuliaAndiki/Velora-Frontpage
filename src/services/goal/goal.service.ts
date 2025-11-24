@@ -1,5 +1,5 @@
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
-import { FormCreateGoal, PickID } from '@/types/form/goal.form';
+import { FormCreateGoal, FormInsertGoal, PickID } from '@/types/form/goal.form';
 import AxiosClient from '@/utils/axios.client';
 
 class GoalApi {
@@ -33,6 +33,11 @@ class GoalApi {
   }
   async deleteAll(): Promise<TResponse<any>> {
     const res = await AxiosClient.delete('/api/goals/');
+    return res.data;
+  }
+  //blum intergrate
+  async insertGoal(payload: FormInsertGoal): Promise<TResponse<any>> {
+    const res = await AxiosClient.put('/api/goals', payload);
     return res.data;
   }
 }

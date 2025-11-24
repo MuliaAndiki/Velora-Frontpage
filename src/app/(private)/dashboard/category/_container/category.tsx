@@ -28,6 +28,8 @@ const CategoryContainer = () => {
   const deleteById = service.Category.mutation.useDeleteCategory();
   const cateCreate = service.Category.mutation.useCreateCategory();
   const cateDeleteAll = service.Category.mutation.useDeleteAll();
+  const cateUpdate = service.Category.mutation.useUpdateCategory();
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const handleChangePict = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -54,8 +56,43 @@ const CategoryContainer = () => {
       cateCreate.mutate(formCreateCategory, {
         onSuccess: () => {
           setPopUpModal(null);
+          setFromCreateCategory({ name: '', cate_avaUrl: '', type: '' });
+          setPreview(undefined);
+          setIsEdit(false);
         },
       });
+    }
+  };
+
+  const handleUpdateCategory = () => {
+    if (!formCreateCategory.name || !formCreateCategory.type) {
+      namespace.alert.toast({
+        title: 'Warning',
+        message: 'name dan type tidak boleh kosong',
+        icon: 'warning',
+      });
+    } else if (!loadId) {
+      namespace.alert.toast({
+        title: 'Warning',
+        message: 'Missing category id',
+        icon: 'warning',
+      });
+    } else {
+      cateUpdate.mutate(
+        {
+          id: loadId,
+          payload: formCreateCategory,
+        },
+        {
+          onSuccess: () => {
+            setPopUpModal(null);
+            setFromCreateCategory({ name: '', cate_avaUrl: '', type: '' });
+            setPreview(undefined);
+            setLoadId(null);
+            setIsEdit(false);
+          },
+        }
+      );
     }
   };
 
@@ -90,13 +127,16 @@ const CategoryContainer = () => {
           popUpModal={popUpModal}
           setPopUpModal={setPopUpModal}
           formCreateCategory={formCreateCategory}
-          isPending={cateCreate.isPending}
+          isPending={cateCreate.isPending || cateUpdate.isPending}
           setFromCreateCategory={setFromCreateCategory}
           onAddCategory={() => handleCreateCategory()}
+          onUpdateCategory={() => handleUpdateCategory()}
           preview={preview}
           onChangePict={handleChangePict}
           onDeleteALl={() => handleDelete()}
           onRemovePreview={() => handleRemovePreview()}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
         />
       </Container>
     </SidebarLayout>

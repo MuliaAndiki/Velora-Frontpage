@@ -14,9 +14,10 @@ const BudgerChart: React.FC<BudgerChartProps> = ({ BudgetData }) => {
       <CardHeader>
         <CardTitle className="text-2xl">Budget Progress</CardTitle>
         <CardDescription>test</CardDescription>
-        {BudgetData.map((items, key) => (
+        {/* fix */}
+        {/* {BudgetData.map((items, key) => (
           <BudgetPartial key={key} data={items} />
-        ))}
+        ))} */}
       </CardHeader>
     </Card>
   );

@@ -1,9 +1,11 @@
+import { UseMutationResult } from '@tanstack/react-query';
 import {
   BarChart3,
   Circle,
   DollarSign,
   Download,
   FileText,
+  Plus,
   TrendingDown,
   TrendingUp,
 } from 'lucide-react';
@@ -23,6 +25,11 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+
+import PopUp from '@/components/ui/pop-up';
+import { IReport } from '@/types/schema';
+import { PopupInterface } from '@/types/ui';
+import { formatCurrency } from '@/utils/number.format';
 
 // Types
 interface MonthlyData {
@@ -53,8 +60,30 @@ interface ReportStats {
   savingsRate: number;
 }
 
+interface ReportHeroProps {
+  reports: IReport[];
+  reportSummary: any;
+  isLoading: boolean;
+  isPending: boolean;
+  onDelete: (id: string) => void;
+  onDownload?: (fileUrl: string) => void;
+  popUpModal: PopupInterface;
+  setPopUpModal: React.Dispatch<React.SetStateAction<PopupInterface>>;
+  createReportMutation: UseMutationResult<any, Error, any>;
+}
+
 // Main Component
-const ReportHeroSection: React.FC = () => {
+const ReportHeroSection: React.FC<ReportHeroProps> = ({
+  reports,
+  reportSummary,
+  isLoading,
+  isPending,
+  onDelete,
+  onDownload,
+  popUpModal,
+  setPopUpModal,
+  createReportMutation,
+}) => {
   const [selectedPeriod, setSelectedPeriod] = useState<ReportPeriod['value']>('month');
   const [reportType, setReportType] = useState<'overview' | 'income' | 'expense'>('overview');
 
@@ -65,7 +94,14 @@ const ReportHeroSection: React.FC = () => {
     { label: 'This Year', value: 'year' },
   ];
 
-  // Sample Data
+  // Get summary data from props
+  const summaryData = reportSummary || {
+    totalIncome: 0,
+    totalExpense: 0,
+    netAmount: 0,
+  };
+
+  // Sample Monthly Data (dapat diperbaiki dengan data real dari API)
   const monthlyData: MonthlyData[] = [
     { month: 'Jan', income: 8000000, expense: 5500000, savings: 2500000 },
     { month: 'Feb', income: 7500000, expense: 5200000, savings: 2300000 },
@@ -100,12 +136,12 @@ const ReportHeroSection: React.FC = () => {
 
   // Calculate statistics
   const stats: ReportStats = useMemo(() => {
-    const totalIncome = monthlyData.reduce((sum, data) => sum + data.income, 0);
-    const totalExpense = monthlyData.reduce((sum, data) => sum + data.expense, 0);
-    const totalSavings = monthlyData.reduce((sum, data) => sum + data.savings, 0);
-    const avgIncome = totalIncome / monthlyData.length;
-    const avgExpense = totalExpense / monthlyData.length;
-    const savingsRate = (totalSavings / totalIncome) * 100;
+    const totalIncome = summaryData.totalIncome || 0;
+    const totalExpense = summaryData.totalExpense || 0;
+    const totalSavings = summaryData.netAmount || totalIncome - totalExpense;
+    const avgIncome = totalIncome / (monthlyData.length || 1);
+    const avgExpense = totalExpense / (monthlyData.length || 1);
+    const savingsRate = totalIncome > 0 ? (totalSavings / totalIncome) * 100 : 0;
 
     return {
       totalIncome,
@@ -115,7 +151,7 @@ const ReportHeroSection: React.FC = () => {
       avgExpense,
       savingsRate,
     };
-  }, [monthlyData]);
+  }, [monthlyData, summaryData]);
 
   // Add percentage to category data
   const expenseCategoriesWithPercentage = useMemo(() => {
@@ -124,7 +160,7 @@ const ReportHeroSection: React.FC = () => {
       ...cat,
       percentage: (cat.value / total) * 100,
     }));
-  }, [expenseCategories]);
+  }, []);
 
   const incomeCategoriesWithPercentage = useMemo(() => {
     const total = incomeCategories.reduce((sum, cat) => sum + cat.value, 0);
@@ -132,27 +168,42 @@ const ReportHeroSection: React.FC = () => {
       ...cat,
       percentage: (cat.value / total) * 100,
     }));
-  }, [incomeCategories]);
-
-  const formatCurrency = (value: number): string => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(value);
-  };
+  }, []);
 
   const handleExport = (): void => {
-    console.log('Export report');
+    const now = new Date();
+    const startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+    createReportMutation.mutate({
+      title: `Financial Report - ${now.toLocaleDateString()}`,
+      type:
+        reportType === 'overview'
+          ? 'SUMMARY'
+          : reportType === 'income'
+            ? 'TRANSACTIONS'
+            : 'TRANSACTIONS',
+      startDate,
+      endDate,
+      format: 'pdf',
+    });
   };
 
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 lg:p-8">
+    <div className="w-full min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 p-6 lg:p-8">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
           <div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 mb-2">
+            <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-600 mb-2">
               Financial Reports
             </h1>
             <p className="text-slate-400 text-lg">
@@ -160,11 +211,11 @@ const ReportHeroSection: React.FC = () => {
             </p>
           </div>
           <button
-            onClick={handleExport}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-xl hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300"
+            onClick={() => setPopUpModal('create-report')}
+            className="flex items-center gap-2 px-6 py-3 bg-linear-to-r from-orange-600 to-red-600 text-white rounded-xl hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300"
           >
-            <Download size={20} />
-            <span className="font-semibold">Export Report</span>
+            <Plus size={20} />
+            <span className="font-semibold">New Report</span>
           </button>
         </div>
 
