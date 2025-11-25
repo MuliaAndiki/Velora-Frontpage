@@ -8,8 +8,9 @@ export function useWalletTransaction() {
     queryFn: () => Api.Wallet.get(),
     staleTime: 1000 * 60 * 5,
   });
+
   return {
-    walletQuery: walletQuery.data?.data ?? '',
+    walletQuery: walletQuery.data?.data ?? null,
     isLoading: walletQuery.isLoading,
     isError: walletQuery.isError,
     refectAll: () => {

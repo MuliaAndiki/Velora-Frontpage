@@ -11,6 +11,9 @@ const TransactionMutation = {
     return useMutation<TResponse<any>, Error, { payload: FormCreateTransaction; id: string }>({
       mutationFn: ({ payload, id }) => Api.Transaction.post(payload, id),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'transaction',
+        });
         namespace.alert.toast({
           title: 'succes',
           message: 'succes melakukan transaction',
@@ -33,6 +36,9 @@ const TransactionMutation = {
     return useMutation<TResponse<any>, Error, any>({
       mutationFn: () => Api.Transaction.delete(),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'transaction',
+        });
         namespace.alert.toast({
           title: 'succes',
           message: 'succes delete all transacntion',
@@ -54,6 +60,9 @@ const TransactionMutation = {
     return useMutation<TResponse<any>, Error, string>({
       mutationFn: (id) => Api.Transaction.deleteById(id),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'transaction',
+        });
         namespace.alert.toast({
           title: 'succes',
           message: 'succes delete transaction',
@@ -65,7 +74,31 @@ const TransactionMutation = {
         namespace.alert.toast({
           title: 'failed',
           message: 'failed delete transacntion',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useUpdate() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, { payload: FormCreateTransaction; id: string }>({
+      mutationFn: ({ payload, id }) => Api.Transaction.update(payload, id),
+      onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'transaction',
+        });
+        namespace.alert.toast({
+          title: 'succes',
+          message: 'succes update transaction',
           icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'failed',
+          message: 'failed update transacntion',
+          icon: 'error',
         });
       },
     });

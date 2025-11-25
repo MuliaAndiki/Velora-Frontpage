@@ -22,6 +22,7 @@ const SettingsContainer = () => {
     fullName: '',
     photoUrl: '',
   });
+  const walletQuery = service.Wallet.query();
   const [preview, setPreview] = useState<string | null>(null);
   const handleLogout = () => {
     logout.mutate(
@@ -75,6 +76,7 @@ const SettingsContainer = () => {
           onUpdate={() => handleUpdate()}
           onChangeAva={handleChangePict}
           preview={preview}
+          Iwallet={walletQuery.walletQuery ?? ''}
         />
       </Container>
     </SidebarLayout>

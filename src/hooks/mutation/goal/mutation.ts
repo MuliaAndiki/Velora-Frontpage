@@ -1,9 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
+import { use } from 'react';
 
 import { useAppNameSpase } from '@/hooks/useNameSpace';
 import { TResponse } from '@/pkg/react-query/mutation-wrapper.type';
 import Api from '@/services/props.service';
-import { FormCreateGoal, PickID } from '@/types/form/goal.form';
+import { FormCreateGoal, FormInsertGoal, PickID } from '@/types/form/goal.form';
 
 const GoalMutation = {
   useCreate() {
@@ -14,6 +15,9 @@ const GoalMutation = {
         namespace.queryClient.invalidateQueries({
           predicate: (query) => query.queryKey[0] === 'goal',
         });
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'wallet',
+        });
         namespace.alert.toast({
           title: 'Berhasil',
           message: 'Tabungan Berhasil Terbuat',
@@ -21,13 +25,11 @@ const GoalMutation = {
         });
       },
       onError: (err) => {
+        console.error(err);
         namespace.alert.toast({
           title: 'Gagal',
           message: 'Tabungan Gagal Terbuat',
           icon: 'error',
-          onVoid: () => {
-            console.error(err);
-          },
         });
       },
     });
@@ -108,6 +110,30 @@ const GoalMutation = {
           onVoid: () => {
             console.error(err);
           },
+        });
+      },
+    });
+  },
+  useInsertGoal() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormInsertGoal>({
+      mutationFn: (payload) => Api.Goal.insertGoal(payload),
+      onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'goal',
+        });
+        namespace.alert.toast({
+          title: 'successfully',
+          message: 'successfully insert goal',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'Gagal',
+          message: 'Goal Gagal di insert',
+          icon: 'error',
         });
       },
     });

@@ -23,8 +23,8 @@ class TransactionApi {
     const res = await AxiosClient.delete(`/api/transaction/${id}`);
     return res.data;
   }
-  async update(id: string): Promise<TResponse<any>> {
-    const res = await AxiosClient.put(`/api/transaction/${id}`);
+  async update(payload: FormCreateTransaction, id: string): Promise<TResponse<any>> {
+    const res = await AxiosClient.put(`/api/transaction/${id}`, payload);
     return res.data;
   }
 }
