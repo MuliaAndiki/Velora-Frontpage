@@ -41,13 +41,6 @@ export default function TransactionContainer() {
     walletID: selectedWalletId,
   });
 
-  useEffect(() => {
-    setFormTransaction((prev) => ({
-      ...prev,
-      walletID: selectedWalletId,
-    }));
-  }, [selectedWalletId]);
-
   const filteredTransactions = useMemo(() => {
     let result = (transactionQuery.transactionQuery ?? []) as TransactionPartialType[];
 
@@ -188,6 +181,13 @@ export default function TransactionContainer() {
     setSelectedWalletId('');
   };
 
+  useEffect(() => {
+    setFormTransaction((prev) => ({
+      ...prev,
+      walletID: selectedWalletId,
+    }));
+  }, [selectedWalletId]);
+
   return (
     <SidebarLayout>
       <Container className="w-full min-h-screen flex flex-col overflow-x-hidden">
@@ -195,7 +195,7 @@ export default function TransactionContainer() {
           transactionData={filteredTransactions}
           popUpModal={popUpModal}
           categoryData={categoryQuery.categoryQuery ?? []}
-          walletsData={walletQuery.getWallets}
+          walletsData={walletQuery.walletQuery ?? ''}
           selectedWalletId={selectedWalletId}
           onSelectWallet={setSelectedWalletId}
           setLoadId={setLoadId}

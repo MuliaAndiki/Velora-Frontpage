@@ -35,7 +35,7 @@ class GoalApi {
     const res = await AxiosClient.delete('/api/goals/');
     return res.data;
   }
-  //blum intergrate
+
   async insertGoal(payload: FormInsertGoal): Promise<TResponse<any>> {
     const res = await AxiosClient.put('/api/goals', payload);
     return res.data;

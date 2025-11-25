@@ -8,6 +8,7 @@ import View from '@/components/ui/view';
 import { CategoryType, TransactionPartialType } from '@/types/components';
 import { FormCreateTransaction } from '@/types/form/transaction.form';
 import { TransactionType } from '@/types/partial';
+import { IWallet } from '@/types/schema';
 
 interface TransactionFormModalProps {
   selectType: TransactionType;
@@ -15,7 +16,7 @@ interface TransactionFormModalProps {
   formCreateTransaction: FormCreateTransaction;
   setFormCreateTransaction: React.Dispatch<React.SetStateAction<FormCreateTransaction>>;
   categoryData: CategoryType[];
-  walletsData: any[];
+  walletsData: IWallet;
   selectedWalletId: string;
   onSelectWallet: (id: string) => void;
   loadId: string | null;
@@ -101,34 +102,20 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
               }}
               className="space-y-4"
             >
-              {!isEdit && walletsData && walletsData.length > 0 && (
-                <div className="w-full border border-slate-700 p-4 rounded-lg space-y-2">
-                  <p className="text-slate-300 text-sm font-semibold mb-2">Select Wallet</p>
-                  <div className="grid grid-cols-2 gap-3">
-                    {walletsData.map((wallet) => (
-                      <WalletCard
-                        key={wallet.id}
-                        wallet={wallet}
-                        isSelected={selectedWalletId === wallet.id}
-                        onClick={() => onSelectWallet(wallet.id)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-
               <div className="w-full border border-slate-700 p-4 rounded-lg space-y-2">
                 <p className="text-slate-300 text-sm font-semibold mb-2">Select Category</p>
-                {categoryData
-                  .filter((item) => item.type === selectType)
-                  .map((item) => (
-                    <CategoryPartial
-                      data={item}
-                      loadId={loadId}
-                      setLoadId={setLoadId}
-                      key={item.id}
-                    />
-                  ))}
+                <div className="grid grid-rows-1 grid-cols-4 gap-2 w-full">
+                  {categoryData
+                    .filter((item) => item.type === selectType)
+                    .map((item) => (
+                      <CategoryPartial
+                        data={item}
+                        loadId={loadId}
+                        setLoadId={setLoadId}
+                        key={item.id}
+                      />
+                    ))}
+                </div>
               </div>
 
               <div>
@@ -176,6 +163,20 @@ const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                   className="mt-1"
                 />
               </div>
+
+              {!isEdit && walletsData && (
+                <div className="w-full border border-slate-700 p-4 rounded-lg space-y-2">
+                  <p className="text-slate-300 text-sm font-semibold mb-2">Select Wallet</p>
+                  <div className="grid grid-cols-2gap-3">
+                    <WalletCard
+                      wallet={walletsData}
+                      isSelected={selectedWalletId === walletsData.id}
+                      key={walletsData.id}
+                      onClick={() => onSelectWallet(walletsData.id)}
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="flex gap-2 pt-4">
                 <Button type="button" variant="outline" onClick={onClose} className="flex-1">

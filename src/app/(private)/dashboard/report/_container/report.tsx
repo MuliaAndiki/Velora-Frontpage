@@ -13,6 +13,7 @@ const ReportContainer = () => {
   const namespace = useAppNameSpase();
   const service = useServices();
   const reportQuery = service.Report.query();
+  const transactionQuery = service.Transaction.query();
   const reportCreate = service.Report.mutation.useCreateReport();
   const reportDelete = service.Report.mutation.useDeleteReport();
   const reportDownload = service.Report.mutation.useDownloadReport();
@@ -31,7 +32,8 @@ const ReportContainer = () => {
         <ReportHeroSection
           reports={reportQuery.useGetReports ?? []}
           reportSummary={reportQuery.useGetReportSummary ?? {}}
-          isLoading={reportQuery.isLoading}
+          transactions={transactionQuery.transactionQuery ?? []}
+          isLoading={reportQuery.isLoading || transactionQuery.isLoading}
           isPending={reportCreate.isPending || reportDelete.isPending}
           onDelete={handleDelete}
           onDownload={handleDownload}

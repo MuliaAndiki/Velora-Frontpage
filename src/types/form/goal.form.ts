@@ -2,7 +2,7 @@ import { IGoal } from '../schema';
 
 export type FormCreateGoal = Pick<
   IGoal,
-  'name' | 'savedAmount' | 'endAt' | 'startAt' | 'targetAmount'
+  'name' | 'savedAmount' | 'endAt' | 'startAt' | 'targetAmount' | 'walletID'
 >;
 export type PickID = Pick<IGoal, 'id'>;
 

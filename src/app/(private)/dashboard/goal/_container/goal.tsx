@@ -1,12 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Container from '@/components/ui/container';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
+import InsertGoalForm from '@/core/section/private/goal/_form/insert-goal-form';
 import GoalHeroSection from '@/core/section/private/goal/hero-section';
 import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
-import { FormCreateGoal } from '@/types/form/goal.form';
+import { FormCreateGoal, FormInsertGoal } from '@/types/form/goal.form';
 import { PopupInterface } from '@/types/ui';
 
 const GoalContainer = () => {
@@ -14,12 +15,20 @@ const GoalContainer = () => {
   const service = useServices();
   const [popUp, setPopUp] = useState<PopupInterface>(null);
   const [id, setId] = useState<any>(null);
+  const [selectWalletId, setSelectWalletId] = useState<string>('');
+
+  const [formInserGoal, setFormInsertGoal] = useState<FormInsertGoal>({
+    savedAmount: undefined,
+    walletID: selectWalletId,
+    id: id,
+  });
   const [formEditGoal, setFormEditGoal] = useState<FormCreateGoal>({
     name: '',
     endAt: '',
     startAt: '',
     savedAmount: undefined,
     targetAmount: undefined,
+    walletID: selectWalletId,
   });
   const [formCreateGoal, setFormCreateGoal] = useState<FormCreateGoal>({
     name: '',
@@ -27,13 +36,16 @@ const GoalContainer = () => {
     startAt: '',
     savedAmount: undefined,
     targetAmount: undefined,
+    walletID: selectWalletId,
   });
 
   const goalAll = service.Goal.query();
   const goalCreate = service.Goal.mutation.useCreate();
   const goalDelete = service.Goal.mutation.useDeleteALl();
   const goalDeleteByID = service.Goal.mutation.useDeleteByID();
+  const goalInsertGoal = service.Goal.mutation.useInsertGoal();
   const goalEdit = service.Goal.mutation.useUpdate();
+  const walletQuery = service.Wallet.query();
 
   const handleOpenPopUp = (data: any) => {
     setFormEditGoal(data);
@@ -63,6 +75,7 @@ const GoalContainer = () => {
             startAt: '',
             savedAmount: undefined,
             targetAmount: undefined,
+            walletID: selectWalletId,
           });
         },
       });
@@ -85,6 +98,22 @@ const GoalContainer = () => {
           },
         }
       );
+    }
+  };
+
+  const handleInsert = () => {
+    if (!formInserGoal.savedAmount || !formInserGoal.walletID) {
+      namespace.alert.toast({
+        title: 'warning',
+        message: 'server internal error',
+        icon: 'warning',
+      });
+    } else {
+      goalInsertGoal.mutate(formInserGoal, {
+        onSuccess: () => {
+          setPopUp(null);
+        },
+      });
     }
   };
 
@@ -116,6 +145,30 @@ const GoalContainer = () => {
     }
   };
 
+  useEffect(() => {
+    if (!id) return;
+    setFormInsertGoal((prev) => ({
+      ...prev,
+      id: id,
+    }));
+  }, [id]);
+
+  useEffect(() => {
+    if (!selectWalletId) return;
+    setFormCreateGoal((prev) => ({
+      ...prev,
+      walletID: selectWalletId,
+    }));
+    setFormEditGoal((prev) => ({
+      ...prev,
+      walletID: selectWalletId,
+    }));
+    setFormInsertGoal((prev) => ({
+      ...prev,
+      walletID: selectWalletId,
+    }));
+  }, [selectWalletId]);
+
   return (
     <SidebarLayout>
       <Container className="w-full min-h-screen flex flex-col">
@@ -137,6 +190,12 @@ const GoalContainer = () => {
           handleOpenPopUp={handleOpenPopUp}
           onEdit={() => handleGoalUpdate(id!)}
           setId={setId}
+          selectWalletId={selectWalletId}
+          onSelectWalletId={setSelectWalletId}
+          walletData={walletQuery.walletQuery ?? ''}
+          formInsertGoal={formInserGoal}
+          setFormInsertGoal={setFormInsertGoal}
+          onInsert={() => handleInsert()}
         />
       </Container>
     </SidebarLayout>

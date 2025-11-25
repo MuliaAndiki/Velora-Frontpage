@@ -57,4 +57,5 @@ export type PopupInterface =
   | 'delete-budget'
   | 'create-report'
   | 'edit-report'
+  | 'insert-goal'
   | null;

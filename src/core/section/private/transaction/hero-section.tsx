@@ -27,6 +27,7 @@ import View from '@/components/ui/view';
 import { CategoryType, TransactionPartialType } from '@/types/components';
 import { FormCreateTransaction } from '@/types/form/transaction.form';
 import { TransactionType } from '@/types/partial';
+import { IWallet } from '@/types/schema';
 import { PopupInterface } from '@/types/ui';
 
 import TransactionFormModal from './_form/create_transaction';
@@ -34,7 +35,7 @@ import TransactionFormModal from './_form/create_transaction';
 interface TrasanctionProps {
   transactionData: TransactionPartialType[];
   categoryData: CategoryType[];
-  walletsData: any[];
+  walletsData: IWallet;
   selectedWalletId: string;
   onSelectWallet: (walletId: string) => void;
   popUpModal: PopupInterface;

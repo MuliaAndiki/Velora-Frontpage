@@ -61,7 +61,7 @@ const BudgetHeroSection: React.FC<BudgetHeroProps> = ({
   }
 
   return (
-    <div className="w-full min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 p-6 lg:p-8">
+    <div className="w-full min-h-screen  p-6 lg:p-8">
       <div className="mb-8">
         <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-600 mb-3">
           Budget Manager

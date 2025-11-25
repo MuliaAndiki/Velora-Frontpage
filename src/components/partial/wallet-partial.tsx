@@ -22,13 +22,13 @@ const WalletCard: React.FC<WalletCardProps> = ({ wallet, isSelected = false, onC
     <div
       onClick={handleClick}
       className={`
-        relative bg-linear-to-br from-slate-800 to-slate-900 backdrop-blur-sm 
+        relative bg-linear-to-br overflow-x-hidden from-slate-800 to-slate-900 backdrop-blur-sm 
         border-2 rounded-2xl p-6 cursor-pointer
         transition-all duration-300 group
         ${
           isSelected
-            ? 'border-blue-500 shadow-lg shadow-blue-500/30 -translate-y-1'
-            : 'border-slate-700 hover:border-slate-600 hover:shadow-xl hover:-translate-y-1'
+            ? 'border-blue-500 shadow-lg shadow-blue-500/30 '
+            : 'border-slate-700 hover:border-slate-600 hover:shadow-xl '
         }
       `}
     >
