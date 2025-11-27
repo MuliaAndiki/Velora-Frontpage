@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 import Container from '@/components/ui/container';
 import { SidebarLayout } from '@/core/layouts/sidebar.layout';
-import InsertGoalForm from '@/core/section/private/goal/_form/insert-goal-form';
 import GoalHeroSection from '@/core/section/private/goal/hero-section';
 import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
@@ -174,6 +173,7 @@ const GoalContainer = () => {
       <Container className="w-full min-h-screen flex flex-col">
         <GoalHeroSection
           goalData={goalAll.goalQuery ?? []}
+          isLoading={goalAll.isLoading}
           trashhole={trashole}
           goalOverlayData={goalAll.goalProgress ?? ''}
           isPending={goalCreate.isPending || goalEdit.isPending}

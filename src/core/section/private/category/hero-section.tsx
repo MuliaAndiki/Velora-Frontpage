@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import CategoryPartial from '@/components/partial/category-partial';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,6 +49,8 @@ interface CategoryProps {
   onRemovePreview: () => void;
   isEdit?: boolean;
   setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
+  t: any;
+  isLoading: boolean;
 }
 
 const CategoryHeroSection: React.FC<CategoryProps> = ({
@@ -69,15 +71,24 @@ const CategoryHeroSection: React.FC<CategoryProps> = ({
   onRemovePreview,
   isEdit,
   setIsEdit,
+  t,
+  isLoading,
 }) => {
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
   return (
     <View>
       <div className="w-full min-h-screen flex items-start flex-col overflow-x-hidden">
         <div className="w-full flex justify-center items-start p-4 flex-col">
           <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-600 mb-3">
-            Category
+            {t('category.title')}
           </h1>
-          <p className="text-slate-400 text-lg mb-6">Organize your spending with categories</p>
+          <p className="text-slate-400 text-lg mb-6">{t('category.desc')}</p>
 
           <div className="w-full my-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

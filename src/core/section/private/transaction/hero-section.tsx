@@ -59,6 +59,8 @@ interface TrasanctionProps {
   setSortBy: React.Dispatch<React.SetStateAction<'newest' | 'oldest'>>;
   selectedTransactionForEdit?: TransactionPartialType | null;
   onCloseModal: () => void;
+  t: any;
+  isLoading: boolean;
 }
 
 const TransactionHeroSection: React.FC<TrasanctionProps> = ({
@@ -88,15 +90,24 @@ const TransactionHeroSection: React.FC<TrasanctionProps> = ({
   setSortBy,
   selectedTransactionForEdit,
   onCloseModal,
+  isLoading,
+  t,
 }) => {
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
   return (
     <View>
       <div className="w-full flex flex-col min-h-screen overflow-hidden justify-start items-start p-4 ">
         <div className="flex items-start flex-col mb-3 ">
           <h1 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-600 mb-3">
-            All Transactions
+            {t('transaction.title')}
           </h1>
-          <p className="text-slate-400 text-lg">Track and manage your financial transactions</p>
+          <p className="text-slate-400 text-lg">{t('transaction.desc')}</p>
         </div>
 
         <Card className="w-full mb-6">

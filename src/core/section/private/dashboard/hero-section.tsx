@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import PopUp from '@/components/ui/pop-up';
 import View from '@/components/ui/view';
 import { FormCreateWallet } from '@/types/form/wallet.form';
-import { IBudget,ITransaction, IWallet } from '@/types/schema';
+import { IBudget, ITransaction, IWallet } from '@/types/schema';
 import { PopupInterface } from '@/types/ui';
 import { formatCurrency } from '@/utils/number.format';
 
@@ -23,6 +23,8 @@ interface DashboardProps {
   setFormCreateWallet: React.Dispatch<React.SetStateAction<FormCreateWallet>>;
   isPending: boolean;
   onWallet: () => void;
+  t: any;
+  isLoading: boolean;
 }
 
 const DashboardHeroSection: React.FC<DashboardProps> = ({
@@ -35,6 +37,8 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
   setFormCreateWallet,
   isPending,
   onWallet,
+  isLoading,
+  t,
 }) => {
   const recentTransactions = useMemo(() => {
     return transactions.slice(0, 5);
@@ -64,16 +68,23 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
     return { totalBudget, totalSpent, utilization };
   }, [budgets]);
 
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
   return (
     <View className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden">
       <div className="flex-1 w-full mx-auto relative z-10 p-6 lg:p-8">
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 bg-opacity-50 backdrop-blur-sm border border-slate-700 rounded-full mb-4">
             <span className="text-lg font-bold text-orange-400">Velora</span>
-            <span className="text-sm text-slate-400">Financial Dashboard</span>
+            <span className="text-sm text-slate-400">{t('dashboard.title')}</span>
           </div>
-          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-2">Financial Dashboard</h1>
-          <p className="text-slate-400 text-lg">Overview of your financial activities</p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-2">{t('dashboard.title')}</h1>
+          <p className="text-slate-400 text-lg">{t('dashboard.desc')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

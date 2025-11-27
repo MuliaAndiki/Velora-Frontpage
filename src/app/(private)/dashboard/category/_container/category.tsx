@@ -24,7 +24,7 @@ const CategoryContainer = () => {
   });
   const namespace = useAppNameSpase();
   const service = useServices();
-  const cateQuer = service.Category.query();
+  const cateQuery = service.Category.query();
   const deleteById = service.Category.mutation.useDeleteCategory();
   const cateCreate = service.Category.mutation.useCreateCategory();
   const cateDeleteAll = service.Category.mutation.useDeleteAll();
@@ -120,8 +120,10 @@ const CategoryContainer = () => {
     <SidebarLayout>
       <Container className="w-full min-h-screen flex flex-col overflow-x-hidden">
         <CategoryHeroSection
-          data={cateQuer.categoryQuery ?? []}
+          data={cateQuery.categoryQuery ?? []}
+          isLoading={cateQuery.isLoading}
           loadId={loadId}
+          t={namespace.t}
           setLoadId={setLoadId}
           onDelete={handlerDeleteById}
           popUpModal={popUpModal}

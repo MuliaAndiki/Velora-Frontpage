@@ -21,7 +21,7 @@ const UserPartial: React.FC<UserPartialProps> = ({ data, handleOpenPopUp }) => {
         />
         <div className="w-full flex tart items-start flex-col">
           <h1 className="text-2xl font-semibold">{data?.fullName}</h1>
-          <p className="text-lg">setup</p>
+          <p className="text-lg font-medium">{data?.role}</p>
         </div>
       </div>
       <ChevronRight onClick={() => handleOpenPopUp(data)} className="cursor-pointer" />

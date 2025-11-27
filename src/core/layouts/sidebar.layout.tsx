@@ -23,7 +23,7 @@ export function SidebarLayout({ children }: AppLayoutProps) {
                 <View className="flex items-center gap-4">
                   {/* <ThemeToggle /> */}
 
-                  <NotificationDropdown />
+                  {/* <NotificationDropdown /> */}
                   {/* <UserDropdown /> */}
                 </View>
               </View>

@@ -63,5 +63,17 @@
     "report": "Report",
     "setting": "Setting",
     "category": "Category"
+  },
+  "dashboard": {
+    "title": "Financial Dashboard",
+    "desc": "Overview of your financial activities"
+  },
+  "category": {
+    "title": "Category",
+    "desc": "Organize your spending with categories"
+  },
+  "transaction": {
+    "title": "All Transactions",
+    "desc": "Track and manage your financial transactions"
   }
 }

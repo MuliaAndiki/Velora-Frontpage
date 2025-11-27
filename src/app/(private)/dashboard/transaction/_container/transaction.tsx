@@ -193,6 +193,7 @@ export default function TransactionContainer() {
       <Container className="w-full min-h-screen flex flex-col overflow-x-hidden">
         <TransactionHeroSection
           transactionData={filteredTransactions}
+          isLoading={transactionQuery.isLoading}
           popUpModal={popUpModal}
           categoryData={categoryQuery.categoryQuery ?? []}
           walletsData={walletQuery.walletQuery ?? ''}
@@ -200,6 +201,7 @@ export default function TransactionContainer() {
           onSelectWallet={setSelectedWalletId}
           setLoadId={setLoadId}
           loadId={loadId}
+          t={namespace.t}
           setPopUpModal={setPopUpModal}
           isPending={
             transactionMutation.isPending ||
