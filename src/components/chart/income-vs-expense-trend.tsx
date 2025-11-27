@@ -54,7 +54,7 @@ const IncomeVsExpenseTrend: React.FC<IncomeVsExpenseTrendProps> = ({ transaction
         <CardTitle className="text-white text-xl font-bold">Income vs Expense Trend</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid lg:grid-cols-3 gap-4 mb-6">
           <div className="p-4 bg-green-900/20 rounded-lg border border-green-700">
             <p className="text-green-400 text-sm font-medium">Total Income</p>
             <p className="text-2xl font-bold text-green-400">

@@ -68,7 +68,7 @@ export default function AppHeader({ t }: AppHeaderProps) {
             </NavigationMenuList>
           </NavigationMenu>
           <LanguageDropdown />
-          <NotificationDropdown />
+          {/* <NotificationDropdown /> */}
         </div>
       </div>
     </nav>

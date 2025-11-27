@@ -63,5 +63,17 @@
     "report": "Laporan",
     "setting": "Pengaturan",
     "category": "Kategori"
+  },
+  "dashboard": {
+    "title": "Dashboard Keuangan",
+    "desc": "Ringkasan aktivitas keuangan Anda"
+  },
+  "category": {
+    "title": "Kategori",
+    "desc": "Atur pengeluaran Anda dengan kategori"
+  },
+  "transaction": {
+    "title": "Semua Transaksi",
+    "desc": "Lacak dan kelola transaksi keuangan Anda"
   }
 }

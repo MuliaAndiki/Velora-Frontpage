@@ -50,8 +50,13 @@ const SettingsSection: React.FC<SettingProps> = ({
           <SettingsConfig />
           <SettingPayment walletData={Iwallet} />
           <SettingsRoutes />
-          <Button className="w-full" disabled={isPending} onClick={() => logout()}>
-            {isPending ? 'wait' : 'quit'}
+          <Button
+            className="w-full"
+            disabled={isPending}
+            onClick={() => logout()}
+            variant={'destructive'}
+          >
+            {isPending ? 'wait' : 'Quit'}
           </Button>
         </div>
       </div>

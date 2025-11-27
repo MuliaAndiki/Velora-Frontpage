@@ -23,7 +23,6 @@ export default function DashboardContainer() {
   const walletQuery = service.Wallet.query();
   const budgetQuery = useBudgetData();
   const [popupModal, setPopupModal] = useState<PopupInterface>(null);
-  const category = useServices().Category.mutation.useCreateCategory();
 
   const handleCreateWallet = () => {
     if (!formCreateWallet.name) {
@@ -46,7 +45,9 @@ export default function DashboardContainer() {
       <Container className="w-full min-h-screen flex flex-col">
         <DashboardHeroSection
           transactions={transactionQuery.transactionQuery ?? []}
+          isLoading={transactionQuery.isLoading}
           wallet={walletQuery.walletQuery}
+          t={namespace.t}
           budgets={budgetQuery.getBudgets}
           popUpModal={popupModal}
           onWallet={() => handleCreateWallet()}
