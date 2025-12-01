@@ -12,7 +12,7 @@ export default function AppFooter({ t }: AppFooterProps) {
     <footer className="bg-slate-900 border-t border-slate-800 text-slate-200 py-10 mt-16">
       <div className="container mx-auto max-w-7xl px-4 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex items-center gap-4">
-          <Image src={appConfig.logo} alt="Velora Logo" width={48} height={48} />
+          <Image src={appConfig.logo} alt="Velora Logo" width={70} height={70} />
           <div>
             <span className="text-2xl font-bold text-orange-500">Velora</span>
             <p className="text-slate-400 text-sm mt-1">{t('fotter.title')}</p>

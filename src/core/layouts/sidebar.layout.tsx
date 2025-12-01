@@ -4,8 +4,6 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import View from '@/components/ui/view';
 import { AppSidebar } from '@/core/components/app-sidebar';
 
-import NotificationDropdown from '../components/notification.dropdown';
-
 interface AppLayoutProps {
   children: React.ReactNode;
 }
