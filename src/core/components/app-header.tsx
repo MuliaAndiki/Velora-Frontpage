@@ -46,7 +46,7 @@ export default function AppHeader({ t }: AppHeaderProps) {
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/images/logo.png" alt="Velora Logo" width={40} height={40} />
+            <Image src="/favicon/icon.svg" alt="Velora Logo" width={70} height={70} />
             <span className="text-2xl font-bold text-orange-500 tracking-tight">Velora</span>
           </Link>
           <span className="hidden md:inline text-slate-400 font-medium ml-2">

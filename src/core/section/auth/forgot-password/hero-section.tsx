@@ -22,7 +22,12 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
 }) => {
   return (
     <View className="flex flex-col gap-6'">
-      <Card>
+      <Card
+        className="group relative bg-white/5 backdrop-blur-xl rounded-xl shadow-md
+        hover:shadow-xl  transition-all duration-300
+        border border-gray-500 overflow-hidden cursor-pointer
+        flex flex-col h-full"
+      >
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Forgot Password</CardTitle>
           <CardDescription>We will provide you with an OTP code</CardDescription>

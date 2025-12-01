@@ -8,6 +8,7 @@ import OTPForm from '@/core/section/auth/verify-otp/hero-section';
 import { useAppSelector } from '@/hooks/dispatch/dispatch';
 import useServices from '@/hooks/mutation/props.service';
 import { useAppNameSpase } from '@/hooks/useNameSpace';
+import { setEmail } from '@/stores/otpSlice/otpSlice';
 import { FormVerifyOtp } from '@/types/form/auth.form';
 
 const VerifyOtpContainer = () => {
@@ -35,7 +36,8 @@ const VerifyOtpContainer = () => {
             otp: formVerifyOtp.otp,
           },
           {
-            onSuccess: () => {
+            onSuccess: (res, variable) => {
+              namespase.dispatch(setEmail(variable.email));
               namespase.router.push('/reset-password');
             },
           }
