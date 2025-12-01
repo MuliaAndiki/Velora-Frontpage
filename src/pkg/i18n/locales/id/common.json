@@ -53,6 +53,11 @@
       "terms": "Syarat dan Ketentuan",
       "and": "dan",
       "privacy": "Kebijakan Privasi"
+    },
+    "reset-password": {
+      "title": "Ubah Kata Sandi",
+      "deskripsi": "Formulir ini digunakan untuk mereset kata sandi.",
+      "reset": "Ubah"
     }
   },
   "sidebar-konten": {

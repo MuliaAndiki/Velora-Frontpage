@@ -34,12 +34,7 @@ const CategoryPartial: React.FC<CategoryProps & CategoryPartialProps> = ({
       onClick={() => setLoadId(data.id)}
     >
       <div className="relative w-full aspect-square overflow-hidden bg-slate-700">
-        <Image
-          alt={data?.name}
-          src={data?.avaUrl}
-          fill
-          className="object-cover group-hover:scale-110 transition-transform duration-300"
-        />
+        <Image alt={data?.name} src={data?.avaUrl} fill className="object-cover aspect-square" />
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
           <Button
             size="sm"

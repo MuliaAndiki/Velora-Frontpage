@@ -6,3 +6,4 @@ export type FormForgotPassword = Pick<IAuth, 'email'>;
 export type FormSendOtp = Pick<IAuth, 'email'>;
 export type FormVerifyOtp = Pick<IAuth, 'email' | 'otp'>;
 export type FormUpdateProfile = Pick<IAuth, 'email' | 'fullName' | 'photoUrl'>;
+export type FormResetPassword = Pick<IAuth, 'password'>;

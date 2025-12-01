@@ -53,6 +53,11 @@
       "terms": "Terms of Service",
       "and": "and",
       "privacy": "Privacy Policy"
+    },
+    "reset-password": {
+      "title": "Reset Password",
+      "deskripsi": "This form is used to reset your password.",
+      "reset": "Reset"
     }
   },
   "sidebar-konten": {

@@ -15,6 +15,7 @@ import {
   FormForgotPassword,
   FormLogin,
   FormRegister,
+  FormResetPassword,
   FormSendOtp,
   FormUpdateProfile,
   FormVerifyOtp,
@@ -195,6 +196,27 @@ const AuthMutation = {
         namespace.alert.toast({
           title: 'error',
           message: 'failed update profile',
+          icon: 'error',
+        });
+      },
+    });
+  },
+  useResetPassword() {
+    const namespace = useAppNameSpase();
+    return useMutation<TResponse<any>, Error, FormResetPassword>({
+      mutationFn: (payload) => Api.Auth.ResetPassword(payload),
+      onSuccess: () => {
+        namespace.alert.toast({
+          title: 'succes',
+          message: 'succesfully reset password',
+          icon: 'success',
+        });
+      },
+      onError: (err) => {
+        console.error(err);
+        namespace.alert.toast({
+          title: 'error',
+          message: 'failed reset password',
           icon: 'error',
         });
       },
