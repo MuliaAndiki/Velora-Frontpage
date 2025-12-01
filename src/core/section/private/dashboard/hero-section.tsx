@@ -4,14 +4,14 @@ import React, { useMemo } from 'react';
 import ExpenseByCategoryChart from '@/components/chart/expense-by-category';
 import IncomeVsExpenseTrend from '@/components/chart/income-vs-expense-trend';
 import { Button } from '@/components/ui/button';
-import { Field, FieldTitle } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
 import PopUp from '@/components/ui/pop-up';
 import View from '@/components/ui/view';
 import { FormCreateWallet } from '@/types/form/wallet.form';
 import { IBudget, ITransaction, IWallet } from '@/types/schema';
 import { PopupInterface } from '@/types/ui';
 import { formatCurrency } from '@/utils/number.format';
+
+import CreateWalletForm from './_form/create-wallet';
 
 interface DashboardProps {
   popUpModal: PopupInterface;
@@ -240,39 +240,12 @@ const DashboardHeroSection: React.FC<DashboardProps> = ({
       </Button>
 
       <PopUp isOpen={popUpModal === 'wallet'} onClose={() => setPopUpModal(null)}>
-        <View className="w-full h-full">
-          <div className="w-full flex justify-center items-center flex-col">
-            <form
-              className="w-full"
-              onSubmit={(e) => {
-                e.preventDefault();
-                onWallet();
-              }}
-            >
-              <Field>
-                <FieldTitle>Wallet Name</FieldTitle>
-                <Input
-                  placeholder="e.g., Main Wallet, Savings, etc."
-                  value={formCreateWallet.name}
-                  onChange={(e) =>
-                    setFormCreateWallet((prev) => ({
-                      ...prev,
-                      name: e.target.value,
-                    }))
-                  }
-                />
-                <Button
-                  variant={'outline'}
-                  type="submit"
-                  disabled={isPending}
-                  className="mt-4 w-full"
-                >
-                  {isPending ? 'Creating...' : 'Create Wallet'}
-                </Button>
-              </Field>
-            </form>
-          </div>
-        </View>
+        <CreateWalletForm
+          formCreateWallet={formCreateWallet}
+          isPending={isPending}
+          onWallet={onWallet}
+          setFormCreateWallet={setFormCreateWallet}
+        />
       </PopUp>
     </View>
   );

@@ -3,6 +3,7 @@ import {
   FormForgotPassword,
   FormLogin,
   FormRegister,
+  FormResetPassword,
   FormSendOtp,
   FormUpdateProfile,
   FormVerifyOtp,
@@ -42,6 +43,10 @@ class AuthApi {
   }
   async UpdateProfile(payload: FormUpdateProfile): Promise<TResponse<any>> {
     const res = await AxiosClient.put('/api/auth', payload);
+    return res.data;
+  }
+  async ResetPassword(payload: FormResetPassword): Promise<TResponse<any>> {
+    const res = await AxiosClient.post('/api/auth/reset-password', payload);
     return res.data;
   }
 }

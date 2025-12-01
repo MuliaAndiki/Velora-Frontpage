@@ -23,6 +23,7 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const isCollapsed = state === 'collapsed';
   const namespase = useAppNameSpase();
+  const last = pathname.split('/').pop();
 
   return (
     <Sidebar
@@ -35,7 +36,7 @@ export function AppSidebar() {
         ) : (
           <div className="flex gap-2 items-center">
             <Image src="/images/logo.png" alt="Logo" width={40} height={40} />
-            <span className="text-xl font-semibold text-white">{kebabCaseToWords(pathname)}</span>
+            <span className="text-xl font-semibold text-white">{kebabCaseToWords(last!)}</span>
           </div>
         )}
       </SidebarHeader>

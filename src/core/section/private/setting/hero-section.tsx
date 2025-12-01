@@ -25,6 +25,7 @@ interface SettingProps {
   onChangeAva: (e: any) => void;
   onUpdate: () => void;
   Iwallet: IWallet;
+  isLoading: boolean;
 }
 
 const SettingsSection: React.FC<SettingProps> = ({
@@ -40,7 +41,15 @@ const SettingsSection: React.FC<SettingProps> = ({
   onUpdate,
   preview,
   Iwallet,
+  isLoading,
 }) => {
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
   return (
     <View>
       <div className="flex justify-center items-start min-h-screen w-full overflow-hidden">

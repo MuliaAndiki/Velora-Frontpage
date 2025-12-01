@@ -66,6 +66,7 @@ const SettingsContainer = () => {
       <Container className="w-full min-h-screen flex flex-col">
         <SettingsSection
           logout={() => handleLogout()}
+          isLoading={AuthQuery.isLoading || walletQuery.isLoading}
           isPending={logout.isPending}
           userData={AuthQuery.profileQuery ?? ''}
           setPopUpModal={setPopUpModal}
