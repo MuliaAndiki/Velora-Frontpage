@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Cell, Legend,Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ITransaction } from '@/types/schema';

@@ -5,7 +5,10 @@ import {
   DollarSign,
   Goal,
   Home,
+  Lightbulb,
+  Rocket,
   Settings,
+  StickyNote,
 } from 'lucide-react';
 
 export const SidebarIcons = {
@@ -18,3 +21,10 @@ export const SidebarIcons = {
   Settings,
 } as const;
 export type SidebarIconKey = keyof typeof SidebarIcons;
+
+export const HelpCenterIcons = {
+  Rocket,
+  Lightbulb,
+  StickyNote,
+} as const;
+export type HelpIconsKey = keyof typeof HelpCenterIcons;

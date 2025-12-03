@@ -36,7 +36,7 @@ const WalletCard: React.FC<WalletCardProps> = ({ wallet, isSelected = false, onC
 
       <div className="relative z-10 flex justify-between items-start mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-blue-600 bg-opacity-20 rounded-xl group-hover:scale-110 transition-transform duration-300">
+          <div className="p-3 bg-blue-600 bg-opacity-20 rounded-xl  transition-transform duration-300">
             <CreditCard className="text-blue-400" size={24} />
           </div>
           <div>

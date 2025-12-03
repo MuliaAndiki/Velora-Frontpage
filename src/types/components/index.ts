@@ -1,3 +1,5 @@
+import { HelpIconsKey } from '@/configs/icons.config';
+
 export interface CardDashboardCardType {
   image?: string;
   label: string;
@@ -58,4 +60,11 @@ export interface TransactionPartialType {
   description: string;
   receiptUrl: string;
   walletID: string;
+}
+
+// static
+export interface HelpCenterType {
+  icon: HelpIconsKey;
+  title: string;
+  desc: string;
 }

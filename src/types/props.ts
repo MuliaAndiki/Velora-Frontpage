@@ -3,6 +3,7 @@ import {
   CardDashboardCardType,
   CategoryType,
   GoalType,
+  HelpCenterType,
   RecentCardType,
   TransactionPartialType,
 } from './components';
@@ -28,4 +29,8 @@ export interface goalProps {
 
 export interface TransactionProps {
   data: TransactionPartialType;
+}
+
+export interface HelpCenterProps {
+  data: HelpCenterType;
 }

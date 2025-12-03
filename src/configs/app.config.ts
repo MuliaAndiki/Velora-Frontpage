@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { SidebarContentType } from '@/types/app';
+import { HelpCenterType } from '@/types/components';
 
 interface AppConfig {
   name: string;
@@ -105,4 +106,22 @@ export const SidebarMenuData: SidebarContentType[] = [
   { title: 'sidebar-konten.goal', url: '/dashboard/goal', icon: 'Goal' },
   { title: 'sidebar-konten.report', url: '/dashboard/report', icon: 'ClipboardMinus' },
   { title: 'sidebar-konten.setting', url: '/dashboard/setting', icon: 'Settings' },
+];
+
+export const HelpCenterData: HelpCenterType[] = [
+  {
+    title: 'Get Started',
+    desc: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi nesciunt quos dicta amet aperiam natus deserunt dolore, tenetur impedit molestiae sunt dignissimos distinctio assumenda ad praesentium possimus, aliquid exercitationem saepe.',
+    icon: 'Rocket',
+  },
+  {
+    title: 'Key Concepts',
+    desc: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi nesciunt quos dicta amet aperiam natus deserunt dolore, tenetur impedit molestiae sunt dignissimos distinctio assumenda ad praesentium possimus, aliquid exercitationem saepe.',
+    icon: 'Lightbulb',
+  },
+  {
+    title: 'Release Notes',
+    desc: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi nesciunt quos dicta amet aperiam natus deserunt dolore, tenetur impedit molestiae sunt dignissimos distinctio assumenda ad praesentium possimus, aliquid exercitationem saepe.',
+    icon: 'StickyNote',
+  },
 ];

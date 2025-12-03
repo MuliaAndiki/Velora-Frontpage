@@ -40,10 +40,12 @@ const TransactionPartial: React.FC<TransactionPartialProps> = ({ data, onEdit, o
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <p className={`text-2xl font-bold ${isIncome ? 'text-green-500' : 'text-red-500'}`}>
-            {isIncome ? '+' : '-'}
+        <div className="flex items-center  gap-3">
+          <p
+            className={`text-2xl gap-2 flex items-center font-bold ${isIncome ? 'text-green-500' : 'text-red-500'}`}
+          >
             {formatCurrency(data.amount)}
+            {isIncome ? '+' : '-'}
           </p>
 
           <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
