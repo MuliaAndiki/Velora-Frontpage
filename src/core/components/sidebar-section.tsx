@@ -22,6 +22,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({ MenuData, isCollapsed, 
         {MenuData?.map((item: SidebarContentType) => {
           const Icon = SidebarIcons[item.icon];
           const isActive = pathname === item.url;
+          const last = item.title.split('.').pop();
           return (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild tooltip={isCollapsed ? item.title : undefined}>
@@ -34,7 +35,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({ MenuData, isCollapsed, 
                 >
                   {Icon && <Icon className="h-6 w-6 lg:h-10 lg:w-10" />}
 
-                  <span className="text-base lg:text-lg">{!isCollapsed && t(item.title)}</span>
+                  <span className="text-base lg:text-lg">{!isCollapsed && t(last)}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

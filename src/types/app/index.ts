@@ -5,7 +5,3 @@ export interface SidebarContentType {
   url: string;
   icon: SidebarIconKey;
 }
-
-export interface MutationOpsiType {
-  onAfterSucces?: () => void;
-}
