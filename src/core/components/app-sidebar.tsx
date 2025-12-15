@@ -32,10 +32,10 @@ export function AppSidebar() {
     >
       <SidebarHeader className="border-b border-slate-800 p-4 h-20 flex justify-center bg-slate-900 bg-opacity-80 backdrop-blur-xl">
         {isCollapsed ? (
-          <Image src="/favicon/icon.svg" alt="Logo" width={70} height={70} />
+          <Image src="/favicon/icon.svg" alt="Logo" width={70} height={70} unoptimized />
         ) : (
           <div className="flex  items-center">
-            <Image src="/favicon/favicon.svg" alt="Logo" width={70} height={70} />
+            <Image src="/favicon/favicon.svg" alt="Logo" width={70} height={70} unoptimized />
             <span className="text-xl font-semibold text-white">{kebabCaseToWords(last!)}</span>
           </div>
         )}

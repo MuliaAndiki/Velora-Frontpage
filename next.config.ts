@@ -44,8 +44,9 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+
       {
-        source: '/:path*',
+        source: '/((?!_next/image).*)',
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
@@ -83,8 +84,10 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentDispositionType: 'inline',
+
+    contentSecurityPolicy: "default-src 'self'; img-src * data: blob:;",
+
     remotePatterns: [
       {
         protocol: 'https',
