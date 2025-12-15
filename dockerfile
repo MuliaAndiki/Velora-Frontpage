@@ -1,14 +1,23 @@
-
 FROM oven/bun:1 AS builder
 
 WORKDIR /app
+
+ARG AUTH_SECRET_KEY
+ARG NEXT_PUBLIC_APP_URL
+ARG NEXT_PUBLIC_BACKEND_URL
+ARG NEXT_PUBLIC_BASEPATH
+
+ENV AUTH_SECRET_KEY=$AUTH_SECRET_KEY
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_BASEPATH=$NEXT_PUBLIC_BASEPATH
+
 
 COPY package.json bun.lockb* ./
 
 RUN bun install --frozen-lockfile
 
 COPY . .
-
 
 RUN bun run next build
 
@@ -26,5 +35,4 @@ RUN bun install --production --frozen-lockfile
 EXPOSE 3000
 
 ENV NODE_ENV=production
-
 CMD ["bun", "run", "next", "start"]
