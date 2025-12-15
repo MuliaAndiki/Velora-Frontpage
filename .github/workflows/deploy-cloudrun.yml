@@ -9,6 +9,10 @@ on:
     branches:
       - main
 
+  permissions:
+    contents: 'read'
+    id-token: 'write'
+
 env:
   PROJECT_ID: project-b67cf636-83ab-4f77-804
   SERVICE_NAME: velora-application
