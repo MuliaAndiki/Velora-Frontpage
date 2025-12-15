@@ -37,9 +37,10 @@ jobs:
       - name: ⚙️ Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: 🔑 Configure Docker Auth (Artifact Registry)
+      - name: 🔑 Authenticate Docker with Access Token
         run: |
-          gcloud auth configure-docker ${{ env.AR_HOST }} --quiet
+          ACCESS_TOKEN=$(gcloud auth print-access-token)
+          echo $ACCESS_TOKEN | docker login -u oauth2accesstoken --password-stdin https://${{ env.AR_HOST }}
 
       - name: 📦 Build Docker Image'
         run: |
@@ -56,7 +57,7 @@ jobs:
 
       - name: 🚢 Push Docker Image
         run: |
-          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          docker push ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 
       - name: 🚀 Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
