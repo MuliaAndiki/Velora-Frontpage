@@ -40,7 +40,9 @@ jobs:
 
       - name: 🔑 Configure Docker Auth (Artifact Registry)
         run: |
-          gcloud auth configure-docker ${{ env.AR_HOST }} --quiet
+          ACCESS_TOKEN=$(gcloud auth print-access-token)
+
+          echo "$ACCESS_TOKEN" | docker login -u oauth2accesstoken --password-stdin ${{ env.AR_HOST }}
 
       - name: 📦 Build Docker Image'
         run: |
