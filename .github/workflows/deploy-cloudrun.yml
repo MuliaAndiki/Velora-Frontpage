@@ -15,7 +15,7 @@ env:
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
 
   AR_HOST: us-docker.pkg.dev
-  AR_REPO: gcr.io
+  AR_REPO: velora-frontend
 
 permissions:
   contents: 'read'
