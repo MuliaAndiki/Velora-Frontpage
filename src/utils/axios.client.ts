@@ -2,10 +2,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import { store } from '@/stores/store';
 
-import { env } from '../configs/env.config';
-
 const AxiosClient = axios.create({
-  baseURL: env.NEXT_PUBLIC_BACKEND_URL,
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
 });
 
 AxiosClient.interceptors.request.use(
