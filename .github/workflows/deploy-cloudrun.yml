@@ -1,4 +1,4 @@
-name: Velora FE CI/CD - WIF (Updated)
+name: Velora FE CI/CD - WIF
 
 on:
   push:
@@ -13,9 +13,9 @@ env:
   SERVICE_NAME: velora
   REGION: asia-southeast1
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
-  AR_HOST: us-docker.pkg.dev
 
-  AR_REPO: velora-frontend
+  AR_HOST: us-docker.pkg.dev
+  AR_REPO: gcr.io
 
 permissions:
   contents: 'read'
@@ -39,14 +39,11 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       - name: 🔑 Configure Docker Auth (Artifact Registry)
-        uses: google-github-actions/artifact-registry-docker@v1
-        with:
-          repository_id: ${{ env.AR_REPO }}
-          location: us
-
-      - name: 📦 Build Docker Image
         run: |
-          # URI Image harus mengikuti format Artifact Registry
+          gcloud auth configure-docker ${{ env.AR_HOST }} --quiet
+
+      - name: 📦 Build Docker Image'
+        run: |
           export IMAGE_URI="${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
 
           echo "Building image: $IMAGE_URI"
@@ -67,8 +64,7 @@ jobs:
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
-
-          image: ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          image: us-docker.pkg.dev/${{ env.PROJECT_ID }}/gcr.io/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: --allow-unauthenticated
           env_vars: |
             NEXT_PUBLIC_BACKEND_URL=${{ env.BACKEND_URL }}
