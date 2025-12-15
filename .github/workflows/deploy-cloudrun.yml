@@ -43,7 +43,7 @@ jobs:
             --build-arg AUTH_SECRET_KEY="${{ secrets.AUTH_SECRET_KEY }}" \
             --build-arg NEXT_PUBLIC_APP_URL="https://velora-application-318444823596.asia-southeast1.run.app/" \
             --build-arg NEXT_PUBLIC_BACKEND_URL="${{ env.BACKEND_URL }}" \
-            --build-arg NEXT_PUBLIC_BASEPATH=""
+            --build-arg NEXT_PUBLIC_BASEPATH="/home"
 
       - name: 🚢 Push Docker Image to GCR
         run: docker push gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}
