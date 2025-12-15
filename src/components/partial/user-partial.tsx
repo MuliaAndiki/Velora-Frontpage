@@ -18,6 +18,7 @@ const UserPartial: React.FC<UserPartialProps> = ({ data, handleOpenPopUp }) => {
           width={70}
           height={70}
           className="aspect-square rounded-full object-cover"
+          unoptimized
         />
         <div className="w-full flex tart items-start flex-col">
           <h1 className="text-2xl font-semibold">{data?.fullName}</h1>
