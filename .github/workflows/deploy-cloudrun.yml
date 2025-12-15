@@ -1,4 +1,4 @@
-name: Velora FE CI/CD - WIF
+name: Velora FE CI/CD - WIF (Updated)
 
 on:
   push:
@@ -13,8 +13,8 @@ env:
   SERVICE_NAME: velora-application
   REGION: asia-southeast1
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
-
   AR_HOST: us-docker.pkg.dev
+
   AR_REPO: velora-frontend
 
 permissions:
@@ -32,20 +32,21 @@ jobs:
       - name: 🔐 Authenticate Google Cloud (WIF)
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: projects/318444823596/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+          workload_identity_provider: projects/xxxxx/locations/global/workloadIdentityPools/github-pool/providers/github-provider
           service_account: velora@project-b67cf636-83ab-4f77-804.iam.gserviceaccount.com
 
       - name: ⚙️ Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
 
       - name: 🔑 Configure Docker Auth (Artifact Registry)
-        run: |
-          ACCESS_TOKEN=$(gcloud auth print-access-token)
+        uses: google-github-actions/artifact-registry-docker@v1
+        with:
+          repository_id: ${{ env.AR_REPO }}
+          location: us
 
-          echo "$ACCESS_TOKEN" | docker login -u oauth2accesstoken --password-stdin ${{ env.AR_HOST }}
-
-      - name: 📦 Build Docker Image'
+      - name: 📦 Build Docker Image
         run: |
+          # URI Image harus mengikuti format Artifact Registry
           export IMAGE_URI="${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
 
           echo "Building image: $IMAGE_URI"
@@ -66,7 +67,8 @@ jobs:
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
-          image: us-docker.pkg.dev/${{ env.PROJECT_ID }}/gcr.io/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+          image: ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: --allow-unauthenticated
           env_vars: |
             NEXT_PUBLIC_BACKEND_URL=${{ env.BACKEND_URL }}
