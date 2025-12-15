@@ -1,0 +1,60 @@
+name: Velora FE CI/CD - WIF
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  permissions:
+    contents: 'read'
+    id-token: 'write'
+
+env:
+  PROJECT_ID: project-b67cf636-83ab-4f77-804
+  SERVICE_NAME: velora-application
+  REGION: asia-southeast1
+  BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🚀 Authenticate Google Cloud with WIF
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/318444823596/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+          service_account: velora@project-b67cf636-83ab-4f77-804.iam.gserviceaccount.com
+
+      - name: 📦 Build and Tag Docker Image
+        run: |
+          # DOCKER_IMAGE_TAG: Buat tag unik (misal: menggunakan commit SHA)
+          export DOCKER_IMAGE_TAG="gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}"
+
+          # Gunakan --build-arg untuk menyuntikkan ENV yang dibutuhkan oleh next build
+          docker build . \
+            --tag $DOCKER_IMAGE_TAG \
+            --build-arg AUTH_SECRET_KEY="${{ secrets.AUTH_SECRET_KEY }}" \
+            --build-arg NEXT_PUBLIC_APP_URL="https://velora-application-318444823596.asia-southeast1.run.app/" \
+            --build-arg NEXT_PUBLIC_BACKEND_URL="${{ env.BACKEND_URL }}" \
+            --build-arg NEXT_PUBLIC_BASEPATH=""
+
+      - name: 🚢 Push Docker Image to GCR
+        run: docker push gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}
+
+      - name: ✨ Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          flags: --allow-unauthenticated
+
+          env_vars: |
+            NEXT_PUBLIC_BACKEND_URL=${{ env.BACKEND_URL }}
