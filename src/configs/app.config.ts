@@ -41,7 +41,7 @@ interface AppConfig {
 export const appConfig: AppConfig = {
   name: 'App',
   description: 'App',
-  logo: '/favicon/icon.svg',
+  logo: '/favicon/favicon.svg',
   metadata: {
     title: 'App',
     description: 'App',

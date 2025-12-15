@@ -35,7 +35,7 @@ export function AppSidebar() {
           <Image src="/favicon/icon.svg" alt="Logo" width={70} height={70} />
         ) : (
           <div className="flex  items-center">
-            <Image src="/favicon/icon.svg" alt="Logo" width={70} height={70} />
+            <Image src="/favicon/favicon.svg" alt="Logo" width={70} height={70} />
             <span className="text-xl font-semibold text-white">{kebabCaseToWords(last!)}</span>
           </div>
         )}

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const siteConfig = {
-  name: 'Next.js Shadcn Base',
-  description: 'Aplikasi berbasis Next.js dengan UI yang modern',
+  name: 'Velora',
+  description: 'Website Keuangan Untuk Mengelola Keuangan',
   url: 'https://your-domain.com',
   locale: 'id-ID',
   keywords: ['next.js', 'react', 'aplikasi web', 'indonesia', 'modern ui', 'shadcn'],
@@ -16,16 +16,16 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   icons: {
-    icon: [{ url: '/images/logo.png', type: 'image/png' }, { url: '/favicon/favicon.ico' }],
-    shortcut: '/images/logo.png',
+    icon: [{ url: '/images/logo.svg', type: 'image/svg' }, { url: '/favicon/favicon.ico' }],
+    shortcut: '/images/logo.svg',
     apple: [
-      { url: '/images/logo.png', type: 'image/png' },
-      { url: '/images/logo.png', sizes: '180x180', type: 'image/png' },
+      { url: '/images/logo.svg', type: 'image/svg' },
+      { url: '/images/logo.svg', sizes: '180x180', type: 'image/svg' },
     ],
     other: [
       {
         rel: 'mask-icon',
-        url: '/images/logo.png',
+        url: '/images/logo.svg',
         color: '#000000',
       },
     ],
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: '/images/logo.png',
+        url: '/images/logo.svg',
         width: 1200,
         height: 630,
         alt: siteConfig.name,
