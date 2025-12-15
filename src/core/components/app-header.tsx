@@ -13,7 +13,6 @@ import { navigationMenuConfig } from '@/configs/app.config';
 import { cn } from '@/utils/classname';
 
 import LanguageDropdown from './language.dropdown';
-import NotificationDropdown from './notification.dropdown';
 import ThemeToggle from './theme-toggle';
 
 export interface AppHeaderProps {
@@ -46,7 +45,7 @@ export default function AppHeader({ t }: AppHeaderProps) {
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/favicon/icon.svg" alt="Velora Logo" width={70} height={70} />
+            <Image src="/favicon/favicon.svg" alt="Velora Logo" width={70} height={70} />
             <span className="text-2xl font-bold text-orange-500 tracking-tight">Velora</span>
           </Link>
           <span className="hidden md:inline text-slate-400 font-medium ml-2">
