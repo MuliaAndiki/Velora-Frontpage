@@ -14,8 +14,8 @@ env:
   REGION: asia-southeast1
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
 
-  AR_HOST: us-docker.pkg.dev
-  AR_REPO: gcr.io
+  AR_HOST: gcr.io
+  AR_REPO: ${{ env.PROJECT_ID }}
 
 permissions:
   contents: 'read'
@@ -42,29 +42,22 @@ jobs:
         run: |
           gcloud auth configure-docker ${{ env.AR_HOST }} --quiet
 
-      - name: 📦 Build Docker Image'
+      - name: 📦 Build Docker Image
         run: |
-          export IMAGE_URI="${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
-
-          echo "Building image: $IMAGE_URI"
-
-          docker build . \
-            --tag $IMAGE_URI \
-            --build-arg AUTH_SECRET_KEY="${{ secrets.AUTH_SECRET_KEY }}" \
-            --build-arg NEXT_PUBLIC_APP_URL="https://velora-application-318444823596.asia-southeast1.run.app/" \
-            --build-arg NEXT_PUBLIC_BACKEND_URL="${{ env.BACKEND_URL }}" \
-            --build-arg NEXT_PUBLIC_BASEPATH="/home"
+          # URI GCR: gcr.io/PROJECT_ID/velora:sha
+          export IMAGE_URI="${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
+          # ... (docker build command)
 
       - name: 🚢 Push Docker Image
         run: |
-          docker push ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          docker push ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 
       - name: 🚀 Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
-          image: us-docker.pkg.dev/${{ env.PROJECT_ID }}/gcr.io/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          image: ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: --allow-unauthenticated
           env_vars: |
             NEXT_PUBLIC_BACKEND_URL=${{ env.BACKEND_URL }}
