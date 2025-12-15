@@ -28,7 +28,7 @@ export default function DashboardContainer() {
     if (!formCreateWallet.name) {
       namespace.alert.toast({
         title: 'warning',
-        message: 'colum tidak boleh kosong',
+        message: 'colum tidak boleh kosong/empty',
         icon: 'warning',
       });
     } else {
