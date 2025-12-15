@@ -10,7 +10,7 @@ on:
 
 env:
   PROJECT_ID: project-b67cf636-83ab-4f77-804
-  SERVICE_NAME: velora-application
+  SERVICE_NAME: velora
   REGION: asia-southeast1
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
   AR_HOST: us-docker.pkg.dev
