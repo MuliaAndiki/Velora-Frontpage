@@ -43,16 +43,16 @@ jobs:
 
       - name: 📦 Build Docker Image'
         run: |
-          export IMAGE_URI="${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
+          export IMAGE_URI="${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
 
-          echo "Building image: $IMAGE_URI"
+           echo "Building image: $IMAGE_URI"
 
-          docker build . \
-            --tag $IMAGE_URI \
-            --build-arg AUTH_SECRET_KEY="${{ secrets.AUTH_SECRET_KEY }}" \
-            --build-arg NEXT_PUBLIC_APP_URL="https://velora-application-318444823596.asia-southeast1.run.app/" \
-            --build-arg NEXT_PUBLIC_BACKEND_URL="${{ env.BACKEND_URL }}" \
-            --build-arg NEXT_PUBLIC_BASEPATH="/home"
+           docker build . \
+             --tag $IMAGE_URI \
+             --build-arg AUTH_SECRET_KEY="${{ secrets.AUTH_SECRET_KEY }}" \
+             --build-arg NEXT_PUBLIC_APP_URL="https://velora-application-318444823596.asia-southeast1.run.app/" \
+             --build-arg NEXT_PUBLIC_BACKEND_URL="${{ env.BACKEND_URL }}" \
+             --build-arg NEXT_PUBLIC_BASEPATH="/home"
 
       - name: 🚢 Push Docker Image
         run: |
@@ -63,7 +63,7 @@ jobs:
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
-          image: us-docker.pkg.dev/${{ env.PROJECT_ID }}/gcr.io/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          image: ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: --allow-unauthenticated
           env_vars: |
             NEXT_PUBLIC_BACKEND_URL=${{ env.BACKEND_URL }}
