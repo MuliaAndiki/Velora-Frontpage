@@ -9,15 +9,15 @@ on:
     branches:
       - main
 
-  permissions:
-    contents: 'read'
-    id-token: 'write'
-
 env:
   PROJECT_ID: project-b67cf636-83ab-4f77-804
   SERVICE_NAME: velora-application
   REGION: asia-southeast1
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
+
+  permissions:
+    contents: 'read'
+    id-token: 'write'
 
 jobs:
   deploy:
