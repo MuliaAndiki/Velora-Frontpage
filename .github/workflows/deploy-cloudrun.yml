@@ -32,7 +32,7 @@ jobs:
       - name: 🔐 Authenticate Google Cloud (WIF)
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: projects/xxxxx/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+          workload_identity_provider: projects/318444823596/locations/global/workloadIdentityPools/github-pool/providers/github-provider
           service_account: velora@project-b67cf636-83ab-4f77-804.iam.gserviceaccount.com
 
       - name: ⚙️ Setup gcloud
