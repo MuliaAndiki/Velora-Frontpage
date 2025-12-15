@@ -15,7 +15,6 @@ env:
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
 
   AR_HOST: gcr.io
-  AR_REPO: ${{ env.PROJECT_ID }}
 
 permissions:
   contents: 'read'
