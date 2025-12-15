@@ -15,9 +15,9 @@ env:
   REGION: asia-southeast1
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
 
-  permissions:
-    contents: 'read'
-    id-token: 'write'
+permissions:
+  contents: 'read'
+  id-token: 'write'
 
 jobs:
   deploy:
