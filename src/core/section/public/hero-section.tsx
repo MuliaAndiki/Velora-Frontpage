@@ -26,16 +26,16 @@ const LandingHeroSection = () => {
           <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">{t('public.deskripsi')}</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* <Link href="/login">
+            <Link href="/login">
               <button className="group px-8 py-4 bg-linear-to-r from-orange-600 to-red-600 text-white rounded-xl font-semibold hover:shadow-2xl hover:shadow-orange-500/50 transition-all flex items-center gap-2">
                 <span>{t('public.start')}</span>
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
               </button>
-            </Link> */}
+            </Link>
 
-            {/* <button className="px-8 py-4 bg-slate-800 border border-slate-700 text-white rounded-xl font-semibold hover:bg-slate-700 transition-all">
+            <button className="px-8 py-4 bg-slate-800 border border-slate-700 text-white rounded-xl font-semibold hover:bg-slate-700 transition-all">
               {t('public.watch')}
-            </button> */}
+            </button>
           </div>
 
           <div className="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto">
