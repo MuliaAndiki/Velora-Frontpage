@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
   pull_request:
     branches:
       - main
@@ -15,46 +14,57 @@ env:
   REGION: asia-southeast1
   BACKEND_URL: https://api-service-318444823596.asia-southeast1.run.app
 
-  permissions:
-    contents: 'read'
-    id-token: 'write'
+  AR_HOST: gcr.io
+  AR_REPO: ''
+permissions:
+  contents: 'read'
+  id-token: 'write'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🚀 Authenticate Google Cloud with WIF
+      - name: 🔐 Authenticate Google Cloud (WIF)
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/318444823596/locations/global/workloadIdentityPools/github-pool/providers/github-provider
           service_account: velora@project-b67cf636-83ab-4f77-804.iam.gserviceaccount.com
 
-      - name: 📦 Build and Tag Docker Image
+      - name: ⚙️ Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: 🔑 Authenticate Docker with Access Token
         run: |
-          # DOCKER_IMAGE_TAG: Buat tag unik (misal: menggunakan commit SHA)
-          export DOCKER_IMAGE_TAG="gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}"
+          ACCESS_TOKEN=$(gcloud auth print-access-token)
+          echo $ACCESS_TOKEN | docker login -u oauth2accesstoken --password-stdin https://${{ env.AR_HOST }}
 
-          # Gunakan --build-arg untuk menyuntikkan ENV yang dibutuhkan oleh next build
-          docker build . \
-            --tag $DOCKER_IMAGE_TAG \
-            --build-arg AUTH_SECRET_KEY="${{ secrets.AUTH_SECRET_KEY }}" \
-            --build-arg NEXT_PUBLIC_APP_URL="https://velora-application-318444823596.asia-southeast1.run.app/" \
-            --build-arg NEXT_PUBLIC_BACKEND_URL="${{ env.BACKEND_URL }}" \
-            --build-arg NEXT_PUBLIC_BASEPATH=""
+      - name: 📦 Build Docker Image'
+        run: |
+          export IMAGE_URI="${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
 
-      - name: 🚢 Push Docker Image to GCR
-        run: docker push gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}
+           echo "Building image: $IMAGE_URI"
 
-      - name: ✨ Deploy to Cloud Run
+           docker build . \
+             --tag $IMAGE_URI \
+             --build-arg AUTH_SECRET_KEY="${{ secrets.AUTH_SECRET_KEY }}" \
+             --build-arg NEXT_PUBLIC_APP_URL="https://velora-application-318444823596.asia-southeast1.run.app/" \
+             --build-arg NEXT_PUBLIC_BACKEND_URL="${{ env.BACKEND_URL }}" \
+             --build-arg NEXT_PUBLIC_BASEPATH="/home"
+
+      - name: 🚢 Push Docker Image
+        run: |
+          docker push ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      - name: 🚀 Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
-          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          image: ${{ env.AR_HOST }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: --allow-unauthenticated
-
           env_vars: |
             NEXT_PUBLIC_BACKEND_URL=${{ env.BACKEND_URL }}
