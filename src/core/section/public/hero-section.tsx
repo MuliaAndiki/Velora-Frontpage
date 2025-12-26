@@ -12,7 +12,7 @@ const LandingHeroSection = () => {
         <div className="text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 bg-opacity-50 backdrop-blur-sm border border-slate-700 rounded-full mb-8">
             <Sparkles className="text-orange-400" size={16} />
-            <span className="text-slate-300 text-sm">{t('public.headerTitle')}</span>
+            <span className="text-slate-300 text-sm">POPL B </span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
