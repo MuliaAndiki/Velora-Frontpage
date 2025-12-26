@@ -11,6 +11,9 @@ const WalletMutation = {
     return useMutation<TResponse<any>, Error, FormCreateWallet>({
       mutationFn: (payload) => Api.Wallet.create(payload),
       onSuccess: () => {
+        namespace.queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === 'wallet',
+        });
         namespace.alert.toast({
           title: 'succes',
           message: 'succes bikin wallet',
